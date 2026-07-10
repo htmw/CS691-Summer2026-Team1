@@ -1,27 +1,30 @@
-import IAPOBackground from '../assets/IAPOBackground.jpg'
-import './Signup.css'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import IAPOBackground from "../assets/IAPOBackground.jpg";
+import "./Signup.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSignup = () => {
     if (password !== confirmPassword) {
-      alert('Passwords do not match')
-      return
+      alert("Passwords do not match");
+      return;
     }
-    console.log({ email, password })
+    console.log({ email, password });
     // put signup logic here
-    navigate('/getstarted')
-  }
+    navigate("/getstarted");
+  };
 
   return (
     <div className="signupContainer">
-      <div className="signupBackground" style={{ backgroundImage: `url(${IAPOBackground})` }}>
+      <div
+        className="signupBackground"
+        style={{ backgroundImage: `url(${IAPOBackground})` }}
+      >
         <div className="signupCard">
           <p className="formTitle">Sign Up</p>
 
@@ -53,16 +56,18 @@ function Signup() {
           />
 
           <div className="signupButtonContainer">
-            <p className="nextButton" onClick={handleSignup}>Sign Up</p>
+            <p className="nextButton" onClick={handleSignup}>
+              Sign Up
+            </p>
           </div>
 
-          <p className="signupLoginLink" onClick={() => navigate('/login')}>
+          <p className="signupLoginLink" onClick={() => navigate("/login")}>
             Already have an account? Log in
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Signup
+export default Signup;

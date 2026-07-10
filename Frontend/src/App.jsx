@@ -1,23 +1,29 @@
-import './App.css'
-import { Routes, Route, useNavigate } from 'react-router-dom'
-import Home from './pages/Home.jsx'
-import Contact from './pages/Contact.jsx'
-import GetStarted from './pages/GetStarted.jsx'
-import Transcript from './pages/Transcript.jsx'
-import InitChat from './pages/InitChat.jsx'
-import ScheduleCreator from './pages/ScheduleCreator.jsx'
-import Login from './pages/Login.jsx'
-import Signup from './pages/Signup.jsx'
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
-function App() {
-  const navigate = useNavigate()
+import Header from "./comp/header.jsx";
 
-  return (   
-    <div className="container">
-      <div className='navContainer'>
-        <p className='navTitle' onClick={() => navigate('/')}>IAPO</p>
-        <p className='navOther' onClick={() => navigate('/contact')}>Contact</p>
-      </div>
+import Home from "./pages/Home.jsx";
+import Contact from "./pages/Contact.jsx";
+import ScheduleCreator from "./pages/ScheduleCreator.jsx";
+
+import GetStarted from "./pages/Setup/GetStarted.jsx";
+import InitChat from "./pages/Setup/InitChat.jsx";
+import Transcript from "./pages/Setup/Transcript.jsx";
+
+import Login from "./pages/UserAccount/Login.jsx";
+import Signup from "./pages/UserAccount/Signup.jsx";
+
+function Routing() {
+  const navigate = useNavigate();
+
+  return (
+    <main>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
@@ -27,9 +33,20 @@ function App() {
         <Route path="/schedulecreator" element={<ScheduleCreator />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-      </Routes> 
-    </div>
-  )
+      </Routes>
+    </main>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <Router>
+      <div className="container">
+        <Header />
+        <Routing />
+      </div>
+    </Router>
+  );
+}
+
+export default App;
