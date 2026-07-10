@@ -1,4 +1,3 @@
-import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,20 +18,27 @@ import Transcript from "./pages/Setup/Transcript.jsx";
 import Login from "./pages/UserAccount/Login.jsx";
 import Signup from "./pages/UserAccount/Signup.jsx";
 
-function Routing() {
-  const navigate = useNavigate();
+import { ROUTES } from "./routes.js";
 
+import "./App.css";
+
+function Routing() {
   return (
     <main>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/getstarted" element={<GetStarted />} />
-        <Route path="/transcript" element={<Transcript />} />
-        <Route path="/initchat" element={<InitChat />} />
-        <Route path="/schedulecreator" element={<ScheduleCreator />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path={ROUTES.HOME} element={<Home />} />
+        <Route path={ROUTES.CONTACT} element={<Contact />} />
+
+        <Route path={ROUTES.GETSTARTED} element={<GetStarted />} />
+        <Route path={ROUTES.TRANSCRIPT} element={<Transcript />} />
+        <Route path={ROUTES.INITCHAT} element={<InitChat />} />
+
+        <Route path={ROUTES.SCHEDULECREATE} element={<ScheduleCreator />} />
+
+        <Route path={ROUTES.SIGNUP} element={<Signup />} />
+        <Route path={ROUTES.LOGIN} element={<Login />} />
+
+        <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
       </Routes>
     </main>
   );

@@ -1,21 +1,24 @@
-import IAPOBackground from '../assets/IAPOBackground.jpg'
-import './Login.css'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import IAPOBackground from "../../assets/IAPOBackground.jpg";
+import "./Login.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = () => {
-    console.log({ email, password })
-    navigate('/getstarted')
-  }
+    console.log({ email, password });
+    navigate("/getstarted");
+  };
 
   return (
     <div className="loginContainer">
-      <div className="loginBackground" style={{ backgroundImage: `url(${IAPOBackground})` }}>
+      <div
+        className="loginBackground"
+        style={{ backgroundImage: `url(${IAPOBackground})` }}
+      >
         <div className="loginCard">
           <p className="formTitle">Log In</p>
 
@@ -38,16 +41,18 @@ function Login() {
           />
 
           <div className="loginButtonContainer">
-            <p className="nextButton" onClick={handleLogin}>Log In</p>
+            <p className="nextButton" onClick={handleLogin}>
+              Log In
+            </p>
           </div>
 
-          <p className="loginSignupLink" onClick={() => navigate('/signup')}>
+          <p className="loginSignupLink" onClick={() => navigate("/signup")}>
             Don't have an account? Sign up
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

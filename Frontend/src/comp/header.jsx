@@ -9,14 +9,6 @@ function Header() {
       <RegularLink href="/contact" className="navTitle">
         Contact
       </RegularLink>
-
-      <p className="navTitle" onClick={() => navigate("/")}>
-        IAPO
-      </p>
-
-      <p className="navOther" onClick={() => navigate("/contact")}>
-        Contact
-      </p>
     </div>
   );
 }

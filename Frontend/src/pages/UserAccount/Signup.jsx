@@ -1,4 +1,4 @@
-import IAPOBackground from "../assets/IAPOBackground.jpg";
+import IAPOBackground from "../../assets/IAPOBackground.jpg";
 import "./Signup.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-export const RegularLink = ({ href, className, children }) => {
+export const RegularLink = ({ href, className, children, onClick }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -8,6 +8,10 @@ export const RegularLink = ({ href, className, children }) => {
   const isSamePage = isInternal && location.pathname === href;
 
   const handleClick = (e) => {
+    if (onClick) {
+      onClick(e);
+    }
+
     if (!isInternal) return;
 
     e.preventDefault();
@@ -16,11 +20,10 @@ export const RegularLink = ({ href, className, children }) => {
       navigate(href);
     }
 
-    // Always scroll to top for internal links
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "smooth", // remove if you want instant
+      behavior: "smooth",
     });
   };
 
