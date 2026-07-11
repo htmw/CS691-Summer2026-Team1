@@ -21,6 +21,7 @@ import Signup from "./pages/UserAccount/Signup.jsx";
 import { ROUTES } from "./routes.js";
 
 import "./App.css";
+import SignupFlowWatcher from "./comp/signUpWatch.jsx";
 
 function Routing() {
   return (
@@ -47,6 +48,7 @@ function Routing() {
 function App() {
   return (
     <Router>
+      <SignupFlowWatcher />
       <div className="container">
         <Header />
         <Routing />

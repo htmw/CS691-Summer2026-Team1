@@ -1,8 +1,8 @@
 import IAPOBackground from "../../assets/IAPOBackground.jpg";
 import "./GetStarted.css";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useUser } from "../../UserContext";
+import { goToNav, RegularLink } from "../../comp/linking";
 
 const semesters = [
   "Fall 2024",
@@ -18,32 +18,85 @@ const semesters = [
 const majors = ["Computer Science"];
 
 function GetStarted() {
-  const navigate = useNavigate();
+  const { setUserData, userData, signUpData, loggedIn, loading } = useUser();
+
   const [name, setName] = useState("");
   const [degreeLevel, setDegreeLevel] = useState("Undergrad");
   const [major, setMajor] = useState("");
   const [startingSemester, setStartingSemester] = useState("");
   const [endingSemester, setEndingSemester] = useState("");
   const [credits, setCredits] = useState("");
-  const [showToast, setShowToast] = useState(false);
-  const { setUserData } = useUser();
+
+  const [error, setError] = useState("");
+  const goTo = goToNav();
 
   const handleNext = () => {
-    if (Number(credits) > 18) {
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
+    if (
+      !name.trim() ||
+      !major ||
+      !startingSemester ||
+      !endingSemester ||
+      !credits
+    ) {
+      setError("Please fill out all required fields.");
       return;
     }
-    setUserData({
+
+    if (Number(credits) > 18) {
+      setError("Maximum 18 credits per semester.");
+      return;
+    }
+
+    const startIndex = semesters.indexOf(startingSemester);
+    const endIndex = semesters.indexOf(endingSemester);
+
+    if (endIndex <= startIndex) {
+      setError("Ending semester must be after starting semester.");
+      return;
+    }
+
+    setError("");
+
+    setUserData((prev) => ({
+      ...prev,
       name,
       degreeLevel,
       major,
       startingSemester,
       endingSemester,
       credits,
-    });
-    navigate("/transcript");
+    }));
+
+    goTo("/transcript");
   };
+
+  useEffect(() => {
+    if (loading) return;
+
+    if (loggedIn) {
+      goTo("/");
+      return;
+    }
+
+    if (!signUpData.email || !signUpData.password) {
+      goTo("/signup");
+    }
+  }, [loading, loggedIn, signUpData.email, signUpData.password, goTo]);
+
+  useEffect(() => {
+    if (userData) {
+      setName(userData.name || "");
+      setDegreeLevel(userData.degreeLevel || "Undergrad");
+      setMajor(userData.major || "");
+      setStartingSemester(userData.startingSemester || "");
+      setEndingSemester(userData.endingSemester || "");
+      setCredits(userData.credits || "");
+    }
+  }, [userData]);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <div className="getStartedContainer">
@@ -113,6 +166,7 @@ function GetStarted() {
                 ))}
               </select>
             </div>
+
             <div className="semesterColumn">
               <p className="formLabel">Ending Semester</p>
               <select
@@ -139,16 +193,18 @@ function GetStarted() {
             placeholder="Max 18 credits"
           />
 
+          {error && <p className="errorMessage">{error}</p>}
+
           <div className="nextButtonContainer">
+            <RegularLink href="/signup" className="nextButton">
+              Back
+            </RegularLink>
             <p className="nextButton" onClick={handleNext}>
               Next
             </p>
           </div>
         </div>
       </div>
-      {showToast && (
-        <div className="toast">Maximum 18 credits per semester</div>
-      )}
     </div>
   );
 }

@@ -1,5 +1,19 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+export const goToNav = () => {
+  const navigate = useNavigate();
+
+  return (href) => {
+    navigate(href);
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+};
+
 export const RegularLink = ({ href, className, children, onClick }) => {
   const location = useLocation();
   const navigate = useNavigate();

@@ -5,6 +5,7 @@ export const getReq = async (endpoint = "/", options = {}) => {
   try {
     const response = await fetch(`${BASE_URL}${endpoint}`, {
       method: "GET",
+      credentials: "include",
       headers: {
         "X-API-Key": API_KEY,
         "Content-Type": "application/json",
@@ -27,6 +28,7 @@ export const postReq = async (endpoint = "/", data, options = {}) => {
   try {
     const response = await fetch(`${BASE_URL}${endpoint}`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "X-API-Key": API_KEY,
         "Content-Type": "application/json",
