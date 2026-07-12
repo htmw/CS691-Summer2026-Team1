@@ -17,7 +17,7 @@ export function UserProvider({ children }) {
   });
 
   const [userData, setUserData] = useState({
-    name: "Test",
+    name: "",
     degreeLevel: "Undergrad",
     major: "",
     startingSemester: "",
