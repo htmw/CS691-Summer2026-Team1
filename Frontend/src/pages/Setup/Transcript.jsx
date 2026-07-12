@@ -55,6 +55,13 @@ function Transcript() {
       return;
     }
 
+    const maxSize = 5 * 1024 * 1024; // 5 MB
+
+    if (file.size > maxSize) {
+      setError("PDF file size must be less than 5 MB.");
+      return;
+    }
+
     setError("");
 
     const reader = new FileReader();
@@ -90,7 +97,7 @@ function Transcript() {
         style={{ backgroundImage: `url(${IAPOBackground})` }}
       >
         <div className="formCardCenter">
-          <p className="formTitle">Upload an optional transcript</p>
+          <p className="formTitle">Upload an optional transcript: 5MB Limit</p>
 
           <input
             type="file"

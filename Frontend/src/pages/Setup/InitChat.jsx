@@ -3,6 +3,7 @@ import "./InitChat.css";
 import { useState, useEffect } from "react";
 import { useUser } from "../../UserContext";
 import { goToNav, RegularLink } from "../../comp/linking";
+import { postReq } from "../../comp/callRequests";
 
 function InitChat() {
   const { setUserData, userData, signUpData, loggedIn, loading } = useUser();
@@ -11,7 +12,7 @@ function InitChat() {
   const [error, setError] = useState("");
   const goTo = goToNav();
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!chat.trim()) {
       setError("Please fill out all required fields.");
       return;
@@ -19,12 +20,24 @@ function InitChat() {
 
     setError("");
 
-    setUserData((prev) => ({
-      ...prev,
+    const updatedUserData = {
+      ...signUpData,
+      ...userData,
       chat,
-    }));
+    };
+
+    setUserData(updatedUserData);
 
     // goTo("/transcript");
+    try {
+      const response = await postReq("/signUp", updatedUserData);
+      console.log("Plan generated:", response);
+      setError("Account Created");
+      //goTo("/getstarted");
+    } catch (error) {
+      console.error(error.response?.data || error);
+      setError("Something went wrong. Please try again.");
+    }
   };
 
   useEffect(() => {
