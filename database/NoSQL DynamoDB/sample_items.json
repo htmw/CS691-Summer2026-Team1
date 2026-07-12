@@ -1,0 +1,402 @@
+#Sample data used for testing
+
+#Department
+{
+  "PK": {
+    "S": "DEPARTMENT#1"
+  },
+  "SK": {
+    "S": "INFO"
+  },
+  "DepartmentID": {
+    "N": "1"
+  },
+  "DepartmentName": {
+    "S": "Seidenberg School of CS"
+  }
+}
+
+#Major
+{
+  "PK": {
+    "S": "MAJOR#1"
+  },
+  "SK": {
+    "S": "INFO"
+  },
+  "DepartmentID": {
+    "N": "1"
+  },
+  "MajorID": {
+    "N": "1"
+  },
+  "MajorName": {
+    "S": "Computer Science"
+  }
+}
+
+#Semester
+{
+  "PK": {
+    "S": "SEMESTER#1"
+  },
+  "SK": {
+    "S": "INFO"
+  },
+  "EndDate": {
+    "S": "2026-12-19"
+  },
+  "SemesterID": {
+    "N": "1"
+  },
+  "SemesterTerm": {
+    "S": "Fall"
+  },
+  "StartDate": {
+    "S": "2026-08-31"
+  },
+  "Year": {
+    "N": "2026"
+  }
+}
+
+#Degree Requirements
+{
+  "PK": {
+    "S": "MAJOR#1"
+  },
+  "SK": {
+    "S": "REQUIREMENT"
+  },
+  "CapstoneCreditsRequired": {
+    "N": "3"
+  },
+  "CoreCreditsRequired": {
+    "N": "18"
+  },
+  "ElectiveCreditsRequired": {
+    "N": "9"
+  },
+  "MajorID": {
+    "S": "1"
+  },
+  "MinimumGPA": {
+    "N": "3"
+  },
+  "RequirementID": {
+    "N": "1"
+  },
+  "TotalCreditsRequired": {
+    "N": "30"
+  }
+}
+
+#Students
+{
+  "PK": {
+    "S": "STUDENT#1001"
+  },
+  "SK": {
+    "S": "PROFILE"
+  },
+  "Degree": {
+    "S": "MS Computer Science"
+  },
+  "Email": {
+    "S": "charlottem@pace.edu"
+  },
+  "FirstName": {
+    "S": "Charlotte"
+  },
+  "LastName": {
+    "S": "Miller"
+  },
+  "MajorID": {
+    "N": "1"
+  },
+  "StudentID": {
+    "N": "1001"
+  }
+}
+
+{
+  "PK": {
+    "S": "STUDENT#1002"
+  },
+  "SK": {
+    "S": "PROFILE"
+  },
+  "Degree": {
+    "S": "MS Computer Science"
+  },
+  "Email": {
+    "S": "danielj@pace.edu"
+  },
+  "FirstName": {
+    "S": "Daniel"
+  },
+  "LastName": {
+    "S": "Jackson"
+  },
+  "MajorID": {
+    "N": "1"
+  },
+  "StudentID": {
+    "N": "1002"
+  }
+}
+
+#Course
+{
+  "PK": {
+    "S": "COURSE#CS604"
+  },
+  "SK": {
+    "S": "INFO"
+  },
+  "CareerTags": {
+    "SS": [
+      "Backend Engineer",
+      "Cloud Engineer",
+      "Operating Systems Engineer",
+      "Software Engineer",
+      "Systems Engineer"
+    ]
+  },
+  "CourseID": {
+    "S": "CS604"
+  },
+  "CourseKeywords": {
+    "SS": [
+      "compilers",
+      "computer architecture",
+      "computer organization",
+      "computer systems",
+      "low level programming",
+      "memory systems",
+      "operating systems",
+      "processor architecture",
+      "programming languages",
+      "system design"
+    ]
+  },
+  "CourseName": {
+    "S": "Computer Systems and Concepts"
+  },
+  "Credits": {
+    "N": "3"
+  },
+  "MajorID": {
+    "N": "1"
+  }
+}
+
+{
+  "PK": {
+    "S": "COURSE#CS608"
+  },
+  "SK": {
+    "S": "INFO"
+  },
+  "CareerTags": {
+    "SS": [
+      "Algorithm Engineer",
+      "Backend Engineer",
+      "Research Engineer",
+      "Software Engineer",
+      "Systems Engineer"
+    ]
+  },
+  "CourseID": {
+    "S": "CS608"
+  },
+  "CourseKeywords": {
+    "SS": [
+      "algorithms",
+      "automata theory",
+      "complexity theory",
+      "computability",
+      "data structures",
+      "divide and conquer",
+      "graph algorithms",
+      "hashing",
+      "searching",
+      "sorting"
+    ]
+  },
+  "CourseName": {
+    "S": "Algorithms and Computer Theory"
+  },
+  "Credits": {
+    "N": "3"
+  },
+  "MajorID": {
+    "N": "1"
+  }
+}
+
+{
+  "PK": {
+    "S": "COURSE#CS623"
+  },
+  "SK": {
+    "S": "INFO"
+  },
+  "CareerTags": {
+    "SS": [
+      "Backend Engineer",
+      "Data Engineer",
+      "Database Administrator",
+      "Database Engineer",
+      "Software Engineer"
+    ]
+  },
+  "CourseID": {
+    "S": "CS623"
+  },
+  "CourseKeywords": {
+    "SS": [
+      "JDBC",
+      "SQL",
+      "data processing",
+      "database design",
+      "database management",
+      "database security",
+      "database systems",
+      "entity relationship modeling",
+      "normalization",
+      "transactions"
+    ]
+  },
+  "CourseName": {
+    "S": "Database Management Systems"
+  },
+  "Credits": {
+    "N": "3"
+  },
+  "MajorID": {
+    "N": "1"
+  }
+}
+
+{
+  "PK": {
+    "S": "COURSE#627"
+  },
+  "SK": {
+    "S": "INFO"
+  },
+  "CareerTags": {
+    "SS": [
+      "AI Engineer",
+      "Data Scientist",
+      "Machine Learning Engineer",
+      "NLP Engineer",
+      "Research Scientist",
+      "Robotics Engineer",
+      "Software Engineer"
+    ]
+  },
+  "CourseID": {
+    "N": "627"
+  },
+  "CourseKeywords": {
+    "SS": [
+      "algorithms",
+      "artificial intelligence",
+      "data structures",
+      "heuristics",
+      "intelligent systems",
+      "natural language processing",
+      "pattern recognition",
+      "search algorithms"
+    ]
+  },
+  "CourseName": {
+    "S": "Artificial Intelligence"
+  },
+  "Credits": {
+    "N": "3"
+  },
+  "MajorID": {
+    "N": "1"
+  }
+}
+
+# Major Courses
+{
+  "PK": {
+    "S": "MAJOR#1"
+  },
+  "SK": {
+    "S": "COURSE#CS604"
+  },
+  "CourseID": {
+    "S": "CS604"
+  },
+  "MajorID": {
+    "N": "1"
+  },
+  "RequirementType": {
+    "S": "Core"
+  }
+}
+
+{
+  "PK": {
+    "S": "MAJOR#1"
+  },
+  "SK": {
+    "S": "COURSE#CS608"
+  },
+  "CourseID": {
+    "S": "CS608"
+  },
+  "MajorID": {
+    "N": "1"
+  },
+  "RequirementType": {
+    "S": "Core"
+  }
+}
+
+{
+  "PK": {
+    "S": "MAJOR#1"
+  },
+  "SK": {
+    "S": "COURSE#CS623"
+  },
+  "CourseID": {
+    "S": "CS623"
+  },
+  "MajorID": {
+    "N": "1"
+  },
+  "RequirementType": {
+    "S": "Core"
+  }
+}
+
+{
+  "PK": {
+    "S": "MAJOR#1"
+  },
+  "SK": {
+    "S": "COURSE#CS627"
+  },
+  "CourseID": {
+    "S": "CS627"
+  },
+  "MajorID": {
+    "N": "1"
+  },
+  "RequirementType": {
+    "S": "Elective"
+  }
+}
+
+#Constraints 
+#Student Schedules 
+#Prerequisites
+#Courses Offered
