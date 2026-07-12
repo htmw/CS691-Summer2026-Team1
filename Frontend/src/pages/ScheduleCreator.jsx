@@ -2,6 +2,7 @@ import './ScheduleCreator.css'
 import { useState } from 'react'
 import IAPOBackground from '../assets/IAPOBackground.jpg'
 import { useUser } from '../UserContext'
+import downloadImg from "../assets/downloadIcon.png";
 
 
 const semesters = [
@@ -115,7 +116,10 @@ function ScheduleCreator() {
       </div>
 
       <div className="schedulePanel">
-        <p className="scheduleTitle">{userData.name}'s Schedule</p>
+        <div className="scheduleTitleRow">
+          <p className="scheduleTitle">{userData.name}'s Schedule</p>
+          <img src={downloadImg} className="settingImgButton"/>
+        </div>
         <div className="yearTabs">
           {years.map((year) => (
             <p
