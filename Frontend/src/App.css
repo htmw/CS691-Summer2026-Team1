@@ -17,6 +17,18 @@
   padding-right: 34px;
 }
 
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .navTitle {
   font-size: 32px;
   cursor: pointer;
@@ -73,4 +85,13 @@
   border-radius: 6px;
   text-decoration: none;
   color: black;
+}
+
+.settingImgButton {
+  width: 30px;
+}
+
+.logoImgButton {
+  width: 50px;
+  border-radius: 45px;
 }

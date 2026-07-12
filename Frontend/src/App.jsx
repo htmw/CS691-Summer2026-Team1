@@ -17,6 +17,7 @@ import Transcript from "./pages/Setup/Transcript.jsx";
 
 import Login from "./pages/UserAccount/Login.jsx";
 import Signup from "./pages/UserAccount/Signup.jsx";
+import Settings from "./pages/UserAccount/Settings.jsx";
 
 import { ROUTES } from "./routes.js";
 
@@ -38,6 +39,7 @@ function Routing() {
 
         <Route path={ROUTES.SIGNUP} element={<Signup />} />
         <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.SETTINGS} element={<Settings />} />
 
         <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
       </Routes>
