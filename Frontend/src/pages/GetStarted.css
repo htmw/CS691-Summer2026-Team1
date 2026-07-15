@@ -1,0 +1,140 @@
+.getStartedContainer {
+    width: 100%;
+    height: 90vh;
+}
+
+.getStartedBackground {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formCard {
+    width: 60%;
+    background-color: rgba(202, 200, 234, 0.7);
+    border-radius: 16px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.formTitle {
+    font-size: 32px;
+    font-weight: 900;
+    font-family: 'Fira Sans', sans-serif;
+    color: #5F4BA4;
+    margin-bottom: 20px;
+}
+
+.formLabel {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Fira Sans', sans-serif;
+    color: #5b4a9e;
+    font-style: italic;
+    margin-bottom: 8px;
+    margin-top: 16px;
+}
+
+.formInput {
+    width: 70%;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding-left: 12px;
+    font-size: 16px;
+    font-family: 'Fira Sans', sans-serif;
+    background-color: #f0f8f0;
+}
+
+.formInputSmall {
+    width: 40%;
+}
+
+.formSelect {
+    width: 100%;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding-left: 12px;
+    font-size: 16px;
+    font-family: 'Fira Sans', sans-serif;
+    background-color: #f0f8f0;
+    cursor: pointer;
+}
+
+.toggleContainer {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #999;
+    border-radius: 6px;
+    overflow: hidden;
+    width: 60%;
+}
+
+.toggleOption {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Fira Sans', sans-serif;
+    cursor: pointer;
+    background-color: #e0e0e0;
+}
+
+.toggleActive {
+    background-color: white;
+}
+
+.semesterRow {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+}
+
+.semesterColumn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.nextButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+.nextButton {
+    background-color: #3b2d6b;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Fira Sans', sans-serif;
+    padding: 12px 40px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-style: italic;
+}
+
+.toast {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #3b2d6b;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Fira Sans', sans-serif;
+    padding: 14px 28px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
