@@ -397,6 +397,383 @@
 }
 
 #Constraints 
+
+{
+  "PK": {
+    "S": "STUDENT#1001"
+  },
+  "SK": {
+    "S": "CONSTRAINT#1"
+  },
+  "ConstraintID": {
+    "N": "1"
+  },
+  "ConstraintType": {
+    "S": "RequiredDaysOff"
+  },
+  "ConstraintValue": {
+    "S": "Friday"
+  },
+  "Priority": {
+    "N": "1"
+  }
+}
+
+{
+  "PK": {
+    "S": "STUDENT#1002"
+  },
+  "SK": {
+    "S": "CONSTRAINT#2"
+  },
+  "ConstraintID": {
+    "N": "2"
+  },
+  "ConstraintType": {
+    "S": "MaxCreditsPerSemester"
+  },
+  "ConstraintValue": {
+    "S": "12"
+  },
+  "Priority": {
+    "N": "1"
+  }
+}
+
+{
+  "PK": {
+    "S": "STUDENT#1002"
+  },
+  "SK": {
+    "S": "CONSTRAINT#3"
+  },
+  "ConstraintID": {
+    "N": "3"
+  },
+  "ConstraintType": {
+    "S": "Instructional Method"
+  },
+  "ConstraintValue": {
+    "L": [
+      {
+        "S": "Online"
+      },
+      {
+        "S": "Asynchronous"
+      }
+    ]
+  },
+  "Priority": {
+    "N": "2"
+  }
+}
+
+{
+  "PK": {
+    "S": "STUDENT#1001"
+  },
+  "SK": {
+    "S": "CONSTRAINT#4"
+  },
+  "ConstraintID": {
+    "N": "4"
+  },
+  "ConstraintType": {
+    "S": "PreferredTime"
+  },
+  "ConstraintValue": {
+    "S": "Morning"
+  },
+  "Priority": {
+    "N": "2"
+  }
+}
+
 #Student Schedules 
+
+{
+  "PK": {
+    "S": "STUDENT#1001"
+  },
+  "SK": {
+    "S": "SCHEDULE#FALL2026#5001"
+  },
+  "OfferedID": {
+    "N": "5001"
+  },
+  "ScheduleID": {
+    "N": "9001"
+  },
+  "Status": {
+    "S": "Optimized"
+  },
+  "StudentID": {
+    "N": "1001"
+  }
+}
+
+{
+  "PK": {
+    "S": "STUDENT#1002"
+  },
+  "SK": {
+    "S": "SCHEDULE#FALL2026#5002"
+  },
+  "OfferedID": {
+    "N": "5002"
+  },
+  "ScheduleID": {
+    "N": "9003"
+  },
+  "Status": {
+    "S": "Draft"
+  },
+  "StudentID": {
+    "N": "1002"
+  }
+}
+
+{
+  "PK": {
+    "S": "STUDENT#1001"
+  },
+  "SK": {
+    "S": "SCHEDULE#FALL2026#5003"
+  },
+  "OfferedID": {
+    "N": "5003"
+  },
+  "ScheduleID": {
+    "N": "9004"
+  },
+  "Status": {
+    "S": "Generated"
+  },
+  "StudentID": {
+    "N": "1001"
+  }
+}
+
+{
+  "PK": {
+    "S": "STUDENT#1002"
+  },
+  "SK": {
+    "S": "SCHEDULE#FALL2026#5004"
+  },
+  "OfferedID": {
+    "N": "5004"
+  },
+  "ScheduleID": {
+    "N": "9004"
+  },
+  "Status": {
+    "S": "Optimized"
+  },
+  "StudentID": {
+    "N": "1002"
+  }
+}
+
 #Prerequisites
+
+{
+  "PK": {
+    "S": "COURSE#CS604"
+  },
+  "SK": {
+    "S": "PREREQUISITE#CS505"
+  },
+  "CourseID": {
+    "S": "CS604"
+  },
+  "PrereqCourseID": {
+    "S": "CS505"
+  }
+}
+
+{
+  "PK": {
+    "S": "COURSE#CS627"
+  },
+  "SK": {
+    "S": "PREREQUISITE#CS608"
+  },
+  "CourseID": {
+    "S": "CS627"
+  },
+  "PrereqCourseID": {
+    "S": "CS608"
+  }
+}
+
 #Courses Offered
+
+{
+  "PK": {
+    "S": "SEMESTER#1"
+  },
+  "SK": {
+    "S": "COURSE#CS604#SECTION#1"
+  },
+  "Capacity": {
+    "N": "30"
+  },
+  "CourseID": {
+    "S": "CS604"
+  },
+  "CurrentlyEnrolled": {
+    "N": "15"
+  },
+  "EndTime": {
+    "S": "20:30"
+  },
+  "InstructionalMethod": {
+    "S": "Hybrid"
+  },
+  "Instructor": {
+    "S": "Dr. Bai"
+  },
+  "MeetingDay": {
+    "S": "Monday"
+  },
+  "OfferedID": {
+    "N": "5001"
+  },
+  "SectionID": {
+    "N": "1"
+  },
+  "SemesterID": {
+    "N": "1"
+  },
+  "StartTime": {
+    "S": "18:00"
+  }
+}
+
+{
+  "PK": {
+    "S": "SEMESTER#1"
+  },
+  "SK": {
+    "S": "COURSE#CS608#SECTION#1"
+  },
+  "Capacity": {
+    "N": "30"
+  },
+  "CourseID": {
+    "S": "CS608"
+  },
+  "CurrentlyEnrolled": {
+    "N": "20"
+  },
+  "EndTime": {
+    "S": "14:30"
+  },
+  "InstructionalMethod": {
+    "S": "In Person"
+  },
+  "Instructor": {
+    "S": "Mr.Evans "
+  },
+  "MeetingDay": {
+    "S": "Wednesday"
+  },
+  "OfferedID": {
+    "N": "5002"
+  },
+  "SectionID": {
+    "N": "1"
+  },
+  "SemesterID": {
+    "N": "1"
+  },
+  "StartTime": {
+    "S": "12:00"
+  }
+}
+
+{
+  "PK": {
+    "S": "SEMESTER#1"
+  },
+  "SK": {
+    "S": "COURSE#CS623#SECTION#1"
+  },
+  "Capacity": {
+    "N": "30"
+  },
+  "CourseID": {
+    "S": "CS623"
+  },
+  "CurrentlyEnrolled": {
+    "N": "27"
+  },
+  "EndTime": {
+    "S": "00:00"
+  },
+  "InstructionalMethod": {
+    "S": "Online"
+  },
+  "Instructor": {
+    "S": "Mr.Ramsay"
+  },
+  "MeetingDay": {
+    "S": "Asynchronous"
+  },
+  "OfferedID": {
+    "N": "5003"
+  },
+  "SectionID": {
+    "N": "1"
+  },
+  "SemesterID": {
+    "N": "1"
+  },
+  "StartTime": {
+    "S": "00:00"
+  }
+}
+
+{
+  "PK": {
+    "S": "SEMESTER#1"
+  },
+  "SK": {
+    "S": "COURSE#CS627#SECTION#1"
+  },
+  "Capacity": {
+    "N": "30"
+  },
+  "CourseID": {
+    "S": "CS627"
+  },
+  "CurrentlyEnrolled": {
+    "N": "18"
+  },
+  "EndTime": {
+    "S": "16:45"
+  },
+  "InstructionalMethod": {
+    "S": "Online"
+  },
+  "Instructor": {
+    "S": "Dr.Johnson"
+  },
+  "MeetingDay": {
+    "S": "Tuesday, Thursday"
+  },
+  "OfferedID": {
+    "N": "5004"
+  },
+  "SectionID": {
+    "N": "1"
+  },
+  "SemesterID": {
+    "N": "1"
+  },
+  "StartTime": {
+    "S": "15:00"
+  }
+}
+
