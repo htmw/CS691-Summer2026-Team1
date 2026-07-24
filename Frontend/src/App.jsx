@@ -18,11 +18,20 @@ import Transcript from "./pages/Setup/Transcript.jsx";
 import Login from "./pages/UserAccount/Login.jsx";
 import Signup from "./pages/UserAccount/Signup.jsx";
 import Settings from "./pages/UserAccount/Settings.jsx";
-
+import { useUser } from "./UserContext.jsx";
 import { ROUTES } from "./routes.js";
-
 import "./App.css";
 import SignupFlowWatcher from "./comp/signUpWatch.jsx";
+
+function ProtectedRoute({ children }) {
+  const { loggedIn } = useUser();
+
+  if (!loggedIn) {
+    //return <Navigate to="/gettingStarted" replace />;
+  }
+
+  return children;
+}
 
 function Routing() {
   return (
@@ -31,15 +40,25 @@ function Routing() {
         <Route path={ROUTES.HOME} element={<Home />} />
         <Route path={ROUTES.CONTACT} element={<Contact />} />
 
-        <Route path={ROUTES.GETSTARTED} element={<GetStarted />} />
-        <Route path={ROUTES.TRANSCRIPT} element={<Transcript />} />
-        <Route path={ROUTES.INITCHAT} element={<InitChat />} />
+        <Route path={ROUTES.GETSTARTED} element={
+          <ProtectedRoute><GetStarted /></ProtectedRoute>
+        } />
+        <Route path={ROUTES.TRANSCRIPT} element={
+          <ProtectedRoute><Transcript /></ProtectedRoute>
+        } />
+        <Route path={ROUTES.INITCHAT} element={
+          <ProtectedRoute><InitChat /></ProtectedRoute>
+        } />
 
-        <Route path={ROUTES.SCHEDULECREATE} element={<ScheduleCreator />} />
+        <Route path={ROUTES.SCHEDULECREATE} element={
+          <ProtectedRoute><ScheduleCreator /></ProtectedRoute>
+        } />
 
         <Route path={ROUTES.SIGNUP} element={<Signup />} />
         <Route path={ROUTES.LOGIN} element={<Login />} />
-        <Route path={ROUTES.SETTINGS} element={<Settings />} />
+        <Route path={ROUTES.SETTINGS} element={
+          <ProtectedRoute><Settings /></ProtectedRoute>
+        } />
 
         <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
       </Routes>

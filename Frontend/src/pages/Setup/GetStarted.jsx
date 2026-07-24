@@ -196,9 +196,6 @@ function GetStarted() {
           {error && <p className="errorMessage">{error}</p>}
 
           <div className="nextButtonContainer">
-            <RegularLink href="/signup" className="nextButton">
-              Back
-            </RegularLink>
             <p className="nextButton" onClick={handleNext}>
               Next
             </p>

@@ -28,6 +28,7 @@ export function UserProvider({ children }) {
       name: "",
     },
     chat: "",
+    isLoggedIn: false,
   });
 
   const [loading, setLoading] = useState(true);
