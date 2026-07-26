@@ -27,9 +27,9 @@ function Contact() {
   };
 
   return (
-    <div className="signupContainer">
+    <div className="midSizeCardContainer">
       <div
-        className="signupBackground"
+        className="centerBackground"
         style={{ backgroundImage: `url(${IAPOBackground})` }}
       >
         <div className="signupCard">
@@ -51,7 +51,7 @@ function Contact() {
               className="formInput"
               type="email"
               name="user_email"
-              placeholder="your@email.com"
+              placeholder="Your@email.com"
               required
             />
 
@@ -63,7 +63,7 @@ function Contact() {
               required
             />
 
-            <div className="signupButtonContainer">
+            <div className="buttonContainerCenter">
               <button type="submit" className="nextButton">
                 Send
               </button>

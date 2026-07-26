@@ -55,6 +55,7 @@
     font-family: 'Fira Sans', sans-serif;
     cursor: pointer;
     background-color: #e0e0e0;
+    overflow-y: scroll;
 }
 
 .toggleActive {

@@ -91,9 +91,9 @@ function Transcript() {
   }
 
   return (
-    <div className="getStartedContainer">
+    <div className="midSizeCardContainer">
       <div
-        className="getStartedBackground"
+        className="centerBackground"
         style={{ backgroundImage: `url(${IAPOBackground})` }}
       >
         <div className="formCardCenter">

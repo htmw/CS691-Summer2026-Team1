@@ -96,9 +96,9 @@ function Signup() {
   }
 
   return (
-    <div className="signupContainer">
+    <div className="midSizeCardContainer">
       <div
-        className="signupBackground"
+        className="centerBackground"
         style={{ backgroundImage: `url(${IAPOBackground})` }}
       >
         <div className="signupCard">
@@ -133,13 +133,13 @@ function Signup() {
 
           {error && <p className="signupError">{error}</p>}
 
-          <div className="signupButtonContainer">
+          <div className="buttonContainerCenter">
             <p className="nextButton" onClick={handleSignup}>
               Sign Up
             </p>
           </div>
 
-          <RegularLink href="/login" className="signupLoginLink">
+          <RegularLink href="/login" className="authLink">
             Already have an account? Log in
           </RegularLink>
         </div>

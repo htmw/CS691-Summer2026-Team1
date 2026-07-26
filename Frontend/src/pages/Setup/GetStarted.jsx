@@ -42,6 +42,11 @@ function GetStarted() {
       return;
     }
 
+    if (Number(credits) < 1) {
+      setError("Must take at least one credit.");
+      return;
+    }    
+    
     if (Number(credits) > 18) {
       setError("Maximum 18 credits per semester.");
       return;
@@ -99,9 +104,9 @@ function GetStarted() {
   }
 
   return (
-    <div className="getStartedContainer">
+    <div className="midSizeCardContainer">
       <div
-        className="getStartedBackground"
+        className="centerBackground"
         style={{ backgroundImage: `url(${IAPOBackground})` }}
       >
         <div className="formCard">

@@ -22,18 +22,18 @@ function Settings() {
   };
 
   return (
-    <div className="signupContainer">
+    <div className="midSizeCardContainer">
       <div
-        className="signupBackground"
+        className="centerBackground"
         style={{ backgroundImage: `url(${IAPOBackground})` }}
       >
         <div className="signupCard">
           <div className="settingsHeader">
             <p className="formTitle">Settings</p>
             {!isEditing ? (
-              <p className="editButton" onClick={() => setIsEditing(true)}>edit</p>
+              <p className="settingsEditButton" onClick={() => setIsEditing(true)}>edit</p>
             ) : (
-              <p className="editButton" onClick={handleSave}>save</p>
+              <p className="settingsEditButton" onClick={handleSave}>save</p>
             )}
           </div>
 
@@ -69,7 +69,7 @@ function Settings() {
             </>
           )}
 
-          <div className="signupButtonContainer">
+          <div className="buttonContainerCenter">
             <p className="nextButton" onClick={() => navigate("/")}>
               Sign Out?
             </p>

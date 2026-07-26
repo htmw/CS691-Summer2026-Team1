@@ -5,6 +5,16 @@
   height: 90vh;
 }
 
+.centerBackground {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .navContainer {
   height: 10vh;
   width: 100%;
@@ -88,6 +98,10 @@
   color: black;
 }
 
+.nextButton:hover {
+  background-color: #251360;
+}
+
 .settingImgButton {
   width: 30px;
 }
@@ -95,4 +109,109 @@
 .logoImgButton {
   width: 50px;
   border-radius: 45px;
+}
+
+.nextButton {
+    background-color: #3b2d6b;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Fira Sans', sans-serif;
+    padding: 12px 40px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-style: italic;
+    border: 1px solid rgb(217, 207, 223);
+    text-decoration: none;
+}
+
+.nextButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+    gap: 10px;
+    width: 100%;
+}
+
+.midSizeCardContainer {
+    width: 100%;
+    height: 90vh;
+}
+
+.formTitle {
+    font-size: 32px;
+    font-weight: 900;
+    font-family: 'Fira Sans', sans-serif;
+    color: #5F4BA4;
+    margin-bottom: 20px;
+}
+
+.formLabel {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Fira Sans', sans-serif;
+    color: #5b4a9e;
+    font-style: italic;
+    margin-bottom: 8px;
+    margin-top: 16px;
+}
+
+.formInput {
+    width: 100%;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding-left: 12px;
+    font-size: 16px;
+    font-family: 'Fira Sans', sans-serif;
+    background-color: #f0f8f0;
+}
+
+.errorMessage {
+    font-size: 14px;
+    font-family: 'Fira Sans', sans-serif;
+    color: #d32f2f;
+    background-color: rgba(211, 47, 47, 0.1);
+    border: 1px solid rgba(211, 47, 47, 0.3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 12px;
+}
+
+.formCardCenter {
+    width: 60%;
+    background-color: rgba(202, 200, 234, 0.7);
+    border-radius: 16px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    align-items: center;
+}
+
+.buttonContainerCenter {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.authLink {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+    font-family: 'Fira Sans', sans-serif;
+    color: #5b4a9e;
+    cursor: pointer;
+    font-style: italic;
+}
+
+.authLink:hover {
+    text-decoration: underline;
+}
+
+.uploadText {
+    font-size: 16px;
+    font-family: 'Fira Sans', sans-serif;
+    font-style: italic;
+    color: #a89ecf;
 }

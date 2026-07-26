@@ -1,18 +1,3 @@
-.getStartedContainer {
-    width: 100%;
-    height: 90vh;
-}
-
-.getStartedBackground {
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .formCard {
     width: 60%;
     background-color: rgba(202, 200, 234, 0.7);
@@ -21,35 +6,6 @@
     display: flex;
     flex-direction: column;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-}
-
-.formTitle {
-    font-size: 32px;
-    font-weight: 900;
-    font-family: 'Fira Sans', sans-serif;
-    color: #5F4BA4;
-    margin-bottom: 20px;
-}
-
-.formLabel {
-    font-size: 16px;
-    font-weight: 600;
-    font-family: 'Fira Sans', sans-serif;
-    color: #5b4a9e;
-    font-style: italic;
-    margin-bottom: 8px;
-    margin-top: 16px;
-}
-
-.formInput {
-    width: 70%;
-    height: 40px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    padding-left: 12px;
-    font-size: 16px;
-    font-family: 'Fira Sans', sans-serif;
-    background-color: #f0f8f0;
 }
 
 .formInputSmall {
@@ -103,24 +59,6 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-}
-
-.nextButtonContainer {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 24px;
-}
-
-.nextButton {
-    background-color: #3b2d6b;
-    color: white;
-    font-size: 18px;
-    font-weight: 700;
-    font-family: 'Fira Sans', sans-serif;
-    padding: 12px 40px;
-    border-radius: 24px;
-    cursor: pointer;
-    font-style: italic;
 }
 
 .toast {

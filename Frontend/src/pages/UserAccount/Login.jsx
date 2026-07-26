@@ -14,9 +14,9 @@ function Login() {
   };
 
   return (
-    <div className="loginContainer">
+    <div className="midSizeCardContainer">
       <div
-        className="loginBackground"
+        className="centerBackground"
         style={{ backgroundImage: `url(${IAPOBackground})` }}
       >
         <div className="loginCard">
@@ -40,13 +40,13 @@ function Login() {
             placeholder="Your password"
           />
 
-          <div className="loginButtonContainer">
+          <div className="buttonContainerCenter">
             <p className="nextButton" onClick={handleLogin}>
               Log In
             </p>
           </div>
 
-          <p className="loginSignupLink" onClick={() => navigate("/signup")}>
+          <p className="authLink" onClick={() => navigate("/signup")}>
             Don't have an account? Sign up
           </p>
         </div>
