@@ -7,9 +7,9 @@ import {
 
 import Header from "./comp/header.jsx";
 
-import Home from "./pages/Home.jsx";
-import Contact from "./pages/Contact.jsx";
-import ScheduleCreator from "./pages/ScheduleCreator.jsx";
+import Home from "./pages/Extra/Home.jsx";
+import Contact from "./pages/Extra/Contact.jsx";
+import ScheduleCreator from "./pages/Generator/ScheduleCreator.jsx";
 
 import GetStarted from "./pages/Setup/GetStarted.jsx";
 import InitChat from "./pages/Setup/InitChat.jsx";
@@ -70,7 +70,8 @@ function App() {
   return (
     <Router>
       <SignupFlowWatcher />
-      <div className="container">
+
+      <div className="container gradientBackground">
         <Header />
         <Routing />
       </div>

@@ -1,5 +1,5 @@
-import IAPOBackground from "../../assets/IAPOBackground.jpg";
-import "./Settings.css";
+import "./UserStyles.css";
+import "../Extra/ExtraStyles.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../UserContext";
@@ -21,63 +21,107 @@ function Settings() {
     setIsEditing(false);
   };
 
-  return (
-    <div className="midSizeCardContainer">
-      <div
-        className="centerBackground"
-        style={{ backgroundImage: `url(${IAPOBackground})` }}
-      >
-        <div className="signupCard">
+return (
+  <div className="gradientBackground">
+    <div className="settingsPage">
+      <section className="settingsSection">
+        <div className="settingsCard">
+
           <div className="settingsHeader">
-            <p className="formTitle">Settings</p>
+            <h1 className="settingsTitle">
+              Settings
+            </h1>
+
             {!isEditing ? (
-              <p className="settingsEditButton" onClick={() => setIsEditing(true)}>edit</p>
+              <button
+                className="settingsEditButton"
+                onClick={() => setIsEditing(true)}
+              >
+                Edit
+              </button>
             ) : (
-              <p className="settingsEditButton" onClick={handleSave}>save</p>
+              <button
+                className="settingsEditButton"
+                onClick={handleSave}
+              >
+                Save
+              </button>
             )}
           </div>
 
           {!isEditing ? (
-            <>
-              <p className="formLabel">Name: {userData.name}</p>
-              <p className="formLabel">Email: {email || "(none)"}</p>
-              <p className="formLabel">Password: *****</p>
-            </>
+            <div className="settingsInfo">
+              <div className="settingsItem">
+                <p className="settingsLabel">Name</p>
+                <p className="settingsValue">
+                  {userData.name}
+                </p>
+              </div>
+
+              <div className="settingsItem">
+                <p className="settingsLabel">Email</p>
+                <p className="settingsValue">
+                  {email || "(none)"}
+                </p>
+              </div>
+
+              <div className="settingsItem">
+                <p className="settingsLabel">Password</p>
+                <p className="settingsValue">
+                  ********
+                </p>
+              </div>
+            </div>
           ) : (
-            <>
-              <p className="formLabel">Name</p>
+            <div className="settingsForm">
+
+              <label className="settingsLabel">
+                Name
+              </label>
+
               <input
-                className="formInput"
+                className="settingsInput"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <p className="formLabel">Email</p>
+
+              <label className="settingsLabel">
+                Email
+              </label>
+
               <input
-                className="formInput"
+                className="settingsInput"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <p className="formLabel">New Password</p>
+
+              <label className="settingsLabel">
+                New Password
+              </label>
+
               <input
-                className="formInput"
+                className="settingsInput"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="*****"
+                placeholder="********"
               />
-            </>
+
+            </div>
           )}
 
-          <div className="buttonContainerCenter">
-            <p className="nextButton" onClick={() => navigate("/")}>
-              Sign Out?
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+          <button
+            className="logoutButton"
+            onClick={() => navigate("/")}
+          >
+            Sign Out
+          </button>
 
+        </div>
+      </section>
+    </div>
+  </div>
+);
+}
 export default Settings;

@@ -1,0 +1,104 @@
+/* ===========================
+   Header
+=========================== */
+
+.header {
+    height: 78px;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 42px;
+
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(0,0,0,.08);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 1000;
+}
+
+
+.headerLeft,
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+}
+
+.logoImg {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+}
+
+.logoText {
+    color: #5F4BA4;
+    font: 900 30px "Fira Sans", sans-serif;
+}
+
+.headerIconButton {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    text-decoration: none;
+
+    color: #5F4BA4;
+    background: rgba(95,75,164,.08);
+
+    transition: .25s;
+}
+
+.headerIconButton:hover {
+    background: #5F4BA4;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.headerIconButton .material-symbols-outlined {
+    font-size: 24px;
+}
+
+.profileButton {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+
+    background: linear-gradient(135deg, #5F4BA4, #7D68CC);
+    color: white;
+
+    font: 700 20px "Fira Sans", sans-serif;
+
+    box-shadow: 0 6px 16px rgba(95,75,164,.35);
+
+    transition: .25s;
+}
+
+.profileButton:hover {
+    transform: scale(1.06);
+}

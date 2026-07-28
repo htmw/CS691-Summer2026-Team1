@@ -1,6 +1,5 @@
-import IAPOBackground from "../../assets/IAPOBackground.jpg";
-import fileimg from "../../assets/file.png";
-import "./Transcript.css";
+
+import fileimg from "/assets/file.png";
 import { useEffect, useRef, useState } from "react";
 import { RegularLink, goToNav } from "../../comp/linking";
 
@@ -94,7 +93,7 @@ function Transcript() {
     <div className="midSizeCardContainer">
       <div
         className="centerBackground"
-        style={{ backgroundImage: `url(${IAPOBackground})` }}
+
       >
         <div className="formCardCenter">
           <p className="formTitle">Upload an optional transcript: 5MB Limit</p>

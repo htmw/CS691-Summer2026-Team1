@@ -1,8 +1,7 @@
 import './ScheduleCreator.css'
 import { useState } from 'react'
-import IAPOBackground from '../assets/IAPOBackground.jpg'
-import { useUser } from '../UserContext'
-import downloadImg from "../assets/downloadIcon.png";
+import { useUser } from '../../UserContext'
+import downloadImg from "/assets/downloadIcon.png";
 
 
 const semesters = [
@@ -50,7 +49,7 @@ function ScheduleCreator() {
   const filteredSchedule = schedule.filter((sem) => sem.semester.includes(activeYear))
 
   return (
-    <div className="schedulePageContainer" style={{ backgroundImage: `url(${IAPOBackground})` }}>
+    <div className="schedulePageContainer">
       <div className="profilePanel">
         <p className="profileTitle">{userData.name}'s Profile</p>
 

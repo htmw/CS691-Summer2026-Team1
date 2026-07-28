@@ -1,5 +1,5 @@
-import IAPOBackground from "../../assets/IAPOBackground.jpg";
-import "./Login.css";
+
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -17,9 +17,9 @@ function Login() {
     <div className="midSizeCardContainer">
       <div
         className="centerBackground"
-        style={{ backgroundImage: `url(${IAPOBackground})` }}
+
       >
-        <div className="loginCard">
+        <div className="authCard">
           <p className="formTitle">Log In</p>
 
           <p className="formLabel">Email</p>

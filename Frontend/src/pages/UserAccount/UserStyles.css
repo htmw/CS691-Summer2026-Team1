@@ -1,0 +1,160 @@
+/* ===========================
+   Settings Page
+=========================== */
+
+.settingsPage {
+    min-height: calc(100vh - 78px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 60px 30px;
+}
+
+
+.settingsSection {
+    width: 100%;
+    max-width: 700px;
+}
+
+
+.settingsCard {
+    width: 100%;
+
+    padding: 45px;
+
+    border-radius: 24px;
+
+    background: rgba(255,255,255,.14);
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.2);
+
+    color: white;
+}
+
+
+/* Header */
+
+.settingsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 35px;
+}
+
+
+.settingsTitle {
+    font: 900 42px "Fira Sans", sans-serif;
+    color: white;
+}
+
+
+/* Edit button */
+
+.settingsEditButton {
+    border: none;
+    background: rgba(255,255,255,.18);
+
+    color: white;
+
+    padding: 10px 22px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font: 600 16px "Fira Sans", sans-serif;
+
+    transition: .25s;
+}
+
+
+.settingsEditButton:hover {
+    background: white;
+    color: #5F4BA4;
+}
+
+
+/* Display mode */
+
+.settingsItem {
+    margin-bottom: 24px;
+}
+
+
+.settingsLabel {
+    color: rgba(255,255,255,.75);
+
+    font: 600 15px "Fira Sans", sans-serif;
+
+    margin-bottom: 8px;
+}
+
+
+.settingsValue {
+    color: white;
+
+    font: 500 20px "Fira Sans", sans-serif;
+}
+
+
+/* Edit mode */
+
+.settingsForm {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.settingsInput {
+    height: 48px;
+
+    margin-bottom: 22px;
+
+    padding: 0 14px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    background: rgba(255,255,255,.9);
+
+    font: 16px "Fira Sans", sans-serif;
+}
+
+
+/* Logout */
+
+.logoutButton {
+    width: 100%;
+
+    margin-top: 30px;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    cursor: pointer;
+
+    background: #5F4BA4;
+
+    color: white;
+
+    font: 700 18px "Fira Sans", sans-serif;
+
+    transition: .25s;
+}
+
+
+.logoutButton:hover {
+    background: #4d3895;
+    transform: translateY(-2px);
+}

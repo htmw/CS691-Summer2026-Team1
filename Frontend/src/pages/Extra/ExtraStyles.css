@@ -1,0 +1,264 @@
+/* ===========================
+   Landing Page
+=========================== */
+
+.landingPage {
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+
+
+/* ===========================
+   Hero
+=========================== */
+
+.heroSection {
+    max-width: 1100px;
+    width: 100%;
+    text-align: center;
+
+    padding: 40px;
+}
+
+
+.heroTitle {
+    color: white;
+    font: 900 64px "Fira Sans", sans-serif;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.heroSubtitle {
+    max-width: 720px;
+    margin: 0 auto;
+    color: rgba(255,255,255,.92);
+    font: 300 24px "Fira Sans", sans-serif;
+    line-height: 1.6;
+}
+
+.heroButtons {
+    margin-top: 55px;
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+.heroButton {
+    min-width: 190px;
+    padding: 16px 34px;
+    border-radius: 12px;
+    text-decoration: none;
+    font: 700 18px "Fira Sans", sans-serif;
+    transition: .25s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.primaryButton {
+    background: #5F4BA4;
+    color: white;
+    box-shadow: 0 8px 24px rgba(95,75,164,.45);
+}
+
+.primaryButton:hover {
+    background: #4d3895;
+    transform: translateY(-3px);
+}
+
+.secondaryButton {
+    background: rgba(255,255,255,.14);
+    border: 2px solid rgba(255,255,255,.6);
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+.secondaryButton:hover {
+    background: white;
+    color: #5F4BA4;
+}
+
+/* ===========================
+   Features
+=========================== */
+
+.featuresSection {
+    max-width: 1300px;
+    width: 100%;
+
+    padding: 40px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+
+    margin: 0;
+}
+
+
+.featureCard {
+    padding: 38px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.12);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,.18);
+    color: white;
+    transition: .3s;
+}
+
+.featureCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.25);
+}
+
+.featureIcon {
+    font-size: 46px;
+    margin-bottom: 22px;
+}
+
+.featureCard h2 {
+    font: 700 28px "Fira Sans", sans-serif;
+    margin-bottom: 18px;
+}
+
+.featureCard p {
+    color: rgba(255,255,255,.88);
+    font: 300 18px "Fira Sans", sans-serif;
+    line-height: 1.7;
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width: 900px) {
+
+    .heroTitle {
+        font-size: 46px;
+    }
+
+    .heroSubtitle {
+        font-size: 20px;
+    }
+
+    .featuresSection {
+        grid-template-columns: 1fr;
+    }
+
+    .heroButtons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .heroButton {
+        width: 260px;
+    }
+}
+
+/* ===========================
+   Contact Page
+=========================== */
+
+.contactPage {
+    min-height: 90vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.contactSection {
+    max-width: 900px;
+    margin: auto;
+    padding: 80px 30px;
+}
+
+.contactHeader {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.contactTitle {
+    color: white;
+    font: 900 56px "Fira Sans", sans-serif;
+    margin-bottom: 20px;
+}
+
+.contactSubtitle {
+    max-width: 650px;
+    margin: auto;
+    color: rgba(255,255,255,.9);
+    font: 300 22px "Fira Sans", sans-serif;
+    line-height: 1.6;
+}
+
+.contactCard {
+    background: rgba(255,255,255,.12);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 24px;
+    padding: 45px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactForm .formLabel {
+    margin: 20px 0 8px;
+    color: white;
+    font: 600 16px "Fira Sans", sans-serif;
+}
+
+.contactForm .formInput,
+.contactForm .formTextarea {
+    background: rgba(255,255,255,.92);
+    border: none;
+    border-radius: 10px;
+    font: 16px "Fira Sans", sans-serif;
+}
+
+.contactForm .formInput {
+    height: 50px;
+}
+
+.contactTextarea {
+    min-height: 180px;
+}
+
+.contactButton {
+    margin-top: 35px;
+    align-self: center;
+    min-width: 220px;
+}
+
+.sentMessage {
+    margin-top: 25px;
+    text-align: center;
+    color: #C8FFD2;
+    font: 600 16px "Fira Sans", sans-serif;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .contactTitle {
+        font-size: 42px;
+    }
+
+    .contactSubtitle {
+        font-size: 18px;
+    }
+
+    .contactCard {
+        padding: 30px;
+    }
+}

@@ -1,5 +1,5 @@
-import IAPOBackground from "../../assets/IAPOBackground.jpg";
-import "./Signup.css";
+
+
 import { useState, useEffect } from "react";
 
 import { useUser } from "../../UserContext";
@@ -99,9 +99,9 @@ function Signup() {
     <div className="midSizeCardContainer">
       <div
         className="centerBackground"
-        style={{ backgroundImage: `url(${IAPOBackground})` }}
+
       >
-        <div className="signupCard">
+        <div className="authCard">
           <p className="formTitle">Sign Up</p>
 
           <p className="formLabel">Email</p>

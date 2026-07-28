@@ -215,3 +215,127 @@
     font-style: italic;
     color: #a89ecf;
 }
+
+
+/* ===========================
+   Global Animated Background
+=========================== */
+
+.gradientBackground {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+ transform: translateZ(0);
+    background:
+        linear-gradient(
+            135deg,
+            #d8d8ff 0%,
+            #b8c8f2 35%,
+            #d8b6e8 70%,
+            #a8c4f5 100%
+        );
+}
+
+
+/* Large blurred shapes */
+
+.gradientBackground::before,
+.gradientBackground::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+       filter: blur(60px);
+    will-change: transform;
+    opacity: .7;
+    z-index: 0;
+}
+
+
+/* Pink/purple blob */
+
+.gradientBackground::before {
+    width: 650px;
+    height: 650px;
+
+    top: -180px;
+    left: -120px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(230,140,220,.8),
+            transparent 70%
+        );
+}
+
+
+/* Blue blob */
+
+.gradientBackground::after {
+    width: 800px;
+    height: 800px;
+
+    right: -200px;
+    bottom: -250px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(100,170,255,.75),
+            transparent 70%
+        );
+}
+
+
+/* Content stays above effects */
+
+.pageContent {
+    position: relative;
+    z-index: 1;
+}
+
+.gradientBackground {
+    min-height: 100vh;
+    width: 100%;
+
+    background:
+        radial-gradient(
+            ellipse at 20% 20%,
+            rgba(255,180,230,.7),
+            transparent 45%
+        ),
+        radial-gradient(
+            ellipse at 80% 20%,
+            rgba(130,180,255,.8),
+            transparent 50%
+        ),
+        radial-gradient(
+            ellipse at 50% 80%,
+            rgba(190,130,220,.5),
+            transparent 55%
+        ),
+        linear-gradient(
+            135deg,
+            #dce5ff,
+            #b6c9ef
+        );
+}
+
+
+.landingOverlay {
+    min-height: 100vh;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(
+        rgba(18,18,35,.72),
+        rgba(32,28,56,.82)
+    );
+
+    padding: 60px 0;
+}

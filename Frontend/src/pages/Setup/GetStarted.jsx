@@ -1,5 +1,4 @@
-import IAPOBackground from "../../assets/IAPOBackground.jpg";
-import "./GetStarted.css";
+
 import { useState, useEffect } from "react";
 import { useUser } from "../../UserContext";
 import { goToNav, RegularLink } from "../../comp/linking";
@@ -107,7 +106,7 @@ function GetStarted() {
     <div className="midSizeCardContainer">
       <div
         className="centerBackground"
-        style={{ backgroundImage: `url(${IAPOBackground})` }}
+
       >
         <div className="formCard">
           <p className="formTitle">Let's Get Started</p>

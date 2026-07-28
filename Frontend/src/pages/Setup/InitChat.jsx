@@ -1,5 +1,4 @@
-import IAPOBackground from "../../assets/IAPOBackground.jpg";
-import "./InitChat.css";
+
 import { useState, useEffect } from "react";
 import { useUser } from "../../UserContext";
 import { goToNav, RegularLink } from "../../comp/linking";
@@ -67,7 +66,7 @@ function InitChat() {
     <div className="midSizeCardContainer">
       <div
         className="centerBackground"
-        style={{ backgroundImage: `url(${IAPOBackground})` }}
+
       >
         <div className="formCard">
           <p className="formTitle">Tell us some details</p>

@@ -1,31 +1,38 @@
 import { RegularLink } from "./linking";
-import settingImg from "../assets/profilepic.png";
-import logoImg from "../assets/IAPOLogo.png";
+import settingImg from "/assets/profilepic.png";
+import logoImg from "/assets/IAPOLogo.png";
+import "./compStyles.css";
 
 function Header() {
+  const initial ="Y";// user?.name?.charAt(0).toUpperCase() || "U";
+
   return (
-    <div className="navContainer">
-      <div className="navLeft">
-        <RegularLink href="/schedulecreator">
-          <img src={logoImg} className="logoImgButton"/>
+    <header className="header">
+      <div className="headerLeft">
+        <RegularLink href="/" className="logoContainer">
+          <img src={logoImg} alt="IAPO Logo" className="logoImg" />
+          <span className="logoText">IAPO</span>
         </RegularLink>
-        <RegularLink href="/" className="navTitle">
-          IAPO
+
+         <RegularLink href="/profile" className="profileButton">
+          {initial}
         </RegularLink>
-        {/* <RegularLink href="/schedulecreator" className="profileLabel">
-          Your Schedule
-        </RegularLink> */}     
       </div>
-      <div className="navRight">
-        <RegularLink href="/contact" className="navTitle">
-          Contact
-        </RegularLink>        
-        <RegularLink href="/settings">
-          <img src={settingImg} className="settingImgButton"/>
+
+      <div className="headerRight">
+        <RegularLink href="/contact" className="headerIconButton">
+          <span className="material-symbols-outlined">mail</span>
         </RegularLink>
-        </div>
-    </div>
+
+        <RegularLink href="/settings" className="headerIconButton">
+          <span className="material-symbols-outlined">settings</span>
+        </RegularLink>
+
+       
+      </div>
+    </header>
   );
 }
+
 
 export default Header;
