@@ -55,7 +55,7 @@ function Home() {
               Sign Up
             </RegularLink>
 
-            <RegularLink href="/login" className="heroButton secondaryButton">
+            <RegularLink href="/login" className="heroButton primaryButton">
               Log In
             </RegularLink>
           </>

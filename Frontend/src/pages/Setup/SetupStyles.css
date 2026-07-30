@@ -1,0 +1,95 @@
+/* ===========================
+   Get Started Form Card
+=========================== */
+
+.formCard {
+    width: 500px;
+    padding: 40px;
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ===========================
+   Degree Toggle
+=========================== */
+
+.toggleContainer {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.toggleOption {
+    flex: 1;
+
+    padding: 12px;
+
+    border-radius: 10px;
+    border: 2px solid #5F4BA4;
+
+    background: white;
+    color: #5F4BA4;
+
+    font-family: "Fira Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.toggleActive {
+    background: #5F4BA4;
+    color: white;
+}
+
+
+/* ===========================
+   Select Inputs
+=========================== */
+
+.formSelect {
+    width: 100%;
+    height: 42px;
+
+    border-radius: 6px;
+    border: 1px solid #ccc;
+
+    padding-left: 12px;
+
+    font-size: 16px;
+    font-family: "Fira Sans", sans-serif;
+
+    background-color: #f0f8f0;
+}
+
+
+/* ===========================
+   Semester Layout
+=========================== */
+
+.semesterRow {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.semesterColumn {
+    flex: 1;
+}
+
+
+/* ===========================
+   Small Number Input
+=========================== */
+
+.formInputSmall {
+    width: 180px;
+}

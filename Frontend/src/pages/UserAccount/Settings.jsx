@@ -4,8 +4,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../UserContext";
 
-//add profile picture option!!!!!
-
 function Settings() {
   const navigate = useNavigate();
   const { userData, setUserData } = useUser();
@@ -17,111 +15,96 @@ function Settings() {
 
   const handleSave = () => {
     setUserData({ ...userData, name });
-    // email/password save stuff here
     setIsEditing(false);
   };
-
 return (
   <div className="gradientBackground">
-    <div className="settingsPage">
-      <section className="settingsSection">
-        <div className="settingsCard">
+    <div className="landingOverlay">
+       <div className="authCard">
 
           <div className="settingsHeader">
-            <h1 className="settingsTitle">
-              Settings
-            </h1>
+            <h1 className="formTitle">Settings</h1>
 
-            {!isEditing ? (
-              <button
-                className="settingsEditButton"
-                onClick={() => setIsEditing(true)}
-              >
-                Edit
-              </button>
-            ) : (
-              <button
-                className="settingsEditButton"
-                onClick={handleSave}
-              >
-                Save
-              </button>
-            )}
+            <button
+              className="heroButton primaryButton settingsSaveButton"
+              onClick={isEditing ? handleSave : () => setIsEditing(true)}
+            >
+              {isEditing ? "Save" : "Edit"}
+            </button>
           </div>
 
           {!isEditing ? (
             <div className="settingsInfo">
               <div className="settingsItem">
-                <p className="settingsLabel">Name</p>
-                <p className="settingsValue">
-                  {userData.name}
-                </p>
+                 <p className="formLabel">Name</p>
+                <p className="settingsValue">{userData.name}</p>
               </div>
 
               <div className="settingsItem">
-                <p className="settingsLabel">Email</p>
-                <p className="settingsValue">
-                  {email || "(none)"}
-                </p>
+                <p className="formLabel">Email</p>
+                <p className="settingsValue">{email || "(none)"}</p>
               </div>
 
               <div className="settingsItem">
-                <p className="settingsLabel">Password</p>
-                <p className="settingsValue">
-                  ********
-                </p>
+                 <p className="formLabel">Password</p>
+                <p className="settingsValue">********</p>
               </div>
+
+                          <button
+            className="heroButton logoutButton"
+            onClick={() => navigate("/")}
+          >
+            Sign Out
+          </button>
             </div>
+
+
           ) : (
-            <div className="settingsForm">
+            <form className="settingsForm">
 
-              <label className="settingsLabel">
-                Name
-              </label>
-
+              <label className="formLabel">Name</label>
               <input
-                className="settingsInput"
+                className="formInput"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
 
-              <label className="settingsLabel">
-                Email
-              </label>
-
+             <label className="formLabel">Email</label>
               <input
-                className="settingsInput"
+                className="formInput"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
 
-              <label className="settingsLabel">
-                New Password
-              </label>
-
+              <label className="formLabel">New Password</label>
               <input
-                className="settingsInput"
+                className="formInput"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="********"
               />
 
-            </div>
+              <label className="formLabel">Confirm Password</label>
+              <input
+                className="formInput"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="********"
+              />
+
+            </form>
           )}
 
-          <button
-            className="logoutButton"
-            onClick={() => navigate("/")}
-          >
-            Sign Out
-          </button>
+          
 
         </div>
-      </section>
     </div>
   </div>
 );
+
 }
+
 export default Settings;

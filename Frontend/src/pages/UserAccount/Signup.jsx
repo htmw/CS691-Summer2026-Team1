@@ -96,56 +96,54 @@ function Signup() {
   }
 
   return (
-    <div className="midSizeCardContainer">
-      <div
-        className="centerBackground"
+  <div className="gradientBackground">
+    <div className="landingOverlay">
+      <div className="authCard">
+        <p className="formTitle">Sign Up</p>
 
-      >
-        <div className="authCard">
-          <p className="formTitle">Sign Up</p>
+        <p className="formLabel">Email</p>
+        <input
+          className="formInput"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+        />
 
-          <p className="formLabel">Email</p>
-          <input
-            className="formInput"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="your@email.com"
-          />
+        <p className="formLabel">Password</p>
+        <input
+          className="formInput"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Create a password"
+        />
 
-          <p className="formLabel">Password</p>
-          <input
-            className="formInput"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Create a password"
-          />
+        <p className="formLabel">Confirm Password</p>
+        <input
+          className="formInput"
+          type="password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          placeholder="Confirm your password"
+        />
 
-          <p className="formLabel">Confirm Password</p>
-          <input
-            className="formInput"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Confirm your password"
-          />
+        {error && <p className="errorMessage">{error}</p>}
 
-          {error && <p className="signupError">{error}</p>}
-
-          <div className="buttonContainerCenter">
-            <p className="nextButton" onClick={handleSignup}>
-              Sign Up
-            </p>
-          </div>
-
-          <RegularLink href="/login" className="authLink">
-            Already have an account? Log in
-          </RegularLink>
+        <div className="buttonContainerCenter">
+          <p className="heroButton nextButton" onClick={handleSignup}>
+            Sign Up
+          </p>
         </div>
+
+        <RegularLink href="/login" className="authLink">
+          Already have an account? Log in
+        </RegularLink>
       </div>
     </div>
-  );
+  </div>
+);
+
 }
 
 export default Signup;
