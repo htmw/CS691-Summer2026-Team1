@@ -44,13 +44,13 @@ function InitChat() {
     if (loading) return;
 
     if (loggedIn) {
-      goTo(ROUTES.HOME);
+      //goTo(ROUTES.HOME);
       return;
     }
 
     if (!signUpData.email || !signUpData.password) {
       return;
-      goTo(ROUTES.SIGNUP);
+      //goTo(ROUTES.SIGNUP);
     }
   }, [loading, loggedIn, signUpData.email, signUpData.password, goTo]);
 

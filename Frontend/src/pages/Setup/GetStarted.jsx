@@ -79,7 +79,7 @@ function GetStarted() {
     if (loading) return;
 
     if (loggedIn) {
-      goTo(ROUTES.HOME);
+      //goTo(ROUTES.HOME);
       return;
     }
 
@@ -87,7 +87,7 @@ function GetStarted() {
       console.log("No Data");
       console.log(signUpData.email);
       console.log(signUpData.password);
-      goTo(ROUTES.SIGNUP);
+      //goTo(ROUTES.SIGNUP);
     }
   }, [loading, loggedIn, signUpData.email, signUpData.password, goTo]);
 
