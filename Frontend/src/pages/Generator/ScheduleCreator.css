@@ -2,15 +2,34 @@
    Schedule Page Layout
 =========================== */
 
-.scheduleLayout {
-  width:100%;
-  
-  display:grid;
-  grid-template-columns:900px 1fr;
-
-  overflow: hidden !important;
-
+.scheduleCreatorPage {
+    height: calc(100vh - 78px); /* adjust for your header height */
+    max-height: 100%;
+    overflow: hidden;
 }
+
+.scheduleCreatorPage .landingOverlay {
+    padding-top: 80px;
+    padding-bottom: 20px;
+    overflow: hidden;
+}
+
+
+.scheduleCreatorPage .scheduleLayout {
+    height: 100%;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 700px minmax(0, 1fr);
+}
+
+.scheduleCreatorPage .schedulePanel {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
 
 
 /* ===========================
@@ -22,26 +41,30 @@
   background:rgba(255,255,255,.12);
   border-radius:18px;
   box-shadow:0 12px 40px rgba(0,0,0,.2);
-  padding:30px;
-  box-sizing:border-box;
+
+
 }
 
 
 /* Left Profile */
 
 .profilePanel {
-  height:100vh  ;
+  height: auto !important;
   width: 100% !important;
 
-  background:rgba(255,255,255,.25);
-  border-radius:0 !important;
-  box-shadow:none;
-  padding:30px 25px;
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-  
+  background: rgba(255,255,255,.25);
+  border-radius: 0 !important;
+  box-shadow: none;
+
+  padding: 30px 25px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  overflow-y: auto;
 }
+
 
 
 .profilePanel .formTitle {
@@ -76,6 +99,7 @@
 
 .profilePanel textarea {
   min-height:100px;
+  resize: none;
 }
 
 
@@ -84,18 +108,17 @@
 =========================== */
 
 .schedulePanel {
-  height:auto;
-  max-height: 1200px;
-  width:100% !important;
-  max-width: 1200px;
-  background:rgba(255,255,255,.12);
-  border-radius:18px;
-  box-shadow:0 12px 40px rgba(0,0,0,.2);
-  padding:35px;
-  margin:20px;
-  box-sizing:border-box;
-  overflow-y:auto;
+    display: flex;
+    flex-direction: column;
+
+    width: 90%;
+    max-width: 1920px;
+
+    padding: 35px 45px;
+    box-sizing: border-box;
 }
+
+
 
 
 .scheduleTitleRow {
@@ -172,12 +195,17 @@
 /* ===========================
    Semester Cards
 =========================== */
-
 .semesterList {
-  display:flex;
-  flex-direction:column;
-  gap:15px;
+    flex: 1;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    max-height: 70vh; /* Adjust as needed */
 }
+
 
 
 .semesterCard {
@@ -239,22 +267,26 @@
    Responsive
 =========================== */
 
-@media(max-width:1000px) {
+@media (max-width: 1000px) {
 
   .scheduleLayout {
-    grid-template-columns:1fr;
+    grid-template-columns: 1fr;
+    gap: 24px;                 /* Space between panels */
+    padding: 20px;
+    box-sizing: border-box;
   }
 
-
   .profilePanel {
-    height:auto;
+    height: auto;
     max-width: 100% !important;
   }
 
-
   .schedulePanel {
-    height:auto;
-    margin:20px;
+    height: auto;
+    width: 100%;
+    max-width: 700px;          /* Adjust as desired */
+    margin: 0 auto;            /* Center horizontally */
   }
 
 }
+

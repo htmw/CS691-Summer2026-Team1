@@ -54,6 +54,24 @@ function ScheduleCreator() {
         "PHYS 101 - Physics I",
       ],
     },
+        {
+      semester: "Fall 2027",
+      courses: [
+        "CS 301 - Algorithms",
+        "MATH 400 - Linear Algebra",
+        "CS 350 - Operating Systems",
+        "PHYS 101 - Physics I",
+      ],
+    },
+        {
+      semester: "Fall 2027",
+      courses: [
+        "CS 301 - Algorithms",
+        "MATH 400 - Linear Algebra",
+        "CS 350 - Operating Systems",
+        "PHYS 101 - Physics I",
+      ],
+    },
     {
       semester: "Spring 2028",
       courses: [
@@ -126,7 +144,7 @@ function ScheduleCreator() {
   );
 
   return (
-    <div className="gradientBackground">
+    <div className="gradientBackground scheduleCreatorPage">
       <div className="landingOverlay">
         <div className="scheduleLayout">
           {/* Profile Panel */}
@@ -250,7 +268,7 @@ function ScheduleCreator() {
               <label className="formLabel">Ask for something else</label>
 
               <textarea
-                className="detailsTextarea"
+                className="detailsTextarea formTextarea"
                 value={ask}
                 onChange={(e) => setAsk(e.target.value)}
                 placeholder="i.e. put more focus on math"
@@ -261,7 +279,7 @@ function ScheduleCreator() {
           </div>
 
           {/* Schedule Panel */}
-          <div className="authCard schedulePanel">
+          <div className=" schedulePanel">
             <div className="scheduleTitleRow">
               <h1 className="formTitle">{userData.name}'s Schedule</h1>
 
