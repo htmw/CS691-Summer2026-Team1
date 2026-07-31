@@ -13,6 +13,7 @@ function InitChat() {
   const goTo = goToNav();
 
   const handleNext = async () => {
+    goTo(ROUTES.SCHEDULELOAD);
     if (!chat.trim()) {
       setError("Please fill out all required fields.");
       return;
@@ -28,12 +29,11 @@ function InitChat() {
 
     setUserData(updatedUserData);
 
-    // goTo("/transcript");
     try {
       const response = await postReq("/signUp", updatedUserData);
       console.log("Plan generated:", response);
       setError("Account Created");
-      //goTo("/getstarted");
+      goTo(ROUTES.SCHEDULELOAD);
     } catch (error) {
       console.error(error.response?.data || error);
       setError("Something went wrong. Please try again.");
@@ -64,63 +64,41 @@ function InitChat() {
     return null;
   }
 
- return (
-  <div className="gradientBackground">
-    <div className="landingOverlay">
-      <div className="authCard detailsCard">
+  return (
+    <div className="gradientBackground">
+      <div className="landingOverlay">
+        <div className="authCard detailsCard">
+          <div className="setupContent">
+            <h1 className="formTitle">Tell us some details</h1>
 
-        <div className="setupContent">
-
-          <h1 className="formTitle">
-            Tell us some details
-          </h1>
-
-
-          <div className="formGroup">
-
-            <textarea
-              className="detailsTextarea"
-              value={chat}
-              onChange={(e) => setChat(e.target.value)}
-              placeholder="More math focused, no class on Tuesdays, etc."
-            />
-
-          </div>
-
-
-          {error && (
-            <div className="errorMessage">
-              {error}
+            <div className="formGroup">
+              <textarea
+                className="detailsTextarea"
+                value={chat}
+                onChange={(e) => setChat(e.target.value)}
+                placeholder="More math focused, no class on Tuesdays, etc."
+              />
             </div>
-          )}
 
+            {error && <div className="errorMessage">{error}</div>}
 
-          <div className="formActions">
+            <div className="formActions">
+              <RegularLink
+                href={ROUTES.TRANSCRIPT}
+                className="heroButton nextButton"
+              >
+                Back
+              </RegularLink>
 
-            <RegularLink
-              href={ROUTES.TRANSCRIPT}
-              className="heroButton nextButton"
-            >
-              Back
-            </RegularLink>
-
-
-            <button
-              className="heroButton nextButton"
-              onClick={handleNext}
-            >
-              Generate Plan
-            </button>
-
+              <button className="heroButton nextButton" onClick={handleNext}>
+                Generate Plan
+              </button>
+            </div>
           </div>
-
-
         </div>
-
       </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default InitChat;

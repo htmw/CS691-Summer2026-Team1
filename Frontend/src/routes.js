@@ -7,6 +7,7 @@ export const ROUTES = {
   INITCHAT: "/signup/initchat",
 
   SCHEDULECREATE: "/schedulecreator",
+  SCHEDULELOAD: "/schedulecreator/load",
 
   SIGNUP: "/signup",
   LOGIN: "/login",

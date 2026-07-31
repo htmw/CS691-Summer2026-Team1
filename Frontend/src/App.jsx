@@ -9,7 +9,9 @@ import Header from "./comp/header.jsx";
 
 import Home from "./pages/Extra/Home.jsx";
 import Contact from "./pages/Extra/Contact.jsx";
+
 import ScheduleCreator from "./pages/Generator/ScheduleCreator.jsx";
+import ScheduleLoader from "./pages/Generator/ScheduleLoader.jsx";
 
 import GetStarted from "./pages/Setup/GetStarted.jsx";
 import InitChat from "./pages/Setup/InitChat.jsx";
@@ -52,6 +54,9 @@ function Routing() {
 
         <Route path={ROUTES.SCHEDULECREATE} element={
           <ProtectedRoute><ScheduleCreator /></ProtectedRoute>
+        } />
+        <Route path={ROUTES.SCHEDULELOAD} element={
+          <ProtectedRoute><ScheduleLoader /></ProtectedRoute>
         } />
 
         <Route path={ROUTES.SIGNUP} element={<Signup />} />
