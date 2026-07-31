@@ -8,13 +8,11 @@ They double as the Sprint 1 "Test Cases" artifact: each test maps to a user
 story / acceptance criterion for the extraction feature.
 """
 
-from fastapi.testclient import TestClient
-
 import extract
 from schema import StudentPlanRequest, Level
-from server import app
+from flask_app import app
 
-client = TestClient(app)
+client = app.test_client()
 
 
 # TC-01 — graduate students are identified from their message
@@ -58,16 +56,26 @@ def test_output_is_valid_schema():
 # TC-07 — the /extract endpoint returns a valid structured object
 def test_extract_endpoint():
     resp = client.post(
-        "/extract", json={"student_text": "MS CS, finished CS101, 9 credits/term"}
+        "/extract", json={"ask": "MS CS, finished CS101, 9 credits/term"}
     )
     assert resp.status_code == 200
-    body = resp.json()
+    body = resp.get_json()
     assert body["standing"]["level"] == "graduate"
     assert "CS101" in body["standing"]["completed_courses"]
 
 
-# TC-08 — health check is up
+# TC-08 — new: form fields are honored over free-text guessing
+def test_form_fields_are_used():
+    plan = extract.extract_plan(
+        "not sure what I want",
+        form={"degreeLevel": "Graduate", "credits": "12", "startingSemester": "Spring 2027"},
+    )
+    assert plan.standing.level == Level.GRADUATE
+    assert plan.hard_constraints.max_credits_per_term == 12
+
+
+# TC-09 — health check is up
 def test_health():
     resp = client.get("/health")
     assert resp.status_code == 200
-    assert resp.json()["status"] == "ok"
+    assert resp.get_json()["status"] == "ok"
