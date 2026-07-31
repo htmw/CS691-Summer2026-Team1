@@ -1,6 +1,6 @@
 import "./ScheduleCreator.css";
 import { useState, useRef } from "react";
-import { useUser} from "../../UserContext";
+import { useUser } from "../../UserContext";
 import downloadImg from "/assets/downloadIcon.png";
 
 const semesters = [
@@ -54,7 +54,7 @@ function ScheduleCreator() {
         "PHYS 101 - Physics I",
       ],
     },
-        {
+    {
       semester: "Fall 2027",
       courses: [
         "CS 301 - Algorithms",
@@ -63,7 +63,7 @@ function ScheduleCreator() {
         "PHYS 101 - Physics I",
       ],
     },
-        {
+    {
       semester: "Fall 2027",
       courses: [
         "CS 301 - Algorithms",
@@ -83,6 +83,51 @@ function ScheduleCreator() {
     },
     {
       semester: "Fall 2028",
+      courses: [
+        "CS 499 - Capstone",
+        "BUS 300 - Entrepreneurship",
+        "CS 420 - Security",
+        "COMM 200 - Public Speaking",
+      ],
+    },
+    {
+      semester: "Fall 2029",
+      courses: [
+        "CS 499 - Capstone",
+        "BUS 300 - Entrepreneurship",
+        "CS 420 - Security",
+        "COMM 200 - Public Speaking",
+      ],
+    },
+    {
+      semester: "Fall 2030",
+      courses: [
+        "CS 499 - Capstone",
+        "BUS 300 - Entrepreneurship",
+        "CS 420 - Security",
+        "COMM 200 - Public Speaking",
+      ],
+    },
+        {
+      semester: "Fall 2031",
+      courses: [
+        "CS 499 - Capstone",
+        "BUS 300 - Entrepreneurship",
+        "CS 420 - Security",
+        "COMM 200 - Public Speaking",
+      ],
+    },
+        {
+      semester: "Fall 2032",
+      courses: [
+        "CS 499 - Capstone",
+        "BUS 300 - Entrepreneurship",
+        "CS 420 - Security",
+        "COMM 200 - Public Speaking",
+      ],
+    },
+        {
+      semester: "Fall 2033",
       courses: [
         "CS 499 - Capstone",
         "BUS 300 - Entrepreneurship",
@@ -262,7 +307,6 @@ function ScheduleCreator() {
 
               {error && <div className="errorMessage">{error}</div>}
             </div>
-
 
             <div className="formGroup">
               <label className="formLabel">Ask for something else</label>

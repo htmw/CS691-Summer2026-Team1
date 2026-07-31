@@ -1,4 +1,5 @@
 import "./SetupStyles.css";
+import { ROUTES } from "../../routes.js";
 import { useState, useEffect } from "react";
 import { useUser } from "../../UserContext";
 import { goToNav, RegularLink } from "../../comp/linking";
@@ -71,19 +72,22 @@ function GetStarted() {
       credits,
     }));
 
-    goTo("/transcript");
+    goTo(ROUTES.TRANSCRIPT);
   };
 
   useEffect(() => {
     if (loading) return;
 
     if (loggedIn) {
-      goTo("/");
+      goTo(ROUTES.HOME);
       return;
     }
 
     if (!signUpData.email || !signUpData.password) {
-      goTo("/signup");
+      console.log("No Data");
+      console.log(signUpData.email);
+      console.log(signUpData.password);
+      goTo(ROUTES.SIGNUP);
     }
   }, [loading, loggedIn, signUpData.email, signUpData.password, goTo]);
 

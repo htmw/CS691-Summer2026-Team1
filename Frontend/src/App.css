@@ -12,8 +12,8 @@
     align-items: center;
 
     background: linear-gradient(
-        rgba(18,18,35,.72),
-        rgba(32,28,56,.82)
+        var(--bg-overlay-start),
+        var(--bg-overlay-end)
     );
 
     padding: 60px 0;
@@ -24,8 +24,9 @@
     max-width: 600px;
     padding: 40px;
     border-radius: 18px;
-    background: rgba(255,255,255,.12);
-    box-shadow: 0 12px 40px rgba(0,0,0,.2);
+
+    background: var(--bg-glass);
+    box-shadow: var(--shadow-card);
 
     display: flex;
     flex-direction: column;
@@ -39,36 +40,39 @@
     min-width: 190px;
     padding: 16px 34px;
     border-radius: 12px;
-    text-decoration: none;
-    font: 700 18px "Fira Sans", sans-serif;
-    transition: 0.25s;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+
     border: none;
+    cursor: pointer;
+
+    text-decoration: none;
+    font: var(--font-button);
+
+    transition: 0.25s;
 }
 
 .primaryButton {
-    background: #5F4BA4;
-    color: white;
-    box-shadow: 0 8px 24px rgba(95, 75, 164, 0.45);
+    background: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: var(--shadow-button);
 }
 
 .primaryButton:hover {
-    background: #4d3895;
+    background: var(--color-primary-dark);
     transform: translateY(-3px);
 }
 
-
 .nextButton {
-    background: #5F4BA4;
-    color: white;
-    box-shadow: 0 8px 24px rgba(95, 75, 164, 0.45);
+    background: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: var(--shadow-button);
 }
 
 .nextButton:hover {
-    background-color: #251360;
+    background: var(--color-primary-darker);
     transform: translateY(-3px);
 }
 
@@ -77,56 +81,58 @@
 =========================== */
 
 .formTitle {
-    font: 900 56px "Fira Sans", sans-serif;
-    color: white;
+    font: var(--font-title-lg);
+    color: var(--color-white);
     margin-bottom: 20px;
 }
 
-
 .formLabel {
-    font-size: 16px;
-    font-weight: 600;
-    font-family: "Fira Sans", sans-serif;
-    color: rgba(255,255,255,.85);
-    font: 700 18px "Fira Sans", sans-serif;
-    margin-bottom: 4px;
     margin-top: 16px;
-}
+    margin-bottom: 4px;
 
+    color: var(--color-text-muted);
+    font: var(--font-label);
+}
 
 .formInput {
     width: 100%;
     height: 40px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+
     padding-left: 12px;
-    font-size: 16px;
-    font-family: "Fira Sans", sans-serif;
-    background: rgba(255, 255, 255, 0.92);
+
+    border: var(--border-light);
+    border-radius: 6px;
+
+    background: var(--bg-input);
+
+    font: var(--font-body);
 }
 
 .contactForm .formTextarea {
-    background: rgba(255, 255, 255, 0.92);
+    background: var(--bg-input);
+
     border: none;
     border-radius: 10px;
+
     padding: 12px;
-    font: 16px "Fira Sans", sans-serif;
+
+    font: var(--font-body);
+
     resize: none;
 }
 
 .errorMessage {
-    font-size: 14px;
-    font-family: "Fira Sans", sans-serif;
-    color: #d32f2f;
-    background-color: rgba(211, 47, 47, 0.1);
-    border: 1px solid rgba(211, 47, 47, 0.3);
-    border-radius: 8px;
-    padding: 10px 14px;
     margin-top: 12px;
+    padding: 10px 14px;
+
+    border: var(--border-error);
+    border-radius: 8px;
+
+    background: rgba(211, 47, 47, 0.1);
+    color: var(--color-error);
+
+    font: var(--font-small);
 }
-
-
-
 
 /* ===========================
    Shared Background
@@ -135,25 +141,26 @@
 .gradientBackground {
     min-height: 100vh;
     width: 100%;
+
     background:
         radial-gradient(
             ellipse at 20% 20%,
-            rgba(255, 180, 230, 0.7),
+            var(--gradient-bg-1),
             transparent 45%
         ),
         radial-gradient(
             ellipse at 80% 20%,
-            rgba(130, 180, 255, 0.8),
+            var(--gradient-bg-2),
             transparent 50%
         ),
         radial-gradient(
             ellipse at 50% 80%,
-            rgba(190, 130, 220, 0.5),
+            var(--gradient-bg-3),
             transparent 55%
         ),
         linear-gradient(
             135deg,
-            #dce5ff,
-            #b6c9ef
+            var(--gradient-page-start),
+            var(--gradient-page-end)
         );
 }

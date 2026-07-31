@@ -1,5 +1,5 @@
-
-
+import "./UserStyles.css";
+import { ROUTES } from "../../routes.js";
 import { useState, useEffect } from "react";
 
 import { useUser } from "../../UserContext";
@@ -62,13 +62,14 @@ function Signup() {
         email: email,
       });
       if (response.exists) {
+        console.log("Email already used");
         setError("Email already used.");
         return;
       }
       console.log({ email, password });
       updateSignUpData(email, password);
       // handle making request to 
-      goTo("/getstarted");
+      goTo(ROUTES.GETSTARTED);
     } catch (error) {
       console.error(error);
       setError("Something went wrong. Please try again.");
@@ -77,7 +78,7 @@ function Signup() {
 
   useEffect(() => {
     if (!loading && loggedIn) {
-      goTo("/");
+      goTo(ROUTES.HOME);
     }
   }, [loading, loggedIn, goTo]);
 
@@ -136,7 +137,7 @@ function Signup() {
           </p>
         </div>
 
-        <RegularLink href="/login" className="authLink">
+        <RegularLink href={ROUTES.LOGIN} className="authLink">
           Already have an account? Log in
         </RegularLink>
       </div>

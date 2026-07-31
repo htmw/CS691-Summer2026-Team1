@@ -3,79 +3,79 @@
 =========================== */
 
 .setupCard {
-  width: 100%;
-  max-width: 1150px !important;
-  padding: 40px;
+    width: 100%;
+    max-width: 1150px !important;
+    padding: 40px;
 }
 
 .setupContent {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
 .setupCard .formTitle {
-  color: #15152d;
-  margin: 0 0 10px;
+    color: var(--color-text-dark);
+    margin: 0 0 10px;
 }
 
 .formGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .toggleContainer {
-  display: flex;
-  width: 65%;
-  height: 42px;
+    display: flex;
+    width: 65%;
+    height: 42px;
 }
 
 .toggleOption {
-  flex: 1;
-  border: 1px solid #aaa;
-  background: rgba(255, 255, 255, 0.85);
+    flex: 1;
+    border: var(--border-medium);
+    background: var(--bg-header);
 
-  font: 700 16px "Fira Sans", sans-serif;
+    font: 700 16px var(--font-family);
 
-  cursor: pointer;
-  transition: 0.25s;
+    cursor: pointer;
+    transition: 0.25s;
 }
 
 .toggleOption:first-child {
-  border-radius: 8px 0 0 8px;
+    border-radius: 8px 0 0 8px;
 }
 
 .toggleOption:last-child {
-  border-radius: 0 8px 8px 0;
+    border-radius: 0 8px 8px 0;
 }
 
 .toggleActive {
-  background: #5f4ba4;
-  color: white;
+    background: var(--color-primary);
+    color: var(--color-white);
 }
 
 .semesterRow {
-  display: flex;
-  gap: 20px;
+    display: flex;
+    gap: 20px;
 }
 
 .semesterColumn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .formActions {
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-  gap: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 20px;
 }
 
 .formActions .nextButton {
-  min-width: 200px;
+    min-width: 200px;
 }
 
 /* ===========================
@@ -83,71 +83,70 @@
 =========================== */
 
 .transcriptCard {
-  max-width: 700px;
+    max-width: 700px;
 }
 
 .hiddenInput {
-  display: none;
+    display: none;
 }
 
 .transcriptLimit {
-  font: 600 18px "Fira Sans", sans-serif;
-  color: rgba(21, 21, 45, 0.75);
-  margin-top: -10px;
+    font: 600 18px var(--font-family);
+    color: var(--color-text-subtle);
+    margin-top: -10px;
 }
 
 .transcriptContainer {
-  width: 100%;
-  min-height: 220px;
+    width: 100%;
+    min-height: 220px;
 
-  border-radius: 18px;
+    border-radius: 18px;
 
-  background: rgba(255, 255, 255, 0.2);
+    background: var(--bg-glass-light);
+    border: var(--border-dashed);
 
-  border: 2px dashed rgba(95, 75, 164, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    cursor: pointer;
 
-  cursor: pointer;
-
-  transition: 0.25s;
+    transition: 0.25s;
 }
 
 .transcriptContainer:hover {
-  background: rgba(255, 255, 255, 0.35);
-  transform: translateY(-3px);
+    background: var(--bg-glass-strong);
+    transform: translateY(-3px);
 }
 
 .fileimg {
-  width: 70px;
-  height: 70px;
-  margin-bottom: 15px;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
 }
 
 .uploadText {
-  font: 600 18px "Fira Sans", sans-serif;
-  color: #15152d;
-  text-align: center;
+    font: 600 18px var(--font-family);
+    color: var(--color-text-dark);
+    text-align: center;
 }
 
 .deleteText {
-  margin-top: 10px;
+    margin-top: 10px;
 
-  background: none;
-  border: none;
+    background: none;
+    border: none;
 
-  color: #d32f2f;
+    color: var(--color-error);
 
-  font: 700 16px "Fira Sans", sans-serif;
+    font: 700 16px var(--font-family);
 
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .deleteText:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 /* ===========================
@@ -155,27 +154,27 @@
 =========================== */
 
 .detailsCard {
-  max-width: 700px;
+    max-width: 700px;
 }
 
 .detailsTextarea {
-  width: 100%;
-  min-height: 220px;
+    width: 100%;
+    min-height: 220px;
 
-  border-radius: 12px;
-  border: none;
+    border-radius: 12px;
+    border: none;
 
-  padding: 15px;
+    padding: 15px;
 
-  resize: vertical;
+    resize: vertical;
 
-  background: rgba(255, 255, 255, 0.92);
+    background: var(--bg-input);
 
-  font: 16px "Fira Sans", sans-serif;
+    font: var(--font-body);
 
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .detailsTextarea:focus {
-  outline: 2px solid #5f4ba4;
+    outline: 2px solid var(--color-primary);
 }

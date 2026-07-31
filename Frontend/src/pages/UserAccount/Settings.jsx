@@ -1,5 +1,7 @@
 import "./UserStyles.css";
 import "../Extra/ExtraStyles.css";
+import { ROUTES } from "../../routes.js";
+import { goToNav, RegularLink } from "../../comp/linking"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../UserContext";
@@ -17,11 +19,10 @@ function Settings() {
     setUserData({ ...userData, name });
     setIsEditing(false);
   };
-return (
-  <div className="gradientBackground">
-    <div className="landingOverlay">
-       <div className="authCard">
-
+  return (
+    <div className="gradientBackground">
+      <div className="landingOverlay">
+        <div className="authCard">
           <div className="settingsHeader">
             <h1 className="formTitle">Settings</h1>
 
@@ -36,7 +37,7 @@ return (
           {!isEditing ? (
             <div className="settingsInfo">
               <div className="settingsItem">
-                 <p className="formLabel">Name</p>
+                <p className="formLabel">Name</p>
                 <p className="settingsValue">{userData.name}</p>
               </div>
 
@@ -45,18 +46,13 @@ return (
                 <p className="settingsValue">{email || "(none)"}</p>
               </div>
 
-                          <button
-            className="heroButton logoutButton"
-            onClick={() => navigate("/")}
-          >
-            Sign Out
-          </button>
+              <RegularLink href={ROUTES.HOME} className="heroButton logoutButton">
+                Sign Out
+              </RegularLink>
+              
             </div>
-
-
           ) : (
             <form className="settingsForm">
-
               <label className="formLabel">Name</label>
               <input
                 className="formInput"
@@ -64,7 +60,7 @@ return (
                 onChange={(e) => setName(e.target.value)}
               />
 
-             <label className="formLabel">Email</label>
+              <label className="formLabel">Email</label>
               <input
                 className="formInput"
                 type="email"
@@ -89,17 +85,12 @@ return (
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="********"
               />
-
             </form>
           )}
-
-          
-
         </div>
+      </div>
     </div>
-  </div>
-);
-
+  );
 }
 
 export default Settings;

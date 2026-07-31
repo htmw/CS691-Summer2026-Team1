@@ -1,4 +1,5 @@
 import { RegularLink } from "./linking";
+import { ROUTES } from "../routes.js";
 import settingImg from "/assets/profilepic.png";
 import logoImg from "/assets/IAPOLogo.png";
 import "./compStyles.css";
@@ -9,21 +10,21 @@ function Header() {
   return (
     <header className="header">
       <div className="headerLeft">
-        <RegularLink href="/" className="logoContainer">
+        <RegularLink href={ROUTES.HOME} className="logoContainer">
           <img src={logoImg} alt="IAPO Logo" className="logoImg" />
         </RegularLink>
 
-         <RegularLink href="/profile" className="profileButton">
+         <RegularLink href={ROUTES.SCHEDULECREATE} className="profileButton">
           {initial}
         </RegularLink>
       </div>
 
       <div className="headerRight">
-        <RegularLink href="/contact" className="headerIconButton">
+        <RegularLink href={ROUTES.CONTACT} className="headerIconButton">
           <span className="material-symbols-outlined">mail</span>
         </RegularLink>
 
-        <RegularLink href="/settings" className="headerIconButton">
+        <RegularLink href={ROUTES.SETTINGS} className="headerIconButton">
           <span className="material-symbols-outlined">settings</span>
         </RegularLink>
 

@@ -10,7 +10,7 @@ export default function SignupFlowWatcher() {
   const previousPath = useRef(location.pathname);
 
   useEffect(() => {
-    const signupFlow = ["/signup", "/getstarted", "/transcript", "/initchat"];
+    const signupFlow = [ROUTES.SIGNUP, ROUTES.GETSTARTED, ROUTES.TRANSCRIPT, ROUTES.INITCHAT];
 
     const wasInSignupFlow = signupFlow.includes(previousPath.current);
     const isInSignupFlow = signupFlow.includes(location.pathname);

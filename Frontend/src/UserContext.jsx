@@ -37,6 +37,8 @@ export function UserProvider({ children }) {
   const sessionChecked = useRef(false);
 
   const updateSignUpData = (email, password) => {
+    console.log("Updating signup data:", { email, password });
+    
     setSignUpData({
       email,
       password,
@@ -49,6 +51,11 @@ export function UserProvider({ children }) {
       [field]: value,
     }));
   };
+
+useEffect(() => {
+  console.log("Context signUpData changed:", signUpData);
+}, [signUpData]);
+
 
   useEffect(() => {
     const savedTranscript = localStorage.getItem("transcript");

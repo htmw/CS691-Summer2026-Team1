@@ -1,7 +1,131 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+:root {
+  /* ===========================
+     Colors
+  =========================== */
 
+  --color-primary: #5f4ba4;
+  --color-primary-dark: #4d3895;
+  --color-primary-darker: #251360;
+  --color-primary-light: #7d68cc;
+
+  --color-danger: #d84c4c;
+  --color-danger-dark: #bf3939;
+  --color-error: #d32f2f;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-text-dark: #15152d;
+  --color-text-light: rgba(255, 255, 255, 0.92);
+  --color-text-muted: rgba(255, 255, 255, 0.85);
+  --color-text-faded: rgba(255, 255, 255, 0.88);
+  --color-text-subtle: rgba(21, 21, 45, 0.75);
+
+  --color-success: #c8ffd2;
+
+  --color-border: #ccc;
+  --color-border-light: #aaa;
+  --color-divider: rgba(21, 21, 45, 0.25);
+
+  /* ===========================
+     Backgrounds
+  =========================== */
+
+  --bg-glass: rgba(255, 255, 255, 0.12);
+  --bg-glass-light: rgba(255, 255, 255, 0.2);
+  --bg-glass-medium: rgba(255, 255, 255, 0.25);
+  --bg-glass-strong: rgba(255, 255, 255, 0.35);
+  --bg-input: rgba(255, 255, 255, 0.92);
+
+  --bg-overlay-start: rgba(18, 18, 35, 0.72);
+  --bg-overlay-end: rgba(32, 28, 56, 0.82);
+
+  --bg-header: rgba(255, 255, 255, 0.85);
+
+  /* ===========================
+     Gradient Colors
+  =========================== */
+
+  --gradient-bg-1: rgba(255, 180, 230, 0.7);
+  --gradient-bg-2: rgba(130, 180, 255, 0.8);
+  --gradient-bg-3: rgba(190, 130, 220, 0.5);
+
+  --gradient-page-start: #dce5ff;
+  --gradient-page-end: #b6c9ef;
+
+  /* ===========================
+     Borders
+  =========================== */
+
+  --border-light: 1px solid var(--color-border);
+  --border-medium: 1px solid var(--color-border-light);
+  --border-primary: 1px solid var(--color-primary);
+  --border-glass: 1px solid rgba(255, 255, 255, 0.18);
+  --border-header: 1px solid rgba(0, 0, 0, 0.08);
+  --border-error: 1px solid rgba(211, 47, 47, 0.3);
+  --border-dashed: 2px dashed rgba(95, 75, 164, 0.6);
+  --border-dashed-small: 1.5px dashed rgba(95, 75, 164, 0.6);
+
+  /* ===========================
+     Shadows
+  =========================== */
+
+  --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.2);
+  --shadow-button: 0 8px 24px rgba(95, 75, 164, 0.45);
+  --shadow-profile: 0 6px 16px rgba(95, 75, 164, 0.35);
+  --shadow-feature: 0 18px 40px rgba(0, 0, 0, 0.25);
+  --shadow-semester: 0 8px 20px rgba(0, 0, 0, 0.12);
+  --shadow-contact: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+  /* ===========================
+     Typography
+  =========================== */
+
+  --font-family: "Fira Sans", sans-serif;
+
+  --font-title-xl: 900 64px var(--font-family);
+  --font-title-lg: 900 56px var(--font-family);
+  --font-title-md: 900 30px var(--font-family);
+  --font-title-sm: 800 20px var(--font-family);
+
+  --font-heading: 700 28px var(--font-family);
+  --font-button: 700 18px var(--font-family);
+  --font-label: 700 18px var(--font-family);
+
+  --font-body-lg: 300 24px var(--font-family);
+  --font-body-md: 300 22px var(--font-family);
+  --font-body: 16px var(--font-family);
+  --font-body-light: 300 18px var(--font-family);
+
+  --font-small: 14px var(--font-family);
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border);
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}

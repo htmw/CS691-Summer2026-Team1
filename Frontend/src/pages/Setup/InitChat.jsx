@@ -1,4 +1,5 @@
-
+import "./SetupStyles.css";
+import { ROUTES } from "../../routes.js";
 import { useState, useEffect } from "react";
 import { useUser } from "../../UserContext";
 import { goToNav, RegularLink } from "../../comp/linking";
@@ -43,13 +44,13 @@ function InitChat() {
     if (loading) return;
 
     if (loggedIn) {
-      goTo("/");
+      goTo(ROUTES.HOME);
       return;
     }
 
     if (!signUpData.email || !signUpData.password) {
       return;
-      goTo("/signup");
+      goTo(ROUTES.SIGNUP);
     }
   }, [loading, loggedIn, signUpData.email, signUpData.password, goTo]);
 
@@ -97,7 +98,7 @@ function InitChat() {
           <div className="formActions">
 
             <RegularLink
-              href="/transcript"
+              href={ROUTES.TRANSCRIPT}
               className="heroButton nextButton"
             >
               Back

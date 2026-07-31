@@ -1,4 +1,5 @@
-
+import "./SetupStyles.css";
+import { ROUTES } from "../../routes.js";
 import fileimg from "/assets/file.png";
 import { useEffect, useRef, useState } from "react";
 import { RegularLink, goToNav } from "../../comp/linking";
@@ -19,19 +20,19 @@ function Transcript() {
 
     // Already logged in users should not be here
     if (loggedIn) {
-      goTo("/");
+      goTo(ROUTES.HOME);
       return;
     }
 
     // User skipped signup
     if (!signUpData.email || !signUpData.password) {
-      goTo("/signup");
+      goTo(ROUTES.SIGNUP);
       return;
     }
 
     // User completed signup but skipped GetStarted
     if (!userData.name) {
-      goTo("/getstarted");
+      goTo(ROUTES.GETSTARTED);
     }
   }, [
     loading,
@@ -161,7 +162,7 @@ return (
           <div className="formActions">
 
             <RegularLink
-              href="/getstarted"
+              href={ROUTES.GETSTARTED}
               className="heroButton nextButton"
             >
               Back
@@ -169,7 +170,7 @@ return (
 
 
             <RegularLink
-              href="/initchat"
+              href={ROUTES.INITCHAT}
               className="heroButton nextButton"
             >
               Next
