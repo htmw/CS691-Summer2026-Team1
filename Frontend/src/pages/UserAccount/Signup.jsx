@@ -34,7 +34,7 @@ function Signup() {
 
   const handleSignup = async () => {
     setError("");
-
+    
     if (!isValidEmail(email)) {
       setError("Please enter a valid email address.");
       return;
@@ -77,7 +77,7 @@ function Signup() {
 
   useEffect(() => {
     if (!loading && loggedIn) {
-      //goTo("/");
+      goTo("/");
     }
   }, [loading, loggedIn, goTo]);
 

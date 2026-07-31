@@ -48,6 +48,7 @@ function InitChat() {
     }
 
     if (!signUpData.email || !signUpData.password) {
+      return;
       goTo("/signup");
     }
   }, [loading, loggedIn, signUpData.email, signUpData.password, goTo]);
@@ -62,37 +63,63 @@ function InitChat() {
     return null;
   }
 
-  return (
-    <div className="midSizeCardContainer">
-      <div
-        className="centerBackground"
+ return (
+  <div className="gradientBackground">
+    <div className="landingOverlay">
+      <div className="authCard detailsCard">
 
-      >
-        <div className="formCard">
-          <p className="formTitle">Tell us some details</p>
+        <div className="setupContent">
 
-          <textarea
-            className="typeChatContainer"
-            value={chat}
-            onChange={(e) => setChat(e.target.value)}
-            placeholder="More math focused, no class on Tuesdays, etc."
-          />
+          <h1 className="formTitle">
+            Tell us some details
+          </h1>
 
-          {error && <p className="errorMessage">{error}</p>}
 
-          <div className="nextButtonContainer">
-            <RegularLink href="/transcript" className="nextButton">
+          <div className="formGroup">
+
+            <textarea
+              className="detailsTextarea"
+              value={chat}
+              onChange={(e) => setChat(e.target.value)}
+              placeholder="More math focused, no class on Tuesdays, etc."
+            />
+
+          </div>
+
+
+          {error && (
+            <div className="errorMessage">
+              {error}
+            </div>
+          )}
+
+
+          <div className="formActions">
+
+            <RegularLink
+              href="/transcript"
+              className="heroButton nextButton"
+            >
               Back
             </RegularLink>
 
-            <button className="nextButton" onClick={handleNext}>
+
+            <button
+              className="heroButton nextButton"
+              onClick={handleNext}
+            >
               Generate Plan
             </button>
+
           </div>
+
+
         </div>
+
       </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default InitChat;

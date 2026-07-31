@@ -10,7 +10,7 @@ function Login() {
 
   const handleLogin = () => {
     console.log({ email, password });
-    navigate("/getstarted");
+    navigate("/schedulecreator");
   };
 
 

@@ -11,7 +11,6 @@ function Header() {
       <div className="headerLeft">
         <RegularLink href="/" className="logoContainer">
           <img src={logoImg} alt="IAPO Logo" className="logoImg" />
-          <span className="logoText">IAPO</span>
         </RegularLink>
 
          <RegularLink href="/profile" className="profileButton">

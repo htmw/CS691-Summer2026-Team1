@@ -45,11 +45,6 @@ return (
                 <p className="settingsValue">{email || "(none)"}</p>
               </div>
 
-              <div className="settingsItem">
-                 <p className="formLabel">Password</p>
-                <p className="settingsValue">********</p>
-              </div>
-
                           <button
             className="heroButton logoutButton"
             onClick={() => navigate("/")}

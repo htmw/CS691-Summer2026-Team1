@@ -89,32 +89,48 @@ function Transcript() {
     return null;
   }
 
-  return (
-    <div className="midSizeCardContainer">
-      <div
-        className="centerBackground"
+return (
+  <div className="gradientBackground">
+    <div className="landingOverlay">
+      <div className="authCard transcriptCard">
 
-      >
-        <div className="formCardCenter">
-          <p className="formTitle">Upload an optional transcript: 5MB Limit</p>
+        <div className="setupContent">
+
+          <h1 className="formTitle">
+            Upload an optional transcript
+          </h1>
+
+          <p className="transcriptLimit">
+            5MB Limit
+          </p>
+
 
           <input
             type="file"
             accept="application/pdf"
             ref={fileInputRef}
-            style={{ display: "none" }}
+            className="hiddenInput"
             onChange={handleFileUpload}
           />
+
 
           <div
             className="transcriptContainer"
             onClick={() => fileInputRef.current.click()}
           >
-            <img src={fileimg} alt="file pic" className="fileimg" />
+
+            <img
+              src={fileimg}
+              alt="file upload"
+              className="fileimg"
+            />
+
 
             {hasTranscript ? (
               <>
-                <p className="uploadText">{userData.transcript.name}</p>
+                <p className="uploadText">
+                  {userData.transcript.name}
+                </p>
 
                 <button
                   className="deleteText"
@@ -127,24 +143,47 @@ function Transcript() {
                 </button>
               </>
             ) : (
-              <p className="uploadText">Click to upload your PDF</p>
+              <p className="uploadText">
+                Click to upload your PDF
+              </p>
             )}
+
           </div>
 
-          {error && <p className="errorText">{error}</p>}
 
-          <div className="nextButtonContainer">
-            <RegularLink href="/getstarted" className="nextButton">
+          {error && (
+            <div className="errorMessage">
+              {error}
+            </div>
+          )}
+
+
+          <div className="formActions">
+
+            <RegularLink
+              href="/getstarted"
+              className="heroButton nextButton"
+            >
               Back
             </RegularLink>
-            <RegularLink href="/initchat" className="nextButton">
+
+
+            <RegularLink
+              href="/initchat"
+              className="heroButton nextButton"
+            >
               Next
             </RegularLink>
+
           </div>
+
+
         </div>
+
       </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default Transcript;

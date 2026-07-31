@@ -1,4 +1,4 @@
-import "./SetupStyles.css"
+import "./SetupStyles.css";
 import { useState, useEffect } from "react";
 import { useUser } from "../../UserContext";
 import { goToNav, RegularLink } from "../../comp/linking";
@@ -44,8 +44,8 @@ function GetStarted() {
     if (Number(credits) < 1) {
       setError("Must take at least one credit.");
       return;
-    }    
-    
+    }
+
     if (Number(credits) > 18) {
       setError("Maximum 18 credits per semester.");
       return;
@@ -102,112 +102,172 @@ function GetStarted() {
     return null;
   }
 
-return (
+ return (
   <div className="gradientBackground">
     <div className="landingOverlay">
-      <div className="authCard">
-        <p className="formTitle">Let's Get Started</p>
+      <div className="authCard setupCard">
 
-        <label className="formLabel">What's your name?</label>
-        <input
-          className="formInput"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Your Name"
-        />
+        <div className="setupContent">
 
-        <label className="formLabel">Degree Level</label>
-        <div className="toggleContainer">
-          <button
-            className={`toggleOption ${
-              degreeLevel === "Undergrad" ? "toggleActive" : ""
-            }`}
-            onClick={() => setDegreeLevel("Undergrad")}
-          >
-            Undergrad
-          </button>
+          <h1 className="formTitle">
+            Let's Get Started
+          </h1>
 
-          <button
-            className={`toggleOption ${
-              degreeLevel === "Graduate" ? "toggleActive" : ""
-            }`}
-            onClick={() => setDegreeLevel("Graduate")}
-          >
-            Graduate
-          </button>
-        </div>
+          <div className="formGroup">
+            <label className="formLabel">
+              What's your name?
+            </label>
 
-        <label className="formLabel">What's your major?</label>
-        <select
-          className="formSelect"
-          value={major}
-          onChange={(e) => setMajor(e.target.value)}
-        >
-          <option value="">Select</option>
-          {majors.map((m) => (
-            <option key={m} value={m}>
-              {m}
-            </option>
-          ))}
-        </select>
+            <input
+              className="formInput"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your Name"
+            />
+          </div>
 
-        <div className="semesterRow">
-          <div className="semesterColumn">
-            <label className="formLabel">Starting Semester</label>
+
+          <div className="formGroup">
+            <label className="formLabel">
+              Degree Level
+            </label>
+
+            <div className="toggleContainer">
+              <button
+                className={`toggleOption ${
+                  degreeLevel === "Undergrad"
+                    ? "toggleActive"
+                    : ""
+                }`}
+                onClick={() => setDegreeLevel("Undergrad")}
+              >
+                Undergrad
+              </button>
+
+              <button
+                className={`toggleOption ${
+                  degreeLevel === "Graduate"
+                    ? "toggleActive"
+                    : ""
+                }`}
+                onClick={() => setDegreeLevel("Graduate")}
+              >
+                Graduate
+              </button>
+            </div>
+          </div>
+
+
+          <div className="formGroup">
+            <label className="formLabel">
+              What's your major?
+            </label>
+
             <select
-              className="formSelect"
-              value={startingSemester}
-              onChange={(e) => setStartingSemester(e.target.value)}
+              className="formInput"
+              value={major}
+              onChange={(e) => setMajor(e.target.value)}
             >
               <option value="">Select</option>
-              {semesters.map((s) => (
-                <option key={s} value={s}>
-                  {s}
+
+              {majors.map((m) => (
+                <option key={m} value={m}>
+                  {m}
                 </option>
               ))}
+
             </select>
           </div>
 
-          <div className="semesterColumn">
-            <label className="formLabel">Ending Semester</label>
-            <select
-              className="formSelect"
-              value={endingSemester}
-              onChange={(e) => setEndingSemester(e.target.value)}
-            >
-              <option value="">Select</option>
-              {semesters.map((s) => (
-                <option key={s} value={s}>
-                  {s}
-                </option>
-              ))}
-            </select>
+
+          <div className="semesterRow">
+
+            <div className="semesterColumn">
+              <label className="formLabel">
+                Starting Semester
+              </label>
+
+              <select
+                className="formInput"
+                value={startingSemester}
+                onChange={(e) => setStartingSemester(e.target.value)}
+              >
+                <option value="">Select</option>
+
+                {semesters.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+
+              </select>
+            </div>
+
+
+            <div className="semesterColumn">
+              <label className="formLabel">
+                Ending Semester
+              </label>
+
+              <select
+                className="formInput"
+                value={endingSemester}
+                onChange={(e) => setEndingSemester(e.target.value)}
+              >
+                <option value="">Select</option>
+
+                {semesters.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+
+              </select>
+            </div>
+
           </div>
+
+
+          <div className="formGroup">
+
+            <label className="formLabel">
+              How many credits per semester
+            </label>
+
+            <input
+              className="formInput"
+              type="number"
+              value={credits}
+              onChange={(e) => setCredits(e.target.value)}
+              placeholder="Max 18 credits"
+            />
+
+          </div>
+
+
+          {error && (
+            <div className="errorMessage">
+              {error}
+            </div>
+          )}
+
+
+          <div className="formActions">
+            <button
+              className="heroButton nextButton"
+              onClick={handleNext}
+            >
+              Next
+            </button>
+          </div>
+
         </div>
 
-        <label className="formLabel">
-          How many credits per semester
-        </label>
-
-        <input
-          className="formInput formInputSmall"
-          type="number"
-          value={credits}
-          onChange={(e) => setCredits(e.target.value)}
-          placeholder="Max 18 credits"
-        />
-
-        {error && <div className="errorMessage">{error}</div>}
-
-        <button className="nextButton" onClick={handleNext}>
-          Next
-        </button>
       </div>
     </div>
   </div>
 );
-
 }
 
 export default GetStarted;
