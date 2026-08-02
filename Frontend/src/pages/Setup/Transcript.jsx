@@ -61,21 +61,15 @@ function Transcript() {
   useEffect(() => {
     if (loading) return;
 
-    // Already logged in users should not be here
-    if (loggedIn) {
-      //goTo(ROUTES.HOME);
-      return;
-    }
-
     // User skipped signup
     if (!signUpData.email || !signUpData.password) {
-      //goTo(ROUTES.SIGNUP);
+      goTo(ROUTES.SIGNUP);
       return;
     }
 
     // User completed signup but skipped GetStarted
     if (!userData.name) {
-      //goTo(ROUTES.GETSTARTED);
+      goTo(ROUTES.GETSTARTED);
     }
   }, [
     loading,

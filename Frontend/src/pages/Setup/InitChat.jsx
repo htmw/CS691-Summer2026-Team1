@@ -6,14 +6,13 @@ import { goToNav, RegularLink } from "../../comp/linking";
 import { postReq } from "../../comp/callRequests";
 
 function InitChat() {
-  const { setUserData, userData, signUpData, loggedIn, loading } = useUser();
+  const { setUserData, userData, signUpData, loggedIn, loading, setUserFromResponse} = useUser();
 
   const [chat, setChat] = useState("");
   const [error, setError] = useState("");
   const goTo = goToNav();
 
   const handleNext = async () => {
-    goTo(ROUTES.SCHEDULELOAD);
     if (!chat.trim()) {
       setError("Please fill out all required fields.");
       return;
@@ -31,8 +30,7 @@ function InitChat() {
 
     try {
       const response = await postReq("/signUp", updatedUserData);
-      console.log("Plan generated:", response);
-      setError("Account Created");
+      setUserFromResponse(response);
       goTo(ROUTES.SCHEDULELOAD);
     } catch (error) {
       console.error(error.response?.data || error);
@@ -43,14 +41,9 @@ function InitChat() {
   useEffect(() => {
     if (loading) return;
 
-    if (loggedIn) {
-      //goTo(ROUTES.HOME);
-      return;
-    }
-
     if (!signUpData.email || !signUpData.password) {
       return;
-      //goTo(ROUTES.SIGNUP);
+      goTo(ROUTES.SIGNUP);
     }
   }, [loading, loggedIn, signUpData.email, signUpData.password, goTo]);
 

@@ -77,6 +77,8 @@ function Signup() {
   };
 
   useEffect(() => {
+    if(loading) return;
+    
     if (!loading && loggedIn) {
       goTo(ROUTES.HOME);
     }

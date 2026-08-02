@@ -4,36 +4,6 @@ import { getReq, postReq } from "../../comp/callRequests.js";
 import "./ExtraStyles.css";
 
 function Home() {
-  // const [apiData, setApiData] = useState(null);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const data = await getReq("/get-data");
-  //       setApiData(data);
-  //       console.log("GET response:", data);
-  //     } catch (error) {
-  //       console.error("GET request failed:", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  // const handlePostRequest = async () => {
-  //   try {
-  //     const response = await postReq("/post-data", {
-  //       name: "Test Hello",
-  //       value: 10,
-  //     });
-
-  //     console.log("POST response:", response);
-  //     setApiData(response);
-  //   } catch (error) {
-  //     console.error("POST request failed:", error);
-  //   }
-  // };
-
   return (
     <div className="gradientBackground">
       <div className="landingOverlay">
