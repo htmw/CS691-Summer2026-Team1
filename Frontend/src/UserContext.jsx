@@ -34,6 +34,8 @@ export function UserProvider({ children }) {
     password: "",
   });
 
+  const [authChecked, setAuthChecked] = useState(false);
+
   const [userData, setUserData] = useState(defaultUserData);
 
   const [loading, setLoading] = useState(true);
@@ -110,12 +112,18 @@ export function UserProvider({ children }) {
         console.error(error);
         setLoggedIn(false);
       } finally {
-        setLoading(false);
+        setAuthChecked(true);
       }
     };
 
     checkSession();
   }, []);
+
+  useEffect(() => {
+    if (authChecked) {
+      setLoading(false);
+    }
+  }, [authChecked]);
 
   return (
     <UserContext.Provider
@@ -132,7 +140,7 @@ export function UserProvider({ children }) {
         setLoggedIn,
 
         loading,
-
+        authChecked,
         setUserFromResponse,
       }}
     >

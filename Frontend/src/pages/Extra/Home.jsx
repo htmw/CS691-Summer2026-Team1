@@ -2,8 +2,12 @@ import { RegularLink } from "../../comp/linking.jsx";
 import { useEffect, useState } from "react";
 import { getReq, postReq } from "../../comp/callRequests.js";
 import "./ExtraStyles.css";
+import { useUser } from "../../UserContext";
 
 function Home() {
+
+  const {loggedIn} = useUser();
+
   return (
     <div className="gradientBackground">
       <div className="landingOverlay">
@@ -16,7 +20,7 @@ function Home() {
           </p>
 
           <div className="heroButtons">
-            {!false ? (
+            {!loggedIn ? (
               <>
                 <RegularLink
                   href="/signup"

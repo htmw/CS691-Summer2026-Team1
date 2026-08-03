@@ -76,18 +76,7 @@
     transform: translateY(-3px);
 }
 
-.headerRight {
-    /* Change the font family */
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
-    /* Adjust size and weight to make it look polished */
-    font-size: 16px;
-    font-weight: 500;
-
-    /* Optional: change the color so it's not default blue */
-    color: #333333; 
-    text-decoration: none; /* Removes the underline */
-}
 /* ===========================
    Shared Form Styles
 =========================== */

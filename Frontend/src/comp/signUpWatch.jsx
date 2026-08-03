@@ -5,7 +5,7 @@ import { ROUTES } from "../routes";
 
 export default function SignupFlowWatcher() {
   const location = useLocation();
-  const { clearSignUpData, loggedIn } = useUser();
+  const { clearSignUpData, loggedIn} = useUser();
 
   const previousPath = useRef(location.pathname);
 
@@ -20,13 +20,8 @@ export default function SignupFlowWatcher() {
     const wasInSignupFlow = signupFlow.includes(previousPath.current);
     const isInSignupFlow = signupFlow.includes(location.pathname);
 
-    if (wasInSignupFlow && !isInSignupFlow) {
+    if (wasInSignupFlow && !isInSignupFlow && !loggedIn) {
       clearSignUpData();
-    }
-
-    if (loggedIn) {
-      goTo(ROUTES.HOME);
-      return;
     }
 
     previousPath.current = location.pathname;

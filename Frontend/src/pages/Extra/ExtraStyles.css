@@ -164,6 +164,13 @@
     font: 600 16px var(--font-family);
 }
 
+.sentMessageError {
+    margin-top: 25px;
+    text-align: center;
+    color: var(--color-failed);
+    font: 600 16px var(--font-family);
+}
+
 /* ===========================
    Mobile
 =========================== */

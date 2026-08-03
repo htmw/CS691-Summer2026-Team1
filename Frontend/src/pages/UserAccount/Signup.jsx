@@ -7,7 +7,7 @@ import { goToNav, RegularLink } from "../../comp/linking";
 import { postReq } from "../../comp/callRequests";
 
 function Signup() {
-  const { loggedIn, loading, updateSignUpData, signUpData, clearSignUpData } =
+  const { loggedIn, updateSignUpData, signUpData} =
     useUser();
 
   const [email, setEmail] = useState(signUpData.email || "");
@@ -76,13 +76,6 @@ function Signup() {
     }
   };
 
-  useEffect(() => {
-    if(loading) return;
-    
-    if (!loading && loggedIn) {
-      goTo(ROUTES.HOME);
-    }
-  }, [loading, loggedIn, goTo]);
 
   useEffect(() => {
     if (signUpData.email) {
@@ -94,9 +87,6 @@ function Signup() {
     }
   }, [signUpData]);
 
-  if (loading) {
-    return null;
-  }
 
   return (
   <div className="gradientBackground">

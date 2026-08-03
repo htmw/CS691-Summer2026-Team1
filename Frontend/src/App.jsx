@@ -1,3 +1,4 @@
+import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,14 +23,18 @@ import Signup from "./pages/UserAccount/Signup.jsx";
 import Settings from "./pages/UserAccount/Settings.jsx";
 import { useUser } from "./UserContext.jsx";
 import { ROUTES } from "./routes.js";
-import "./App.css";
 import SignupFlowWatcher from "./comp/signUpWatch.jsx";
 
-function ProtectedRoute({ children }) {
-  const { loggedIn } = useUser();
+function ProtectedRoute({ hasToBeLoggedIn, children }) {
+  const { loggedIn, loading } = useUser();
+  if(loading) return null;
+  
+  if (hasToBeLoggedIn && !loggedIn) {
+    return <Navigate to={ROUTES.HOME} replace />;
+  }
 
-  if (!loggedIn) {
-    //return <Navigate to="/gettingStarted" replace />;
+  if (!hasToBeLoggedIn && loggedIn) {
+    return <Navigate to={ROUTES.HOME} replace />;
   }
 
   return children;
@@ -42,28 +47,72 @@ function Routing() {
         <Route path={ROUTES.HOME} element={<Home />} />
         <Route path={ROUTES.CONTACT} element={<Contact />} />
 
-        <Route path={ROUTES.GETSTARTED} element={
-          <ProtectedRoute><GetStarted /></ProtectedRoute>
-        } />
-        <Route path={ROUTES.TRANSCRIPT} element={
-          <ProtectedRoute><Transcript /></ProtectedRoute>
-        } />
-        <Route path={ROUTES.INITCHAT} element={
-          <ProtectedRoute><InitChat /></ProtectedRoute>
-        } />
+        <Route
+          path={ROUTES.GETSTARTED}
+          element={
+            <ProtectedRoute hasToBeLoggedIn={false}>
+              <GetStarted />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.TRANSCRIPT}
+          element={
+            <ProtectedRoute hasToBeLoggedIn={false}>
+              <Transcript />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.INITCHAT}
+          element={
+            <ProtectedRoute hasToBeLoggedIn={false}>
+              <InitChat />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route path={ROUTES.SCHEDULECREATE} element={
-          <ProtectedRoute><ScheduleCreator /></ProtectedRoute>
-        } />
-        <Route path={ROUTES.SCHEDULELOAD} element={
-          <ProtectedRoute><ScheduleLoader /></ProtectedRoute>
-        } />
+        <Route
+          path={ROUTES.SCHEDULECREATE}
+          element={
+            <ProtectedRoute hasToBeLoggedIn={true}>
+              <ScheduleCreator />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.SCHEDULELOAD}
+          element={
+            <ProtectedRoute hasToBeLoggedIn={true}>
+              <ScheduleLoader />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route path={ROUTES.SIGNUP} element={<Signup />} />
-        <Route path={ROUTES.LOGIN} element={<Login />} />
-        <Route path={ROUTES.SETTINGS} element={
-          <ProtectedRoute><Settings /></ProtectedRoute>
-        } />
+        <Route
+          path={ROUTES.SIGNUP}
+          element={
+            <ProtectedRoute hasToBeLoggedIn={false}>
+              <Signup />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.LOGIN}
+          element={
+            <ProtectedRoute hasToBeLoggedIn={false}>
+              <Login />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.SETTINGS}
+          element={
+            <ProtectedRoute hasToBeLoggedIn={true}>
+              <Settings />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
       </Routes>
@@ -75,7 +124,7 @@ function App() {
   return (
     <Router>
       <SignupFlowWatcher />
-
+      {/* Check if I can remove gradientBackground here */}
       <div className="container gradientBackground">
         <Header />
         <Routing />

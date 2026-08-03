@@ -28,6 +28,7 @@
   --color-text-subtle: rgba(21, 21, 45, 0.75);
 
   --color-success: #c8ffd2;
+  --color-failed: #ff7570;
 
   --color-border: #ccc;
   --color-border-light: #aaa;

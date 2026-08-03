@@ -6,7 +6,7 @@ import { goToNav, RegularLink } from "../../comp/linking";
 import { postReq } from "../../comp/callRequests";
 
 function InitChat() {
-  const { setUserData, userData, signUpData, loggedIn, loading, setUserFromResponse} = useUser();
+  const { setUserData, userData, signUpData, loggedIn, setUserFromResponse} = useUser();
 
   const [chat, setChat] = useState("");
   const [error, setError] = useState("");
@@ -21,8 +21,8 @@ function InitChat() {
     setError("");
 
     const updatedUserData = {
-      ...signUpData,
       ...userData,
+      ...signUpData,
       chat,
     };
 
@@ -39,13 +39,11 @@ function InitChat() {
   };
 
   useEffect(() => {
-    if (loading) return;
-
     if (!signUpData.email || !signUpData.password) {
-      return;
       goTo(ROUTES.SIGNUP);
+      return;
     }
-  }, [loading, loggedIn, signUpData.email, signUpData.password, goTo]);
+  }, [signUpData.email, signUpData.password, goTo]);
 
   useEffect(() => {
     if (userData) {
@@ -53,9 +51,7 @@ function InitChat() {
     }
   }, [userData]);
 
-  if (loading) {
-    return null;
-  }
+
 
   return (
     <div className="gradientBackground">

@@ -9,7 +9,7 @@ import { useUser } from "../../UserContext";
 function Transcript() {
   const fileInputRef = useRef(null);
 
-  const { userData, updateUserData, signUpData, loggedIn, loading } = useUser();
+  const { userData, updateUserData, signUpData, loggedIn } = useUser();
 
   const [error, setError] = useState("");
 
@@ -59,8 +59,6 @@ function Transcript() {
   const hasTranscript = userData.transcript?.data;
 
   useEffect(() => {
-    if (loading) return;
-
     // User skipped signup
     if (!signUpData.email || !signUpData.password) {
       goTo(ROUTES.SIGNUP);
@@ -70,19 +68,14 @@ function Transcript() {
     // User completed signup but skipped GetStarted
     if (!userData.name) {
       goTo(ROUTES.GETSTARTED);
+      return;
     }
   }, [
-    loading,
-    loggedIn,
     signUpData.email,
     signUpData.password,
     userData.name,
     goTo,
   ]);
-
-  if (loading) {
-    return null;
-  }
 
   return (
     <div className="gradientBackground">
