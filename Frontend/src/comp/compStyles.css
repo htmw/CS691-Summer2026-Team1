@@ -37,6 +37,7 @@
     font-weight: 500;
     color: var(--color-text-dark); /* Changed to support Dark Mode! */
     text-decoration: none; 
+    
 }
 
 .logoContainer {
@@ -70,8 +71,12 @@
     border-radius: 50%;
     text-decoration: none;
 
-    color: var(--color-primary);
-    background: rgba(95, 75, 164, 0.08);
+    background: var(--bg-header);
+    color: var(--color-text-dark);
+
+    border: 2px solid var(--color-text-dark);
+    padding: 0;
+    cursor: pointer;
 
     transition: 0.25s;
 }

@@ -16,6 +16,8 @@ function Settings() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [error, setError] = useState("");
+
   const isValidEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
@@ -32,11 +34,12 @@ function Settings() {
   const nameRegex = /^[A-Za-z ]+$/;
 
   const handleSave = async () => {
+    setError("");
     const updates = {};
 
     if (name !== userData.name) {
       if (!nameRegex.test(name.trim())) {
-        alert("Please enter a valid name.");
+        setError("Please enter a valid name.");
         return;
       }
 
@@ -45,7 +48,7 @@ function Settings() {
 
     if (email !== userData.email) {
       if (!isValidEmail(email)) {
-        alert("Please enter a valid email.");
+        setError("Please enter a valid email address.");
         return;
       }
 
@@ -54,14 +57,14 @@ function Settings() {
 
     if (password !== "") {
       if (!isValidPassword(password)) {
-        alert(
-          "Password must be at least 8 characters and contain an uppercase letter, number, and special character."
+        setError(
+          "Password must be at least 8 characters and include a capital letter, a number, and a special character."
         );
         return;
       }
 
       if (password !== confirmPassword) {
-        alert("Passwords do not match.");
+        setError("Passwords do not match.");
         return;
       }
 
@@ -73,22 +76,22 @@ function Settings() {
       return;
     }
 
-    updates.email = email.trim();
-
     try {
       const response = await postReq("/updateUser", updates);
 
-      setUserData((prev) => ({
-        ...prev,
-        ...updates,
-      }));
+      setUserData(response);
+
+      setError("");
 
       setPassword("");
       setConfirmPassword("");
       setIsEditing(false);
     } catch (err) {
-      console.error(err.response?.data || err);
-      alert("Unable to update your account.");
+      console.log(err);
+      console.log(err.response);
+      console.log(err.response?.data);
+
+      setError(err.response?.data?.detail || "Unable to update your account.");
     }
   };
 
@@ -166,10 +169,12 @@ function Settings() {
               <input
                 className="formInput"
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="********"
               />
+
+              {error && <p className="errorMessage">{error}</p>}
             </form>
           )}
         </div>

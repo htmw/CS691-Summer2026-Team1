@@ -39,13 +39,6 @@ function Header({ toggleTheme, isDark }) {
         <button
           onClick={toggleTheme}
           className="headerIconButton"
-          title="Toggle Dark Mode"
-          style={{
-            background: "transparent",
-            border: "none",
-            cursor: "pointer",
-            color: "inherit",
-          }}
         >
           <span className="material-symbols-outlined">
             {isDark ? "light_mode" : "dark_mode"}

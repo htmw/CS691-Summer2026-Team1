@@ -48,7 +48,7 @@
   --bg-overlay-start: rgba(18, 18, 35, 0.72);
   --bg-overlay-end: rgba(32, 28, 56, 0.82);
 
-  --bg-header: rgba(255, 255, 255, 0.85);
+  --bg-header: rgba(255, 255, 255, 0.95);
 
   /* ===========================
      Gradient Colors
@@ -115,7 +115,7 @@
   --gradient-page-end: #1a162d;
 
   /* Darken the cards and inputs */
-  --bg-header: rgba(20, 18, 32, 0.85);
+  --bg-header: rgba(20, 18, 32, 0.95);
   --bg-input: rgba(30, 28, 45, 0.92);
   
   /* Make the glass effects darker */

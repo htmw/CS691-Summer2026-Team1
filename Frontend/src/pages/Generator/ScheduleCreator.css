@@ -9,18 +9,18 @@
 }
 
 .scheduleCreatorPage .landingOverlay {
-  padding-top: 80px;
-  padding-bottom: 20px;
-  overflow: hidden;
+  padding-top: 70px;
+
+  overflow: hidden;  
 }
 
 .scheduleCreatorPage .scheduleLayout {
   height: 100vh;
-  overflow: visible;
+overflow: visible; 
 }
 
 .scheduleCreatorPage .scheduleLayout {
-  height: calc(100vh - 100px);
+  height: 93vh;
   width: 100%;
 
   display: grid;
@@ -252,6 +252,7 @@
   justify-content: center;
   transition: all 0.8s ease;
 }
+
 
 .spinner {
   width: 480px;
