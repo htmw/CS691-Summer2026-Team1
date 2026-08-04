@@ -31,7 +31,6 @@ CREATE TABLE Degree_Requirements ( /* each majors requirement for graduation */
     MinimumGPA DECIMAL(3,2), /* 3 total digits allowed, 2 digits after decimal point, 1 digit before decimal point */
     PRIMARY KEY (RequirementID),
     FOREIGN KEY (MajorID) REFERENCES Major(MajorID)
-    CHECK (CapstoneCreditsRequired IN (3,4))
 );
 
 /* Student and Course data */
@@ -51,7 +50,9 @@ CREATE TABLE Course (
   Credits INT NOT NULL,
   CourseKeywords TEXT NOT NULL, /* suggested add for AI communication */
   CareerTags TEXT NOT NULL, /* suggested add for AI communication */
+  MajorID INT NOT NULL,
   PRIMARY KEY (CourseID),
+  FOREIGN KEY (MajorID) REFERENCES Major(MajorID),
   CHECK (Credits > 0 AND Credits <= 6) /* Constraint: to ensure valid credit hour values for courses */
 );
 
@@ -85,8 +86,6 @@ CREATE TABLE Courses_Offered  (
   /* suggested to relocate from Course > Courses_Offered (from Instructor to EndTime) */
   Instructor VARCHAR (100) NOT NULL,
   InstructionalMethod VARCHAR(15) NOT NULL, /* online, hybrid, or in person */
-  StartDate DATE NOT NULL,
-  EndDate DATE NOT NULL,
   MeetingDay VARCHAR(30) NOT NULL,
   StartTime TIME  NOT NULL,
   EndTime TIME  NOT NULL,
@@ -95,7 +94,6 @@ CREATE TABLE Courses_Offered  (
   PRIMARY KEY (OfferedID),
   FOREIGN KEY (CourseID) REFERENCES Course(CourseID),
   FOREIGN KEY (SemesterID) REFERENCES Semester(SemesterID),
-  CHECK (EndDate > StartDate), /* recommended to add for data validation */
   CHECK (Capacity > 0),
   CHECK (CurrentlyEnrolled >= 0 AND CurrentlyEnrolled <= Capacity) /* recommended add to start at 0 & prevent over capacity */
 );
