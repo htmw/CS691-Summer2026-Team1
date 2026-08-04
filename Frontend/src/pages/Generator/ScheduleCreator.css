@@ -69,10 +69,12 @@
 
 .profilePanel .toggleContainer {
   width: 100%;
+  
 }
 
 .profilePanel .formInput {
   width: 100%;
+  
 }
 
 .profileDivider {
@@ -86,7 +88,10 @@
 .profilePanel textarea {
   min-height: 100px;
   resize: vertical;
+  color: var(--color-text-dark);
 }
+
+
 
 /* ===========================
    Schedule Panel

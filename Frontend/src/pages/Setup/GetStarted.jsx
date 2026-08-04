@@ -134,7 +134,7 @@ function GetStarted() {
               <div className="toggleContainer">
                 <button
                   className={`toggleOption ${
-                    degreeLevel === "Undergrad" ? "toggleActive" : ""
+                    degreeLevel === "Undergrad" ? "toggleActive" : "toggleInActive"
                   }`}
                   onClick={() => setDegreeLevel("Undergrad")}
                 >
@@ -143,7 +143,7 @@ function GetStarted() {
 
                 <button
                   className={`toggleOption ${
-                    degreeLevel === "Graduate" ? "toggleActive" : ""
+                    degreeLevel === "Graduate" ? "toggleActive" : "toggleInActive"
                   }`}
                   onClick={() => setDegreeLevel("Graduate")}
                 >

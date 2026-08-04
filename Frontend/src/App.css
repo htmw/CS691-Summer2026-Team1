@@ -107,6 +107,8 @@
     background: var(--bg-input);
 
     font: var(--font-body);
+
+    color: var(--color-text-dark);
 }
 
 .contactForm .formTextarea {
@@ -120,6 +122,7 @@
     font: var(--font-body);
 
     resize: none;
+    color: var(--color-text-dark);
 }
 
 .errorMessage {

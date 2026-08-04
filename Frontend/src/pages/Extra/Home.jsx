@@ -1,12 +1,12 @@
-import { RegularLink } from "../../comp/linking.jsx";
-import { useEffect, useState } from "react";
-import { getReq, postReq } from "../../comp/callRequests.js";
 import "./ExtraStyles.css";
+import { ROUTES } from "../../routes.js";
+import { useEffect, useState } from "react";
+
 import { useUser } from "../../UserContext";
+import { RegularLink } from "../../comp/linking.jsx";
 
 function Home() {
-
-  const {loggedIn} = useUser();
+  const { loggedIn } = useUser();
 
   return (
     <div className="gradientBackground">
@@ -23,20 +23,26 @@ function Home() {
             {!loggedIn ? (
               <>
                 <RegularLink
-                  href="/signup"
+                  href={ROUTES.SIGNUP}
                   className="heroButton primaryButton"
                 >
                   Sign Up
                 </RegularLink>
 
-                <RegularLink href="/login" className="heroButton primaryButton">
+                <RegularLink
+                  href={ROUTES.LOGIN}
+                  className="heroButton primaryButton"
+                >
                   Log In
                 </RegularLink>
               </>
             ) : (
-              <button className="heroButton primaryButton">
+              <RegularLink
+                href={ROUTES.SCHEDULECREATE}
+                className="heroButton primaryButton"
+              >
                 Generate Schedule
-              </button>
+              </RegularLink>
             )}
           </div>
         </section>
