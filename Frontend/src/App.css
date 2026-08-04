@@ -129,7 +129,7 @@
     border: var(--border-error);
     border-radius: 8px;
 
-    background: rgba(211, 47, 47, 0.1);
+    background: var(--bg-error-light);
     color: var(--color-error);
 
     font: var(--font-small);

@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState, useEffect } from "react"; // 1. Added React Hooks here!
 import {
   BrowserRouter as Router,
   Routes,
@@ -121,12 +122,30 @@ function Routing() {
 }
 
 function App() {
+
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem('theme') === 'dark';
+  });
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDark]);
+
+  const toggleTheme = () => setIsDark(!isDark);
+
   return (
     <Router>
       <SignupFlowWatcher />
       {/* Check if I can remove gradientBackground here */}
       <div className="container gradientBackground">
-        <Header />
+        {/* 3. Passed the props down to your Header! */}
+        <Header toggleTheme={toggleTheme} isDark={isDark} />
         <Routing />
       </div>
     </Router>

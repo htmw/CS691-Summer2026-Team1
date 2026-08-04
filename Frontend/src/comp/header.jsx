@@ -5,7 +5,8 @@ import { RegularLink } from "./linking";
 import { useUser } from "../UserContext";
 import logoImg from "/assets/IAPOLogo.png";
 
-function Header() {
+// 1. We added { toggleTheme, isDark } so the header can receive the switch from App.jsx
+function Header({ toggleTheme, isDark }) {
   const { loggedIn, userData } = useUser();
 
   let initial = "I";
@@ -34,6 +35,23 @@ function Header() {
       </div>
 
       <div className="headerRight">
+        {/* 2. Here is the new Dark Mode button! It flips the icon text based on the state */}
+        <button
+          onClick={toggleTheme}
+          className="headerIconButton"
+          title="Toggle Dark Mode"
+          style={{
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            color: "inherit",
+          }}
+        >
+          <span className="material-symbols-outlined">
+            {isDark ? "light_mode" : "dark_mode"}
+          </span>
+        </button>
+
         {loggedIn && (
           <RegularLink href={ROUTES.SETTINGS} className="headerIconButton">
             <span className="material-symbols-outlined">settings</span>
