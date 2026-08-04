@@ -1,0 +1,365 @@
+/* ===========================
+   Schedule Page Layout
+=========================== */
+
+.scheduleCreatorPage {
+  height: calc(100vh - 78px);
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.scheduleCreatorPage .landingOverlay {
+  padding-top: 80px;
+  padding-bottom: 20px;
+  overflow: visible;
+}
+
+.scheduleCreatorPage .scheduleLayout {
+  height: calc(100vh - 100px);
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 700px minmax(0, 1fr);
+}
+
+.scheduleCreatorPage .schedulePanel {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ===========================
+   Panels
+=========================== */
+
+.profilePanel,
+.schedulePanel {
+  background: var(--bg-glass);
+  box-shadow: var(--shadow-card);
+}
+
+/* Left Profile */
+
+.profilePanel {
+  height: auto !important;
+  width: 100% !important;
+
+  background: var(--bg-glass-medium);
+  border-radius: 0 !important;
+  box-shadow: none;
+
+  padding: 30px 25px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  overflow-y: auto;
+}
+
+.profilePanel .formTitle {
+  color: var(--color-text-dark);
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+/* ===========================
+   Profile Controls
+=========================== */
+
+.profilePanel .toggleContainer {
+  width: 100%;
+}
+
+.profilePanel .formInput {
+  width: 100%;
+}
+
+.profileDivider {
+  border: none;
+  height: 1px;
+  width: 100%;
+  background: var(--color-divider);
+  margin: 15px 0;
+}
+
+.profilePanel textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* ===========================
+   Schedule Panel
+=========================== */
+
+.schedulePanel {
+  display: flex;
+  flex-direction: column;
+
+  width: 90%;
+  max-width: 1920px;
+
+  padding: 35px 45px;
+  box-sizing: border-box;
+}
+
+.scheduleTitleRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.scheduleTitleRow .formTitle {
+  color: var(--color-text-dark);
+  font-size: 32px;
+  margin: 0;
+}
+
+.downloadButton {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.downloadIcon {
+  width: 28px;
+  height: 28px;
+}
+
+/* ===========================
+   Year Tabs
+=========================== */
+
+.yearTabs {
+  display: flex;
+  width: 100%;
+  margin: 25px 0 15px;
+}
+
+.yearTab {
+  flex: 1;
+  height: 36px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--bg-glass-strong);
+  border: var(--border-primary);
+
+  color: var(--color-primary);
+  font: 700 15px var(--font-family);
+
+  cursor: pointer;
+}
+
+.yearTab:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.yearTab:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.yearTabActive {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ===========================
+   Semester Cards
+=========================== */
+
+.semesterList {
+  flex: 1;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  max-height: 70vh;
+}
+
+.semesterCard {
+  background: var(--bg-glass-light);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: var(--shadow-semester);
+}
+
+.semesterName {
+  margin: 0 0 10px;
+  color: var(--color-primary);
+  font: var(--font-title-sm);
+}
+
+.courseName {
+  margin: 5px 0;
+  color: var(--color-text-dark);
+  font: 600 15px var(--font-family);
+}
+
+/* Smaller transcript uploader inside ScheduleCreator */
+
+.scheduleTranscript .transcriptLimit {
+  font-size: 14px;
+  margin-top: -6px;
+  margin-bottom: 8px;
+}
+
+.scheduleTranscript .transcriptContainer {
+  min-height: 120px;
+  border-radius: 12px;
+  border-width: 1.5px;
+}
+
+.scheduleTranscript .fileimg {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 10px;
+}
+
+.scheduleTranscript .uploadText {
+  font-size: 14px;
+}
+
+.scheduleTranscript .deleteText {
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.scheduleTranscript .errorMessage {
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.scheduleLoader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.8s ease;
+}
+
+
+.spinner {
+  width: 480px;
+  height: 480px;
+  border: 20px solid rgba(255, 255, 255, 0.25);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1.8s linear infinite;
+}
+
+.loaderTextContainer {
+  margin-top: 24px;
+  height: 40px;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+}
+
+.loaderText {
+  position: absolute;
+  color: var(--color-white);
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.fadeIn {
+  animation: fadeIn 0.35s ease forwards;
+}
+
+.fadeOutUp {
+  animation: fadeOutUp 0.5s ease forwards;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-35px);
+  }
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 1200px) {
+  .scheduleCreatorPage {
+    height: auto;
+    min-height: calc(100vh - 78px);
+    overflow: visible;
+  }
+
+  .scheduleCreatorPage .landingOverlay {
+    height: auto;
+    overflow: visible;
+    padding-top: 30px;
+  }
+
+  .scheduleCreatorPage .scheduleLayout {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow: visible;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .profilePanel {
+    order: 2;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: visible;
+    border-radius: 18px !important;
+  }
+
+  .schedulePanel {
+    order: 1;
+    width: 100%;
+    height: auto;
+    max-width: 700px;
+    margin: 0 auto;
+    overflow: visible;
+    border-radius: 18px;
+  }
+
+  .semesterList {
+    max-height: none;
+    overflow: visible;
+  }
+}
