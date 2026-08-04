@@ -2,8 +2,8 @@ import "./UserStyles.css";
 import "../Extra/ExtraStyles.css";
 import { ROUTES } from "../../routes.js";
 import { useState, useEffect } from "react";
-
 import { goToNav, RegularLink } from "../../comp/linking";
+
 import { useUser } from "../../UserContext";
 import { postReq } from "../../comp/callRequests";
 
@@ -34,7 +34,6 @@ function Settings() {
   const handleSave = async () => {
     const updates = {};
 
-    // Name
     if (name !== userData.name) {
       if (!nameRegex.test(name.trim())) {
         alert("Please enter a valid name.");
@@ -44,7 +43,6 @@ function Settings() {
       updates.name = name.trim();
     }
 
-    // Email
     if (email !== userData.email) {
       if (!isValidEmail(email)) {
         alert("Please enter a valid email.");
@@ -54,7 +52,6 @@ function Settings() {
       updates.email = email.trim();
     }
 
-    // Password (only if user entered one)
     if (password !== "") {
       if (!isValidPassword(password)) {
         alert(
@@ -71,7 +68,6 @@ function Settings() {
       updates.password = password;
     }
 
-    // Nothing changed
     if (Object.keys(updates).length === 0) {
       setIsEditing(false);
       return;
@@ -80,7 +76,7 @@ function Settings() {
     updates.email = email.trim();
 
     try {
-      response = await postReq("/updateUser", updates);
+      const response = await postReq("/updateUser", updates);
 
       setUserData((prev) => ({
         ...prev,

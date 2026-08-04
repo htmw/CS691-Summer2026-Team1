@@ -1,6 +1,8 @@
 import "./ScheduleCreator.css";
 import { useState, useRef } from "react";
 import { useUser } from "../../UserContext";
+
+import { postReq } from "../../comp/callRequests";
 import downloadImg from "/assets/downloadIcon.png";
 
 const semesters = [
@@ -17,6 +19,7 @@ const semesters = [
 function ScheduleCreator() {
   const fileInputRef = useRef(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [degreeLevel, setDegreeLevel] = useState("Undergrad");
   const [startingSemester, setStartingSemester] = useState("Fall 2027");
@@ -25,117 +28,30 @@ function ScheduleCreator() {
   const [ask, setAsk] = useState("");
   const [activeYear, setActiveYear] = useState("2027");
   const { userData, updateUserData } = useUser();
+  const [schedule, setSchedule] = useState([]);
 
-  const schedule = [
-    {
-      semester: "Fall 2026",
-      courses: [
-        "ENG 101 - English Composition",
-        "PHIL 200 - Ethics",
-        "CS 150 - Web Development",
-        "MATH 201 - Calculus I",
-      ],
-    },
-    {
-      semester: "Spring 2027",
-      courses: [
-        "CS 101 - Intro to a Computer",
-        "Lit 123 - Shakespearean Shakespeare",
-        "Math 303 - Algebra 16",
-        "CS 200 - Data/Data",
-      ],
-    },
-    {
-      semester: "Fall 2027",
-      courses: [
-        "CS 301 - Algorithms",
-        "MATH 400 - Linear Algebra",
-        "CS 350 - Operating Systems",
-        "PHYS 101 - Physics I",
-      ],
-    },
-    {
-      semester: "Fall 2027",
-      courses: [
-        "CS 301 - Algorithms",
-        "MATH 400 - Linear Algebra",
-        "CS 350 - Operating Systems",
-        "PHYS 101 - Physics I",
-      ],
-    },
-    {
-      semester: "Fall 2027",
-      courses: [
-        "CS 301 - Algorithms",
-        "MATH 400 - Linear Algebra",
-        "CS 350 - Operating Systems",
-        "PHYS 101 - Physics I",
-      ],
-    },
-    {
-      semester: "Spring 2028",
-      courses: [
-        "CS 400 - Machine Learning",
-        "CS 410 - Databases",
-        "MATH 450 - Statistics",
-        "CS 490 - Senior Project",
-      ],
-    },
-    {
-      semester: "Fall 2028",
-      courses: [
-        "CS 499 - Capstone",
-        "BUS 300 - Entrepreneurship",
-        "CS 420 - Security",
-        "COMM 200 - Public Speaking",
-      ],
-    },
-    {
-      semester: "Fall 2029",
-      courses: [
-        "CS 499 - Capstone",
-        "BUS 300 - Entrepreneurship",
-        "CS 420 - Security",
-        "COMM 200 - Public Speaking",
-      ],
-    },
-    {
-      semester: "Fall 2030",
-      courses: [
-        "CS 499 - Capstone",
-        "BUS 300 - Entrepreneurship",
-        "CS 420 - Security",
-        "COMM 200 - Public Speaking",
-      ],
-    },
-        {
-      semester: "Fall 2031",
-      courses: [
-        "CS 499 - Capstone",
-        "BUS 300 - Entrepreneurship",
-        "CS 420 - Security",
-        "COMM 200 - Public Speaking",
-      ],
-    },
-        {
-      semester: "Fall 2032",
-      courses: [
-        "CS 499 - Capstone",
-        "BUS 300 - Entrepreneurship",
-        "CS 420 - Security",
-        "COMM 200 - Public Speaking",
-      ],
-    },
-        {
-      semester: "Fall 2033",
-      courses: [
-        "CS 499 - Capstone",
-        "BUS 300 - Entrepreneurship",
-        "CS 420 - Security",
-        "COMM 200 - Public Speaking",
-      ],
-    },
-  ];
+  const handleGeneratePlan = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const response = await postReq("/extract", {
+        name: userData.name,
+        degreeLevel,
+        major: userData.major,
+        startingSemester,
+        endingSemester,
+        credits,
+        transcript: userData.transcript,
+        chat: ask,
+      });
+      setSchedule(response);
+    } catch (err) {
+      console.error("Generate plan failed:", err);
+      setError("Failed to generate plan. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -202,7 +118,9 @@ function ScheduleCreator() {
               <div className="toggleContainer">
                 <button
                   className={`toggleOption ${
-                    degreeLevel === "Undergrad" ? "toggleActive" : "toggleInActive"
+                    degreeLevel === "Undergrad"
+                      ? "toggleActive"
+                      : "toggleInActive"
                   }`}
                   onClick={() => setDegreeLevel("Undergrad")}
                 >
@@ -211,7 +129,9 @@ function ScheduleCreator() {
 
                 <button
                   className={`toggleOption ${
-                    degreeLevel === "Graduate" ? "toggleActive" : "toggleInActive"
+                    degreeLevel === "Graduate"
+                      ? "toggleActive"
+                      : "toggleInActive"
                   }`}
                   onClick={() => setDegreeLevel("Graduate")}
                 >
@@ -319,7 +239,13 @@ function ScheduleCreator() {
               />
             </div>
 
-            <button className="heroButton nextButton">Next</button>
+            <button
+              className="heroButton nextButton"
+              onClick={handleGeneratePlan}
+              disabled={loading}
+            >
+              {loading ? "Generating..." : "Generate Plan"}
+            </button>
           </div>
 
           {/* Schedule Panel */}

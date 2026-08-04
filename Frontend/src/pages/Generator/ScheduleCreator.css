@@ -16,6 +16,11 @@
 
 .scheduleCreatorPage .scheduleLayout {
   height: 100vh;
+  overflow: visible;
+}
+
+.scheduleCreatorPage .scheduleLayout {
+  height: calc(100vh - 100px);
   width: 100%;
 
   display: grid;
@@ -69,12 +74,10 @@
 
 .profilePanel .toggleContainer {
   width: 100%;
-  
 }
 
 .profilePanel .formInput {
   width: 100%;
-  
 }
 
 .profileDivider {
@@ -90,8 +93,6 @@
   resize: vertical;
   color: var(--color-text-dark);
 }
-
-
 
 /* ===========================
    Schedule Panel
@@ -251,7 +252,6 @@
   justify-content: center;
   transition: all 0.8s ease;
 }
-
 
 .spinner {
   width: 480px;
