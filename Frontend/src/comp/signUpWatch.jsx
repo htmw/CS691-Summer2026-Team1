@@ -5,17 +5,22 @@ import { ROUTES } from "../routes";
 
 export default function SignupFlowWatcher() {
   const location = useLocation();
-  const { clearSignUpData } = useUser();
+  const { clearSignUpData, loggedIn} = useUser();
 
   const previousPath = useRef(location.pathname);
 
   useEffect(() => {
-    const signupFlow = ["/signup", "/getstarted", "/transcript", "/initchat"];
+    const signupFlow = [
+      ROUTES.SIGNUP,
+      ROUTES.GETSTARTED,
+      ROUTES.TRANSCRIPT,
+      ROUTES.INITCHAT,
+    ];
 
     const wasInSignupFlow = signupFlow.includes(previousPath.current);
     const isInSignupFlow = signupFlow.includes(location.pathname);
 
-    if (wasInSignupFlow && !isInSignupFlow) {
+    if (wasInSignupFlow && !isInSignupFlow && !loggedIn) {
       clearSignUpData();
     }
 

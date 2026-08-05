@@ -25,25 +25,29 @@ export const getReq = async (endpoint = "/", options = {}) => {
 };
 
 export const postReq = async (endpoint = "/", data, options = {}) => {
-  try {
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "X-API-Key": API_KEY,
-        "Content-Type": "application/json",
-        ...options.headers,
-      },
-      body: JSON.stringify(data),
-      ...options,
-    });
+  const response = await fetch(`${BASE_URL}${endpoint}`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "X-API-Key": API_KEY,
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+    body: JSON.stringify(data),
+    ...options,
+  });
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
+  const responseData = await response.json();
 
-    return await response.json();
-  } catch (error) {
+  if (!response.ok) {
+    const error = new Error(`HTTP ${response.status}`);
+    error.response = {
+      status: response.status,
+      data: responseData,
+    };
     throw error;
   }
+
+  return responseData;
 };
+

@@ -1,127 +1,186 @@
 import "./UserStyles.css";
 import "../Extra/ExtraStyles.css";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../../UserContext";
+import { ROUTES } from "../../routes.js";
+import { useState, useEffect } from "react";
+import { goToNav, RegularLink } from "../../comp/linking";
 
-//add profile picture option!!!!!
+import { useUser } from "../../UserContext";
+import { postReq } from "../../comp/callRequests";
 
 function Settings() {
-  const navigate = useNavigate();
-  const { userData, setUserData } = useUser();
+  const { loggedIn, setUserData, clearSignUpData, userData } = useUser();
 
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(userData.name);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(userData.email);
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSave = () => {
-    setUserData({ ...userData, name });
-    // email/password save stuff here
-    setIsEditing(false);
+  const [error, setError] = useState("");
+
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-return (
-  <div className="gradientBackground">
-    <div className="settingsPage">
-      <section className="settingsSection">
-        <div className="settingsCard">
+  const isValidPassword = (password) => {
+    return (
+      password.length >= 8 &&
+      /[A-Z]/.test(password) && // capital letter
+      /[0-9]/.test(password) && // number
+      /[!@#$%^&*(),.?":{}|<>]/.test(password) // special character
+    );
+  };
 
+  const nameRegex = /^[A-Za-z ]+$/;
+
+  const handleSave = async () => {
+    setError("");
+    const updates = {};
+
+    if (name !== userData.name) {
+      if (!nameRegex.test(name.trim())) {
+        setError("Please enter a valid name.");
+        return;
+      }
+
+      updates.name = name.trim();
+    }
+
+    if (email !== userData.email) {
+      if (!isValidEmail(email)) {
+        setError("Please enter a valid email address.");
+        return;
+      }
+
+      updates.email = email.trim();
+    }
+
+    if (password !== "") {
+      if (!isValidPassword(password)) {
+        setError(
+          "Password must be at least 8 characters and include a capital letter, a number, and a special character."
+        );
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        setError("Passwords do not match.");
+        return;
+      }
+
+      updates.password = password;
+    }
+
+    if (Object.keys(updates).length === 0) {
+      setIsEditing(false);
+      return;
+    }
+
+    try {
+      const response = await postReq("/updateUser", updates);
+
+      setUserData(response);
+
+      setError("");
+
+      setPassword("");
+      setConfirmPassword("");
+      setIsEditing(false);
+    } catch (err) {
+      console.log(err);
+      console.log(err.response);
+      console.log(err.response?.data);
+
+      setError(err.response?.data?.detail || "Unable to update your account.");
+    }
+  };
+
+  const signOut = async () => {
+    try {
+      const response = await postReq("/signOut", {});
+      clearSignUpData();
+    } catch (error) {
+      console.error(error.response?.data || error);
+    }
+  };
+
+  return (
+    <div className="gradientBackground">
+      <div className="landingOverlay">
+        <div className="authCard">
           <div className="settingsHeader">
-            <h1 className="settingsTitle">
-              Settings
-            </h1>
+            <h1 className="formTitle">Settings</h1>
 
-            {!isEditing ? (
-              <button
-                className="settingsEditButton"
-                onClick={() => setIsEditing(true)}
-              >
-                Edit
-              </button>
-            ) : (
-              <button
-                className="settingsEditButton"
-                onClick={handleSave}
-              >
-                Save
-              </button>
-            )}
+            <button
+              className="heroButton primaryButton settingsSaveButton"
+              onClick={isEditing ? handleSave : () => setIsEditing(true)}
+            >
+              {isEditing ? "Save" : "Edit"}
+            </button>
           </div>
 
           {!isEditing ? (
             <div className="settingsInfo">
               <div className="settingsItem">
-                <p className="settingsLabel">Name</p>
-                <p className="settingsValue">
-                  {userData.name}
-                </p>
+                <p className="formLabel">Name</p>
+                <p className="settingsValue">{userData.name}</p>
               </div>
 
               <div className="settingsItem">
-                <p className="settingsLabel">Email</p>
-                <p className="settingsValue">
-                  {email || "(none)"}
-                </p>
+                <p className="formLabel">Email</p>
+                <p className="settingsValue">{email || "(none)"}</p>
               </div>
 
-              <div className="settingsItem">
-                <p className="settingsLabel">Password</p>
-                <p className="settingsValue">
-                  ********
-                </p>
-              </div>
+              <RegularLink
+                href={ROUTES.HOME}
+                className="heroButton logoutButton"
+                onClick={signOut}
+              >
+                Sign Out
+              </RegularLink>
             </div>
           ) : (
-            <div className="settingsForm">
-
-              <label className="settingsLabel">
-                Name
-              </label>
-
+            <form className="settingsForm">
+              <label className="formLabel">Name</label>
               <input
-                className="settingsInput"
+                className="formInput"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
 
-              <label className="settingsLabel">
-                Email
-              </label>
-
+              <label className="formLabel">Email</label>
               <input
-                className="settingsInput"
+                className="formInput"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
 
-              <label className="settingsLabel">
-                New Password
-              </label>
-
+              <label className="formLabel">New Password</label>
               <input
-                className="settingsInput"
+                className="formInput"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="********"
               />
 
-            </div>
+              <label className="formLabel">Confirm Password</label>
+              <input
+                className="formInput"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="********"
+              />
+
+              {error && <p className="errorMessage">{error}</p>}
+            </form>
           )}
-
-          <button
-            className="logoutButton"
-            onClick={() => navigate("/")}
-          >
-            Sign Out
-          </button>
-
         </div>
-      </section>
+      </div>
     </div>
-  </div>
-);
+  );
 }
+
 export default Settings;

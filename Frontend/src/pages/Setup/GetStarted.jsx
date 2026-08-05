@@ -1,4 +1,5 @@
-
+import "./SetupStyles.css";
+import { ROUTES } from "../../routes.js";
 import { useState, useEffect } from "react";
 import { useUser } from "../../UserContext";
 import { goToNav, RegularLink } from "../../comp/linking";
@@ -17,7 +18,7 @@ const semesters = [
 const majors = ["Computer Science"];
 
 function GetStarted() {
-  const { setUserData, userData, signUpData, loggedIn, loading } = useUser();
+  const { setUserData, userData, signUpData, loggedIn } = useUser();
 
   const [name, setName] = useState("");
   const [degreeLevel, setDegreeLevel] = useState("Undergrad");
@@ -28,6 +29,8 @@ function GetStarted() {
 
   const [error, setError] = useState("");
   const goTo = goToNav();
+
+  const nameRegex = /^[A-Za-z ]+$/;
 
   const handleNext = () => {
     if (
@@ -41,11 +44,16 @@ function GetStarted() {
       return;
     }
 
+    if (!nameRegex.test(name.trim())) {
+      setError("Name can only contain letters.");
+      return;
+    }
+
     if (Number(credits) < 1) {
       setError("Must take at least one credit.");
       return;
-    }    
-    
+    }
+
     if (Number(credits) > 18) {
       setError("Maximum 18 credits per semester.");
       return;
@@ -71,21 +79,19 @@ function GetStarted() {
       credits,
     }));
 
-    goTo("/transcript");
+    goTo(ROUTES.TRANSCRIPT);
   };
 
   useEffect(() => {
-    if (loading) return;
-
-    if (loggedIn) {
-      goTo("/");
-      return;
-    }
 
     if (!signUpData.email || !signUpData.password) {
-      goTo("/signup");
+      console.log("No Data");
+      console.log(signUpData.email);
+      console.log(signUpData.password);
+      goTo(ROUTES.SIGNUP);
+      return;
     }
-  }, [loading, loggedIn, signUpData.email, signUpData.password, goTo]);
+  }, [signUpData.email, signUpData.password, goTo]);
 
   useEffect(() => {
     if (userData) {
@@ -98,111 +104,129 @@ function GetStarted() {
     }
   }, [userData]);
 
-  if (loading) {
-    return null;
-  }
-
   return (
-    <div className="midSizeCardContainer">
-      <div
-        className="centerBackground"
+    <div className="gradientBackground">
+      <div className="landingOverlay">
+        <div className="authCard setupCard">
+          <div className="setupContent">
+            <h1 className="formTitle">Let's Get Started</h1>
 
-      >
-        <div className="formCard">
-          <p className="formTitle">Let's Get Started</p>
+            <div className="formGroup">
+              <label className="formLabel">What's your name?</label>
 
-          <p className="formLabel">What's your name?</p>
-          <input
-            className="formInput"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Your Name"
-          />
+              <input
+                className="formInput"
+                type="text"
+                value={name}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^[A-Za-z ]*$/.test(value)) {
+                    setName(value);
+                  }
+                }}
+                placeholder="Your Name"
+              />
+            </div>
 
-          <p className="formLabel">Degree Level</p>
-          <div className="toggleContainer">
-            <p
-              className={`toggleOption ${
-                degreeLevel === "Undergrad" ? "toggleActive" : ""
-              }`}
-              onClick={() => setDegreeLevel("Undergrad")}
-            >
-              Undergrad
-            </p>
-            <p
-              className={`toggleOption ${
-                degreeLevel === "Graduate" ? "toggleActive" : ""
-              }`}
-              onClick={() => setDegreeLevel("Graduate")}
-            >
-              Graduate
-            </p>
-          </div>
+            <div className="formGroup">
+              <label className="formLabel">Degree Level</label>
 
-          <p className="formLabel">What's your major?</p>
-          <select
-            className="formSelect"
-            value={major}
-            onChange={(e) => setMajor(e.target.value)}
-          >
-            <option value="">Select</option>
-            {majors.map((m) => (
-              <option key={m} value={m}>
-                {m}
-              </option>
-            ))}
-          </select>
+              <div className="toggleContainer">
+                <button
+                  className={`toggleOption ${
+                    degreeLevel === "Undergrad" ? "toggleActive" : "toggleInActive"
+                  }`}
+                  onClick={() => setDegreeLevel("Undergrad")}
+                >
+                  Undergrad
+                </button>
 
-          <div className="semesterRow">
-            <div className="semesterColumn">
-              <p className="formLabel">Starting Semester</p>
+                <button
+                  className={`toggleOption ${
+                    degreeLevel === "Graduate" ? "toggleActive" : "toggleInActive"
+                  }`}
+                  onClick={() => setDegreeLevel("Graduate")}
+                >
+                  Graduate
+                </button>
+              </div>
+            </div>
+
+            <div className="formGroup">
+              <label className="formLabel">What's your major?</label>
+
               <select
-                className="formSelect"
-                value={startingSemester}
-                onChange={(e) => setStartingSemester(e.target.value)}
+                className="formInput"
+                value={major}
+                onChange={(e) => setMajor(e.target.value)}
               >
                 <option value="">Select</option>
-                {semesters.map((s) => (
-                  <option key={s} value={s}>
-                    {s}
+
+                {majors.map((m) => (
+                  <option key={m} value={m}>
+                    {m}
                   </option>
                 ))}
               </select>
             </div>
 
-            <div className="semesterColumn">
-              <p className="formLabel">Ending Semester</p>
-              <select
-                className="formSelect"
-                value={endingSemester}
-                onChange={(e) => setEndingSemester(e.target.value)}
-              >
-                <option value="">Select</option>
-                {semesters.map((s) => (
-                  <option key={s} value={s}>
-                    {s}
-                  </option>
-                ))}
-              </select>
+            <div className="semesterRow">
+              <div className="semesterColumn">
+                <label className="formLabel">Starting Semester</label>
+
+                <select
+                  className="formInput"
+                  value={startingSemester}
+                  onChange={(e) => setStartingSemester(e.target.value)}
+                >
+                  <option value="">Select</option>
+
+                  {semesters.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="semesterColumn">
+                <label className="formLabel">Ending Semester</label>
+
+                <select
+                  className="formInput"
+                  value={endingSemester}
+                  onChange={(e) => setEndingSemester(e.target.value)}
+                >
+                  <option value="">Select</option>
+
+                  {semesters.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-          </div>
 
-          <p className="formLabel">How many credits per semester</p>
-          <input
-            className="formInput formInputSmall"
-            type="number"
-            value={credits}
-            onChange={(e) => setCredits(e.target.value)}
-            placeholder="Max 18 credits"
-          />
+            <div className="formGroup">
+              <label className="formLabel">How many credits per semester</label>
 
-          {error && <p className="errorMessage">{error}</p>}
+              <input
+                className="formInput"
+                type="number"
+                value={credits}
+                onChange={(e) => setCredits(e.target.value)}
+                placeholder="Max 18 credits"
+              />
+            </div>
 
-          <div className="nextButtonContainer">
-            <p className="nextButton" onClick={handleNext}>
-              Next
-            </p>
+            {error && <div className="errorMessage">{error}</div>}
+
+            <div className="formActions">
+              <button className="heroButton nextButton" onClick={handleNext}>
+                Next
+              </button>
+            </div>
           </div>
         </div>
       </div>

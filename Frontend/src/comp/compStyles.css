@@ -12,10 +12,10 @@
 
     padding: 0 42px;
 
-    background: rgba(255, 255, 255, 0.85);
+    background: var(--bg-header);
     backdrop-filter: blur(18px);
 
-    border-bottom: 1px solid rgba(0,0,0,.08);
+    border-bottom: var(--border-header);
 
     position: fixed;
     top: 0;
@@ -24,7 +24,6 @@
     z-index: 1000;
 }
 
-
 .headerLeft,
 .headerRight {
     display: flex;
@@ -32,11 +31,25 @@
     gap: 18px;
 }
 
+.headerRight {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text-dark); /* Changed to support Dark Mode! */
+    text-decoration: none; 
+    
+}
+
 .logoContainer {
     display: flex;
     align-items: center;
     gap: 14px;
     text-decoration: none;
+    transition: 0.25s;
+}
+
+.logoContainer:hover {
+    transform: translateY(-2px);
 }
 
 .logoImg {
@@ -45,10 +58,7 @@
     border-radius: 12px;
 }
 
-.logoText {
-    color: #5F4BA4;
-    font: 900 30px "Fira Sans", sans-serif;
-}
+
 
 .headerIconButton {
     width: 46px;
@@ -61,15 +71,19 @@
     border-radius: 50%;
     text-decoration: none;
 
-    color: #5F4BA4;
-    background: rgba(95,75,164,.08);
+    background: var(--bg-header);
+    color: var(--color-text-dark);
 
-    transition: .25s;
+    border: 2px solid var(--color-text-dark);
+    padding: 0;
+    cursor: pointer;
+
+    transition: 0.25s;
 }
 
 .headerIconButton:hover {
-    background: #5F4BA4;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-white);
     transform: translateY(-2px);
 }
 
@@ -89,16 +103,20 @@
 
     text-decoration: none;
 
-    background: linear-gradient(135deg, #5F4BA4, #7D68CC);
-    color: white;
+    background: linear-gradient(
+        135deg,
+        var(--color-primary),
+        var(--color-primary-light)
+    );
+    color: var(--color-white);
 
-    font: 700 20px "Fira Sans", sans-serif;
+    font: var(--font-title-sm);
 
-    box-shadow: 0 6px 16px rgba(95,75,164,.35);
+    box-shadow: var(--shadow-profile);
 
-    transition: .25s;
+    transition: 0.25s;
 }
 
 .profileButton:hover {
-    transform: scale(1.06);
+    transform: translateY(-2px);
 }
