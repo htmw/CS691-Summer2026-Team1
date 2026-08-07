@@ -97,3 +97,30 @@ User Story 5: 	As an advisor, I want to review student academic schedules so 
     Purpose:
 
     SQL:
+    SELECT
+    s.StudentID,
+    s.FirstName,
+    s.LastName,
+    m.MajorName,
+    dr.TotalCreditsRequired,
+    SUM(c.Credits) AS CompletedCredits,
+    (dr.TotalCreditsRequired - SUM(c.Credits)) AS RemainingCredits
+FROM Student s
+JOIN Major m
+    ON s.MajorID = m.MajorID
+JOIN Degree_Requirements dr
+    ON m.MajorID = dr.MajorID
+JOIN Student_Schedule ss
+    ON s.StudentID = ss.StudentID
+JOIN Courses_Offered co
+    ON ss.OfferedID = co.OfferedID
+JOIN Course c
+    ON co.CourseID = c.CourseID
+WHERE s.StudentID = 100016
+  AND ss.Status = 'Optimized','Accepted', 'Completed'
+GROUP BY
+    s.StudentID,
+    s.FirstName,
+    s.LastName,
+    m.MajorName,
+    dr.TotalCreditsRequired;
