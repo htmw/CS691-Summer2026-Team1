@@ -4,7 +4,7 @@ This document contains example SQL queries that demonstrate relational database 
 
 Examples:
     
-User Story 1: 	As an advisor, I want to view a student's completed and planned courses so that I can track their progress for graduation.*
+User Story 1: 	As an advisor, I want to view a student's completed and planned courses so that I can track their progress for graduation.
 
     Purpose: 
 
@@ -40,7 +40,23 @@ User Story 2: 	As a student, I want to know which prerequisites I am missing 
     Purpose: 
 
     SQL: 
-
+SELECT
+    c.CourseID AS RequiredCourse,
+    c.CourseName,
+    p.PrereqCourseID AS MissingPrerequisite
+FROM Prerequisites p
+JOIN Course c
+    ON p.CourseID = c.CourseID
+WHERE p.CourseID = 'CS624'
+AND p.PrereqCourseID NOT IN
+(
+    SELECT co.CourseID
+    FROM Student_Schedule ss
+    JOIN Courses_Offered co
+        ON ss.OfferedID = co.OfferedID
+    WHERE ss.StudentID = 100017
+    AND ss.Status = 'Accepted'
+);
     
 User Story 3: 	As a student, I want to view available courses by semester so that I can plan ahead to graduation on time.
     
@@ -92,12 +108,12 @@ JOIN Semester sem
 ORDER BY sem.Year, c.CourseID;
 
     
-User Story 5: 	As an advisor, I want to review student academic schedules so that I can provide feedback and ensure students are following the right approach to graduation.
+User Story 5: 	As an advisor, I want to view a student's completed credits and remaining degree requirements, so that I can evaluate their academic progress and provide guidance on course planning for graduation.
 
     Purpose:
 
     SQL:
-    SELECT
+   SELECT
     s.StudentID,
     s.FirstName,
     s.LastName,
@@ -116,8 +132,8 @@ JOIN Courses_Offered co
     ON ss.OfferedID = co.OfferedID
 JOIN Course c
     ON co.CourseID = c.CourseID
-WHERE s.StudentID = 100016
-  AND ss.Status = 'Optimized','Accepted', 'Completed'
+WHERE s.StudentID = 100001
+  AND ss.Status = 'Completed'
 GROUP BY
     s.StudentID,
     s.FirstName,
