@@ -16,7 +16,7 @@ As a student, I want to know which prerequisites I am missing so that I can take
 Access Pattern:
 - Retrieve prerequisites required for a selected course.
 - Retrieve the student's completed courses.
-- Compare completed courses with required prerequisites.
+- Compare completed courses with required prerequisites, one at a time.
 - Return any missing prerequisite courses.
 
 **User Story 3:**
@@ -34,6 +34,7 @@ Access Pattern:
 - Retrieve course enrollment and capacity information.
 - Identify courses with available seats or courses that are full.
 - Return capacity and enrollment details.
+- Ability to update enrollment count on Courses_Offered 
 
 **User Story 5:**
 As an advisor, I want to view a student's completed credits and remaining degree requirements so that I can evaluate their academic progress.
