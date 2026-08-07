@@ -39,7 +39,7 @@ User Story 2: 	As a student, I want to know which prerequisites I am missing 
 
     Purpose: 
 
-    SQL:
+    SQL: 
 
     
 User Story 3: 	As a student, I want to view available courses by semester so that I can plan ahead to graduation on time.
@@ -47,12 +47,50 @@ User Story 3: 	As a student, I want to view available courses by semester so 
     Purpose:
 
     SQL:
+    SELECT
+    sem.SemesterID,
+    sem.SemesterTerm,
+    sem.Year,
+    c.CourseID,
+    c.CourseName,
+    c.Credits,
+    co.Instructor,
+    co.InstructionalMethod,
+    co.MeetingDay,
+    co.StartTime,
+    co.EndTime,
+    co.Capacity,
+    co.CurrentlyEnrolled,
+    (co.Capacity - co.CurrentlyEnrolled) AS AvailableSeats
+FROM Courses_Offered co
+JOIN Course c
+    ON co.CourseID = c.CourseID
+JOIN Semester sem
+    ON co.SemesterID = sem.SemesterID
+WHERE sem.SemesterID = 'Fall2026'
+AND co.CurrentlyEnrolled < co.Capacity
+ORDER BY c.CourseID;
     
 User Story 4: 	As a department administrator, I want to manage course capacities so that students receive accurate academic plans based on available course seats.
 
     Purpose: 
 
     SQL:
+SELECT
+    co.OfferedID,
+    sem.SemesterID,
+    c.CourseID,
+    c.CourseName,
+    co.Capacity,
+    co.CurrentlyEnrolled,
+    (co.Capacity - co.CurrentlyEnrolled) AS AvailableSeats
+FROM Courses_Offered co
+JOIN Course c
+    ON co.CourseID = c.CourseID
+JOIN Semester sem
+    ON co.SemesterID = sem.SemesterID
+ORDER BY sem.Year, c.CourseID;
+
     
 User Story 5: 	As an advisor, I want to review student academic schedules so that I can provide feedback and ensure students are following the right approach to graduation.
 
