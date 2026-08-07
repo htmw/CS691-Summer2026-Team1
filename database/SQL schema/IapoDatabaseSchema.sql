@@ -45,7 +45,7 @@ CREATE TABLE Student (
   FOREIGN KEY (MajorID) REFERENCES Major(MajorID)
 );
 CREATE TABLE Course (
-  CourseID INT NOT NULL,
+  CourseID VARCHAR NOT NULL,
   CourseName VARCHAR(100) NOT NULL,
   Credits INT NOT NULL,
   CourseKeywords TEXT NOT NULL, /* suggested add for AI communication */
@@ -56,19 +56,17 @@ CREATE TABLE Course (
   CHECK (Credits > 0 AND Credits <= 6) /* Constraint: to ensure valid credit hour values for courses */
 );
 
-
 /* Defining relationships and constraints between academic entities */
 CREATE TABLE Major_Course ( /* suggested to add table just incase a course can be used across multiple majors */
   MajorID INT NOT NULL,
-  CourseID INT NOT NULL,
-  RequirementType VARCHAR(50) NOT NULL, /* Core, Elective, Capstone */ /* suggested add to distinguish where the course fits in the degree */
+  CourseID VARCHAR NOT NULL,
+  RequirementType VARCHAR(50) NOT NULL, /* Bridge, Core, Elective, Capstone */ /* suggested add to distinguish where the course fits in the degree */
   PRIMARY KEY (MajorID, CourseID),
   FOREIGN KEY (MajorID) REFERENCES Major(MajorID),
   FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
 );
-
 CREATE TABLE Prerequisites (
-  CourseID INT NOT NULL, /* the course that requires a prerequisite */
+  CourseID VARCHAR NOT NULL, /* the course that requires a prerequisite */
   PrereqCourseID INT NOT NULL, /* the prerequisite course that have to be taken first */
   PRIMARY KEY (CourseID, PrereqCourseID),
   FOREIGN KEY (CourseID) REFERENCES Course(CourseID),
@@ -80,7 +78,7 @@ CREATE TABLE Prerequisites (
 /* used AI to know specifically what attributes to add for a successful run */ 
 CREATE TABLE Courses_Offered  ( 
   OfferedID INT NOT NULL, 
-  CourseID INT NOT NULL,
+  CourseID VARCHAR NOT NULL,
   SectionID INT NOT NULL,
   SemesterID INT NOT NULL,
   /* suggested to relocate from Course > Courses_Offered (from Instructor to EndTime) */
