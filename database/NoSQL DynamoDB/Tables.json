@@ -1,0 +1,130 @@
+# Tables 
+
+Shows the structure of the DynamoDB tables including the names, data types, attributes and primary key.
+
+{
+  "Tables": [
+    {
+      "TableName": "Course",
+      "PrimaryKey": "CourseID",
+      "Attributes": {
+        "CourseID": "String",
+        "CourseName": "String",
+        "Credits": "Number",
+        "MajorID": "Number",
+        "CareerTags": "String Set",
+        "CourseKeywords": "String Set"
+      }
+    },
+    {
+      "TableName": "Courses_Offered",
+      "PrimaryKey": "OfferedID",
+      "Attributes": {
+        "OfferedID": "Number",
+        "CourseID": "String",
+        "SemesterID": "String",
+        "SectionID": "Number",
+        "Instructor": "String",
+        "InstructionalMethod": "String",
+        "MeetingDay": "String",
+        "StartTime": "String",
+        "EndTime": "String",
+        "Capacity": "Number",
+        "CurrentlyEnrolled": "Number"
+      }
+    },
+    {
+      "TableName": "Degree_Requirements",
+      "PrimaryKey": "RequirementID",
+      "Attributes": {
+        "RequirementID": "Number",
+        "MajorID": "Number",
+        "CoreCreditsRequired": "Number",
+        "ElectiveCreditsRequired": "Number",
+        "CapstoneCreditsRequired": "Number",
+        "TotalCreditsRequired": "Number",
+        "MinimumGPA": "Number"
+      }
+    },
+    {
+      "TableName": "Department",
+      "PrimaryKey": "DepartmentID",
+      "Attributes": {
+        "DepartmentID": "Number",
+        "DepartmentName": "String"
+      }
+    },
+    {
+      "TableName": "Major",
+      "PrimaryKey": "MajorID",
+      "Attributes": {
+        "MajorID": "Number",
+        "DepartmentID": "Number",
+        "MajorName": "String"
+      }
+    },
+    {
+      "TableName": "Major_Course",
+      "PrimaryKey": "MajorCourseID",
+      "Attributes": {
+        "MajorCourseID": "Number",
+        "MajorID": "Number",
+        "CourseID": "String",
+        "RequirementType": "String"
+      }
+    },
+    {
+      "TableName": "Prerequisites",
+      "PrimaryKey": "PrerequisiteID",
+      "Attributes": {
+        "PrerequisiteID": "Number",
+        "CourseID": "String",
+        "PrereqCourseID": "String"
+      }
+    },
+    {
+      "TableName": "Semester",
+      "PrimaryKey": "SemesterID",
+      "Attributes": {
+        "SemesterID": "String",
+        "SemesterTerm": "String",
+        "Year": "Number",
+        "StartDate": "String",
+        "EndDate": "String"
+      }
+    },
+    {
+      "TableName": "Student",
+      "PrimaryKey": "StudentID",
+      "Attributes": {
+        "StudentID": "Number",
+        "FirstName": "String",
+        "LastName": "String",
+        "Email": "String",
+        "Degree": "String",
+        "MajorID": "Number"
+      }
+    },
+    {
+      "TableName": "Student_Constraints",
+      "PrimaryKey": "ConstraintID",
+      "Attributes": {
+        "ConstraintID": "Number",
+        "StudentID": "Number",
+        "ConstraintType": "String",
+        "ConstraintValue": "String",
+        "Priority": "Number"
+      }
+    },
+    {
+      "TableName": "Schedule",
+      "PrimaryKey": "ScheduleID",
+      "Attributes": {
+        "ScheduleID": "String",
+        "StudentID": "Number",
+        "OfferedID": "Number",
+        "Status": "String"
+      }
+    }
+  ]
+}
