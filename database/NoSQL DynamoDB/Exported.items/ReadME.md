@@ -1,4 +1,4 @@
-**Database DynamoDB files**
+# Database DynamoDB files
 
 This folder contains the CSV files used to represent the DynamoDB data model for the Intelligent Academic Path Optimizer (IAPO) project. Each CSV matches a DynamoDB table  contains data(items) used for database design and testing.
 
