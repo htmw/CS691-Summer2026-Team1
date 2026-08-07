@@ -67,7 +67,7 @@ CREATE TABLE Major_Course ( /* suggested to add table just incase a course can b
 );
 CREATE TABLE Prerequisites (
   CourseID VARCHAR NOT NULL, /* the course that requires a prerequisite */
-  PrereqCourseID INT NOT NULL, /* the prerequisite course that have to be taken first */
+  PrereqCourseID VARCHAR NOT NULL, /* the prerequisite course that have to be taken first */
   PRIMARY KEY (CourseID, PrereqCourseID),
   FOREIGN KEY (CourseID) REFERENCES Course(CourseID),
   FOREIGN KEY (PrereqCourseID) REFERENCES Course(CourseID), /* has to exist in Course, separate check - same table */
