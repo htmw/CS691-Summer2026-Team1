@@ -6,8 +6,6 @@ Examples:
     
 User Story 1: 	As an advisor, I want to view a student's completed and planned courses so that I can track their progress for graduation.
 
-    Purpose: 
-
     SQL:
 SELECT
     s.StudentID,
@@ -35,9 +33,10 @@ JOIN Semester sem
 WHERE s.StudentID = 100005
 ORDER BY sem.Year, sem.SemesterTerm;
 
-User Story 2: 	As a student, I want to know which prerequisites I am missing so that I can take them on time.
+    Output: 
+Shows what the student has finished and what they are planning to take.
 
-    Purpose: 
+User Story 2: 	As a student, I want to know which prerequisites I am missing so that I can take them on time.
 
     SQL: 
 SELECT
@@ -57,13 +56,14 @@ AND p.PrereqCourseID NOT IN
     WHERE ss.StudentID = 100017
     AND ss.Status = 'Accepted'
 );
+
+    Output:
+Showing the student wants to take Course #, but they have not completed prerequisite couse #, so the system identifies it as missing.
     
 User Story 3: 	As a student, I want to view available courses by semester so that I can plan ahead to graduation on time.
-    
-    Purpose:
 
     SQL:
-    SELECT
+SELECT
     sem.SemesterID,
     sem.SemesterTerm,
     sem.Year,
@@ -86,10 +86,11 @@ JOIN Semester sem
 WHERE sem.SemesterID = 'Fall2026'
 AND co.CurrentlyEnrolled < co.Capacity
 ORDER BY c.CourseID;
+
+    Output:
+Shows courses a student can still register for because seats are available.
     
 User Story 4: 	As a department administrator, I want to manage course capacities so that students receive accurate academic plans based on available course seats.
-
-    Purpose: 
 
     SQL:
 SELECT
@@ -107,13 +108,13 @@ JOIN Semester sem
     ON co.SemesterID = sem.SemesterID
 ORDER BY sem.Year, c.CourseID;
 
+    Output:
+Shows administrators which courses have space and which are full, so if needed can be updated.
     
 User Story 5: 	As an advisor, I want to view a student's completed credits and remaining degree requirements, so that I can evaluate their academic progress and provide guidance on course planning for graduation.
 
-    Purpose:
-
     SQL:
-   SELECT
+SELECT
     s.StudentID,
     s.FirstName,
     s.LastName,
@@ -140,3 +141,6 @@ GROUP BY
     s.LastName,
     m.MajorName,
     dr.TotalCreditsRequired;
+
+Output:
+Shows that the student needs _ credits to graduate, has completed _, and needs _ more.
