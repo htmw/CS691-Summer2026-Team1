@@ -3,7 +3,7 @@ import { ROUTES } from "../routes.js";
 import { RegularLink } from "./linking";
 
 import { useUser } from "../UserContext";
-import logoImg from "/assets/IAPOLogo.png";
+import logoImg from "/assets/IAPOLogo.webp";
 
 // 1. We added { toggleTheme, isDark } so the header can receive the switch from App.jsx
 function Header({ toggleTheme, isDark }) {
