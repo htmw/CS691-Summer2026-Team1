@@ -1,7 +1,7 @@
 # Database Design Decisions
 
 Database Selection
-- the finalized database implementation will use Amazon DynamoDB as the NoSQL database.
+- The finalized database implementation will use Amazon DynamoDB as the NoSQL database.
 - DynamoDB was selected to support the application's scheduling and course-planning requirements while providing a flexible structure for storing and retrieving data.
 - The DynamoDB model was designed based on the system's data requirements and expected retrievals.
 
