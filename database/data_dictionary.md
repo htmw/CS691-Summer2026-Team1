@@ -41,7 +41,7 @@ database/
 
 ### Directory File Descriptions
 
-### CSV File Description
+### Database Table/CSV File Description
 
 ### Data Type:
 SQL
@@ -59,7 +59,7 @@ NoSQL
 - N - Number
 - SS - String Set
 
-
+### Key Relationships
 
 ### Student Schedule:
 - Draft - A schedule has been created but not finalized
