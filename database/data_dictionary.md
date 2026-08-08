@@ -1,18 +1,64 @@
 # Data Dictionary
 
+### Database Repository Structure
+
+The database branch contains the SQL and NoSQL database implementations, supporting documentation, and data representations.
+
+```text
+database/
+├── SQL Schema/
+│   ├── CurrentData.sql
+|   ├── ER Diagram.png
+│   ├── IapoDatabaseSchema.sql
+│   ├── testing_queries.sql
+│   └── ReadME.md
+│
+├── NoSQL DynamoDB/
+│   ├── Exported.items/
+│   │   ├── courses.csv
+│   │   ├── courses offered.csv
+│   │   ├── constraints.csv
+│   │   ├── degree requirements.csv
+│   │   ├── department.csv
+│   │   ├── major course.csv
+│   │   ├── majors.csv
+│   │   ├── prerequisites.csv
+│   │   ├── schedule.csv
+│   │   ├── semesters.csv
+│   │   ├── students.csv
+│   │   └── ReadME.md
+│   ├── sample_items.json
+│   ├── Tables.json
+│   ├── Access_Pattern.md
+│   ├── Dynamodb Model.png
+│   └── ReadME.md
+│
+├── data_dictionary.md
+├── database_design_decisions.md
+├── IAPO UserStories.pdf
+└── README.md
+```
+
+### Directory File Descriptions
+
+### CSV File Description
 
 ### Data Type:
 SQL
+- PRIMARY KEY
+- FOREIGN KEY
 - INT - Integer
 - DATE - Date
-- VARCHAR -
-- 
+- VARCHAR - variable length string
+- DECIMAL - An exact fixed point number
+- TEXT - Large amount of data
 
 NoSQL
 - PK - Primary Key
 - S - String
 - N - Number
 - SS - String Set
+
 
 
 ### Student Schedule:
