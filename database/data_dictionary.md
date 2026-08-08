@@ -61,6 +61,21 @@ NoSQL
 
 ### Key Relationships
 
+## Table Fixed Values
+
+These are predefined values used by the database to maintain consistent entries.
+
+### Instructional Method
+- Online
+- In Person
+- Hybrid
+
+### Course Requirement Type
+- Bridge (not mandatory, unless)
+- Core
+- Elective
+- Capstone
+
 ### Student Schedule:
 - Draft - A schedule has been created but not finalized
 - Optimized - AI/optimization engine created a schedule that satisfies the student's constraints
@@ -69,7 +84,13 @@ NoSQL
 - Conflict - The schedule has problems (time conflicts, missing prerequisites, etc.)
 - Completed – course has been taken and completed.
 
-### Student Constraints
+### Constraints Priority:
+- 1 - required/a must
+- 2 - very important
+- 3 - preference
+- 4 - not mandatory but would like to.
+
+## Student Constraints
 
 Stores individual student scheduling preferences and restrictions used when creating an academic schedule.
 
@@ -89,9 +110,3 @@ Stores individual student scheduling preferences and restrictions used when crea
 | AvoidInstructor | Dr.Yung | Student does not want to take any class by Instructor |
 | BreakTime | 1 Hour | Student wants at least an hour break in-between classes |
 
-
-### Constraints Priority:
-- 1 - required/a must
-- 2 - very important
-- 3 - preference
-- 4 - not mandatory but would like to.
