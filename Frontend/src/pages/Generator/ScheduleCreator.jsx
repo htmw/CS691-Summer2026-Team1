@@ -6,7 +6,7 @@ import { useUser } from "../../UserContext";
 import { goToNav } from "../../comp/linking";
 import { postReq } from "../../comp/callRequests";
 
-import downloadImg from "/assets/downloadIcon.png";
+import downloadImg from "/assets/transDL.webp";
 
 function ScheduleCreator() {
   const { userData, updateUserData, programInfo, setScheduleRequest } =
@@ -270,7 +270,7 @@ function ScheduleCreator() {
                 onClick={() => fileInputRef.current.click()}
               >
                 <img
-                  src="/assets/file.png"
+                  src="/assets/transFilePurple.webp"
                   alt="file upload"
                   className="fileimg"
                 />

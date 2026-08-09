@@ -1,6 +1,6 @@
 import "./SetupStyles.css";
 import { ROUTES } from "../../routes.js";
-import fileimg from "/assets/file.png";
+import fileimg from "/assets/transFilePurple.webp";
 import { useEffect, useRef, useState } from "react";
 import { RegularLink, goToNav } from "../../comp/linking";
 
