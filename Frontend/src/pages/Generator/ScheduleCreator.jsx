@@ -6,9 +6,8 @@ import { useUser } from "../../UserContext";
 import { goToNav } from "../../comp/linking";
 import { postReq } from "../../comp/callRequests";
 
-
-import downloadImg from "/assets/downloadIcon.png";
-import fileImg from "/assets/file.png";
+import downloadImg from "/assets/transDL.webp";
+import fileImg from "/assets/transFilePurple.webp";
 
 function ScheduleCreator() {
   const { userData, programInfo, setScheduleRequest } = useUser();
@@ -332,16 +331,7 @@ function ScheduleCreator() {
                   }
                 }}
               >
-
                 {isCheckingTranscript ? (
-
-                <img
-                  src="/assets/transFilePurple.webp"
-                  alt="file upload"
-                  className="fileimg"
-                />
-
-                {hasTranscript ? (
                   <>
                     <div className="transcriptLoader"></div>
 
