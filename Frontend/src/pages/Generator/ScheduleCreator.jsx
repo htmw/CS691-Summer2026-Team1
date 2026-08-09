@@ -1,56 +1,65 @@
 import "./ScheduleCreator.css";
-import { useState, useRef } from "react";
+import { ROUTES } from "../../routes.js";
+import { useState, useEffect, useRef } from "react";
 import { useUser } from "../../UserContext";
 
+import { goToNav } from "../../comp/linking";
 import { postReq } from "../../comp/callRequests";
+
 import downloadImg from "/assets/downloadIcon.png";
 
-const semesters = [
-  "Fall 2024",
-  "Spring 2025",
-  "Fall 2025",
-  "Spring 2026",
-  "Fall 2026",
-  "Spring 2027",
-  "Fall 2027",
-  "Spring 2028",
-];
-
 function ScheduleCreator() {
-  const fileInputRef = useRef(null);
+  const { userData, updateUserData, programInfo, setScheduleRequest } =
+    useUser();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const goTo = goToNav();
 
-  const [degreeLevel, setDegreeLevel] = useState("Undergrad");
-  const [startingSemester, setStartingSemester] = useState("Fall 2027");
-  const [endingSemester, setEndingSemester] = useState("Spring 2027");
-  const [credits, setCredits] = useState("12");
-  const [ask, setAsk] = useState("");
-  const [activeYear, setActiveYear] = useState("2027");
-  const { userData, updateUserData } = useUser();
-  const [schedule, setSchedule] = useState([]);
+  const fileInputRef = useRef(null);
+
+  const [profile, setProfile] = useState(() => ({
+    degreeLevel: userData.degreeLevel || "Undergrad",
+    major: userData.major || "",
+    startingSemester: userData.startingSemester || "",
+    endingSemester: userData.endingSemester || "",
+    credits: userData.credits || "",
+    transcript: userData.transcript || {
+      data: "",
+      name: "",
+    },
+    chat: userData.chat || "",
+  }));
 
   const handleGeneratePlan = async () => {
-    setLoading(true);
     setError("");
-    try {
-      const response = await postReq("/extract", {
-        name: userData.name,
-        degreeLevel,
-        major: userData.major,
-        startingSemester,
-        endingSemester,
-        credits,
-        transcript: userData.transcript,
-        chat: ask,
-      });
-      setSchedule(response);
-    } catch (err) {
-      console.error("Generate plan failed:", err);
-      setError("Failed to generate plan. Try again.");
-    } finally {
-      setLoading(false);
+
+    const isSameProfile =
+      profile.degreeLevel === userData.degreeLevel &&
+      profile.major === userData.major &&
+      profile.startingSemester === userData.startingSemester &&
+      profile.endingSemester === userData.endingSemester &&
+      profile.credits === userData.credits &&
+      profile.chat === userData.chat &&
+      profile.transcript?.data === userData.transcript?.data &&
+      profile.transcript?.name === userData.transcript?.name;
+
+    if (isSameProfile) {
+      setError(
+        "No changes detected. Please update your profile before generating a new plan."
+      );
+      return;
     }
+
+    setScheduleRequest({
+      degreeLevel: profile.degreeLevel,
+      major: profile.major,
+      startingSemester: profile.startingSemester,
+      endingSemester: profile.endingSemester,
+      credits: profile.credits,
+      transcript: profile.transcript,
+      chat: profile.chat,
+    });
+
+    goTo(ROUTES.SCHEDULELOAD);
   };
 
   const handleFileUpload = (event) => {
@@ -77,24 +86,36 @@ function ScheduleCreator() {
     const reader = new FileReader();
 
     reader.onload = () => {
-      updateUserData("transcript", {
-        data: reader.result,
-        name: file.name,
-      });
+      setProfile((prev) => ({
+        ...prev,
+        transcript: {
+          data: reader.result,
+          name: file.name,
+        },
+      }));
     };
 
     reader.readAsDataURL(file);
   };
 
   const deleteTranscript = () => {
-    updateUserData("transcript", {
-      data: "",
-      name: "",
-    });
+    setProfile((prev) => ({
+      ...prev,
+      transcript: {
+        data: "",
+        name: "",
+      },
+    }));
+
     setError("");
   };
 
-  const hasTranscript = userData.transcript?.data;
+  const hasTranscript = profile.transcript?.data;
+
+  const [activeYear, setActiveYear] = useState("2027");
+  const [schedule, setSchedule] = useState([]);
+  const hasSchedule =
+    userData?.schedule && Object.keys(userData.schedule).length > 0;
 
   // Get unique years from the schedule
   const years = [...new Set(schedule.map((sem) => sem.semester.split(" ")[1]))];
@@ -118,22 +139,32 @@ function ScheduleCreator() {
               <div className="toggleContainer">
                 <button
                   className={`toggleOption ${
-                    degreeLevel === "Undergrad"
+                    profile.degreeLevel === "Undergrad"
                       ? "toggleActive"
                       : "toggleInActive"
                   }`}
-                  onClick={() => setDegreeLevel("Undergrad")}
+                  onClick={() =>
+                    setProfile((prev) => ({
+                      ...prev,
+                      degreeLevel: "Undergrad",
+                    }))
+                  }
                 >
                   Undergrad
                 </button>
 
                 <button
                   className={`toggleOption ${
-                    degreeLevel === "Graduate"
+                    profile.degreeLevel === "Graduate"
                       ? "toggleActive"
                       : "toggleInActive"
                   }`}
-                  onClick={() => setDegreeLevel("Graduate")}
+                  onClick={() =>
+                    setProfile((prev) => ({
+                      ...prev,
+                      degreeLevel: "Graduate",
+                    }))
+                  }
                 >
                   Graduate
                 </button>
@@ -141,14 +172,42 @@ function ScheduleCreator() {
             </div>
 
             <div className="formGroup">
+              <label className="formLabel">Major</label>
+
+              <select
+                className="formInput"
+                value={profile.major}
+                onChange={(e) =>
+                  setProfile((prev) => ({
+                    ...prev,
+                    major: e.target.value,
+                  }))
+                }
+              >
+                <option value="">Select</option>
+
+                {programInfo.majors.map((m) => (
+                  <option key={m} value={m}>
+                    {m}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="formGroup">
               <label className="formLabel">Starting Semester</label>
 
               <select
                 className="formInput"
-                value={startingSemester}
-                onChange={(e) => setStartingSemester(e.target.value)}
+                value={profile.startingSemester}
+                onChange={(e) =>
+                  setProfile((prev) => ({
+                    ...prev,
+                    startingSemester: e.target.value,
+                  }))
+                }
               >
-                {semesters.map((s) => (
+                {programInfo.semesters.map((s) => (
                   <option key={s} value={s}>
                     {s}
                   </option>
@@ -161,10 +220,15 @@ function ScheduleCreator() {
 
               <select
                 className="formInput"
-                value={endingSemester}
-                onChange={(e) => setEndingSemester(e.target.value)}
+                value={profile.endingSemester}
+                onChange={(e) =>
+                  setProfile((prev) => ({
+                    ...prev,
+                    endingSemester: e.target.value,
+                  }))
+                }
               >
-                {semesters.map((s) => (
+                {programInfo.semesters.map((s) => (
                   <option key={s} value={s}>
                     {s}
                   </option>
@@ -178,8 +242,13 @@ function ScheduleCreator() {
               <input
                 className="formInput"
                 type="number"
-                value={credits}
-                onChange={(e) => setCredits(e.target.value)}
+                value={profile.credits}
+                onChange={(e) =>
+                  setProfile((prev) => ({
+                    ...prev,
+                    credits: e.target.value,
+                  }))
+                }
               />
             </div>
 
@@ -208,7 +277,7 @@ function ScheduleCreator() {
 
                 {hasTranscript ? (
                   <>
-                    <p className="uploadText">{userData.transcript.name}</p>
+                    <p className="uploadText">{profile.transcript.name}</p>
 
                     <button
                       className="deleteText"
@@ -224,8 +293,6 @@ function ScheduleCreator() {
                   <p className="uploadText">Click to upload your PDF</p>
                 )}
               </div>
-
-              {error && <div className="errorMessage">{error}</div>}
             </div>
 
             <div className="formGroup">
@@ -233,18 +300,22 @@ function ScheduleCreator() {
 
               <textarea
                 className="detailsTextarea formTextarea"
-                value={ask}
-                onChange={(e) => setAsk(e.target.value)}
+                value={profile.chat}
+                onChange={(e) =>
+                  setProfile((prev) => ({
+                    ...prev,
+                    chat: e.target.value,
+                  }))
+                }
                 placeholder="i.e. put more focus on math"
               />
             </div>
-
+            {error && <div className="errorMessage">{error}</div>}
             <button
               className="heroButton nextButton"
               onClick={handleGeneratePlan}
-              disabled={loading}
             >
-              {loading ? "Generating..." : "Generate Plan"}
+              {"Generate Plan"}
             </button>
           </div>
 
@@ -277,17 +348,21 @@ function ScheduleCreator() {
             </div>
 
             <div className="semesterList">
-              {filteredSchedule.map((sem) => (
-                <div className="semesterCard" key={sem.semester}>
-                  <h2 className="semesterName">{sem.semester}</h2>
+              {hasSchedule ? (
+                filteredSchedule.map((sem) => (
+                  <div className="semesterCard" key={sem.semester}>
+                    <h2 className="semesterName">{sem.semester}</h2>
 
-                  {sem.courses.map((course, i) => (
-                    <p className="courseName" key={i}>
-                      {course}
-                    </p>
-                  ))}
-                </div>
-              ))}
+                    {sem.courses.map((course, i) => (
+                      <p className="courseName" key={i}>
+                        {course}
+                      </p>
+                    ))}
+                  </div>
+                ))
+              ) : (
+                <div className="schedulePlaceholder">Generate a Schedule</div>
+              )}
             </div>
           </div>
         </div>

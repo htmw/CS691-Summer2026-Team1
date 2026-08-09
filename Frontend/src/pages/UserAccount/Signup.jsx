@@ -58,7 +58,7 @@ function Signup() {
       // /signUp route? 
 
       // btw, what is the SignUpData data in the backend signUp being used for?
-      const response = await postReq("/authEmail", {
+      const response = await postReq("/auth/email", {
         email: email,
       });
       if (response.exists) {

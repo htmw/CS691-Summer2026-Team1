@@ -28,6 +28,11 @@ const defaultUserData = {
   schedule: {},
 };
 
+const defaultProgramInfo = {
+  semesters: [],
+  majors: [],
+};
+
 export function UserProvider({ children }) {
   const [signUpData, setSignUpData] = useState({
     email: "",
@@ -35,13 +40,17 @@ export function UserProvider({ children }) {
   });
 
   const [authChecked, setAuthChecked] = useState(false);
-
+  const [programInfo, setProgramInfo] = useState(defaultProgramInfo);
   const [userData, setUserData] = useState(defaultUserData);
 
   const [loading, setLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [pendingLogin, setPendingLogin] = useState(false);
+
 
   const sessionChecked = useRef(false);
+
+  const [scheduleRequest, setScheduleRequest] = useState(null);
 
   const updateSignUpData = (email, password) => {
     setSignUpData({ email, password });
@@ -66,7 +75,7 @@ export function UserProvider({ children }) {
     localStorage.removeItem("transcript");
   }, []);
 
-  const setUserFromResponse = (response) => {
+  const setUserFromResponse = (response, shouldLogin = true) => {
     if (response) {
       const academic = response.academic || {};
 
@@ -89,7 +98,9 @@ export function UserProvider({ children }) {
         localStorage.setItem("transcript", JSON.stringify(response.transcript));
       }
 
-      setLoggedIn(true);
+      if (shouldLogin) {
+        setLoggedIn(true);
+      }
       return updatedUser;
     }
 
@@ -125,6 +136,30 @@ export function UserProvider({ children }) {
     }
   }, [authChecked]);
 
+  const programChecked = useRef(false);
+
+  useEffect(() => {
+    if (programChecked.current) return;
+    programChecked.current = true;
+
+    const loadProgramInfo = async () => {
+      try {
+        const response = await getReq("/api/info");
+
+        console.log("Program info:", response);
+
+        setProgramInfo({
+          semesters: response.semesters || [],
+          majors: response.majors || [],
+        });
+      } catch (error) {
+        console.error("Failed to load program info:", error);
+      }
+    };
+
+    loadProgramInfo();
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
@@ -136,12 +171,19 @@ export function UserProvider({ children }) {
         setUserData,
         updateUserData,
 
+        programInfo,
+
         loggedIn,
         setLoggedIn,
+        pendingLogin,
+        setPendingLogin,
 
         loading,
         authChecked,
         setUserFromResponse,
+
+        scheduleRequest,
+        setScheduleRequest,
       }}
     >
       {children}
