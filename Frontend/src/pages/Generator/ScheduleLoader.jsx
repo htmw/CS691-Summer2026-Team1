@@ -107,16 +107,12 @@ function ScheduleLoader({ onReady }) {
         // --------------------------------
         iterateText("Checking our scheduling service...");
         await safeDelay(1600);
-
         checkCancelled();
-
         // Message appears BEFORE the request
         const responseB = await getReq("/api/health", {
           signal,
         });
-
         console.log(responseB);
-
         checkCancelled();
 
         // --------------------------------
@@ -124,15 +120,12 @@ function ScheduleLoader({ onReady }) {
         // --------------------------------
 
         await safeDelay(800);
-
         checkCancelled();
         iterateText("Building your schedule...");
 
         // Message appears BEFORE the request
         const responseA = await postReq("/api/extract", request, { signal });
-
         console.log(responseA);
-
         checkCancelled();
 
         // --------------------------------
@@ -140,13 +133,11 @@ function ScheduleLoader({ onReady }) {
         // --------------------------------
 
         await safeDelay(1600);
-
         const updatedScheduleRequest = {
           ...request,
           email,
           schedule: responseA,
         };
-
         checkCancelled();
         iterateText("Saving your schedule...", true);
 
@@ -158,18 +149,15 @@ function ScheduleLoader({ onReady }) {
         );
 
         console.log(responseC);
-
         checkCancelled();
 
         updateAllUserDataRef.current(responseC);
-
         if (shouldLogin) {
           setLoggedInRef.current(true);
           setPendingLoginRef.current(false);
         }
 
         await safeDelay(800);
-
         goToRef.current(ROUTES.SCHEDULECREATE);
       } catch (err) {
         if (cancelled || signal.aborted || err?.name === "AbortError") {
@@ -177,18 +165,13 @@ function ScheduleLoader({ onReady }) {
         }
 
         console.error("Schedule generation failed:", err);
-
         const errorText =
           err.response?.data?.detail || "Unable to update your account.";
-
         if (cancelled || signal.aborted) {
           return;
         }
-
         iterateText(errorText, true);
-
         await delay(2500);
-
         if (!cancelled && !signal.aborted) {
           goToRef.current(ROUTES.SCHEDULECREATE);
         }

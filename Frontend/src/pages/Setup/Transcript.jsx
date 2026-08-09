@@ -5,21 +5,25 @@ import { useEffect, useRef, useState } from "react";
 import { RegularLink, goToNav } from "../../comp/linking";
 
 import { useUser } from "../../UserContext";
+import { postReq } from "../../comp/callRequests";
 
 function Transcript() {
   const fileInputRef = useRef(null);
 
-  const { userData, updateUserData, signUpData, loggedIn } = useUser();
+  const { userData, updateUserData, signUpData } = useUser();
 
   const [error, setError] = useState("");
+  const [isCheckingTranscript, setIsCheckingTranscript] = useState(false);
+  const [transcriptInvalid, setTranscriptInvalid] = useState(false);
 
   const goTo = goToNav();
 
-  const handleFileUpload = (event) => {
+  const handleFileUpload = async (event) => {
     const file = event.target.files[0];
 
     if (!file) return;
 
+    // Allows the same file to be selected again later
     event.target.value = "";
 
     if (file.type !== "application/pdf") {
@@ -35,17 +39,53 @@ function Transcript() {
     }
 
     setError("");
+    setTranscriptInvalid(false);
+    setIsCheckingTranscript(true);
 
-    const reader = new FileReader();
+    try {
+      const dataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
 
-    reader.onload = () => {
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
+
+        reader.readAsDataURL(file);
+      });
+
+      // Keep the file visible while it is being checked
       updateUserData("transcript", {
-        data: reader.result,
+        data: dataUrl,
         name: file.name,
       });
-    };
 
-    reader.readAsDataURL(file);
+      const request = {
+        data: dataUrl,
+        name: file.name,
+      };
+
+      const response = await postReq("/api/transcriptCheck", request);
+
+      if (!response.is_transcript) {
+        setTranscriptInvalid(true);
+
+        setError(
+          "That file doesn't look like a transcript. Please upload a document showing your coursework, credits, and grades."
+        );
+
+        return;
+      }
+
+      // Transcript is valid
+      setTranscriptInvalid(false);
+      setError("");
+    } catch (err) {
+      console.error("Transcript verification failed:", err);
+
+      setTranscriptInvalid(true);
+      setError("Could not verify the transcript. Please try again.");
+    } finally {
+      setIsCheckingTranscript(false);
+    }
   };
 
   const deleteTranscript = () => {
@@ -53,10 +93,23 @@ function Transcript() {
       data: "",
       name: "",
     });
+
+    setTranscriptInvalid(false);
     setError("");
   };
 
-  const hasTranscript = userData.transcript?.data;
+  const hasTranscript = Boolean(userData.transcript?.data);
+
+  // Buttons are disabled only while checking or when
+  // a transcript has been determined to be invalid.
+  const buttonsDisabled =
+    isCheckingTranscript || transcriptInvalid;
+
+  const handleDisabledLink = (event) => {
+    if (buttonsDisabled) {
+      event.preventDefault();
+    }
+  };
 
   useEffect(() => {
     // User skipped signup
@@ -82,7 +135,9 @@ function Transcript() {
       <div className="landingOverlay">
         <div className="authCard transcriptCard">
           <div className="setupContent">
-            <h1 className="formTitle">Upload an optional transcript</h1>
+            <h1 className="formTitle">
+              Upload an optional transcript
+            </h1>
 
             <p className="transcriptLimit">5MB Limit</p>
 
@@ -92,46 +147,95 @@ function Transcript() {
               ref={fileInputRef}
               className="hiddenInput"
               onChange={handleFileUpload}
+              disabled={isCheckingTranscript}
             />
 
             <div
-              className="transcriptContainer"
-              onClick={() => fileInputRef.current.click()}
+              className={`transcriptContainer ${
+                isCheckingTranscript ? "transcriptChecking" : ""
+              }`}
+              onClick={() => {
+                if (!isCheckingTranscript) {
+                  fileInputRef.current?.click();
+                }
+              }}
             >
-              <img src={fileimg} alt="file upload" className="fileimg" />
-
-              {hasTranscript ? (
+              {isCheckingTranscript ? (
                 <>
-                  <p className="uploadText">{userData.transcript.name}</p>
+                  <div className="transcriptLoader"></div>
 
-                  <button
-                    className="deleteText"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      deleteTranscript();
-                    }}
-                  >
-                    Delete PDF
-                  </button>
+                  <p className="uploadText">
+                    Checking transcript...
+                  </p>
+
+                  <p className="transcriptCheckingText">
+                    Please wait
+                  </p>
                 </>
               ) : (
-                <p className="uploadText">Click to upload your PDF</p>
+                <>
+                  <img
+                    src={fileimg}
+                    alt="file upload"
+                    className="fileimg"
+                  />
+
+                  {hasTranscript ? (
+                    <>
+                      <p className="uploadText">
+                        {userData.transcript.name}
+                      </p>
+
+                      {transcriptInvalid && (
+                        <p className="transcriptInvalidText">
+                          Invalid transcript
+                        </p>
+                      )}
+
+                      <button
+                        className="deleteText"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          deleteTranscript();
+                        }}
+                      >
+                        Delete PDF
+                      </button>
+                    </>
+                  ) : (
+                    <p className="uploadText">
+                      Click to upload your PDF
+                    </p>
+                  )}
+                </>
               )}
             </div>
 
-            {error && <div className="errorMessage">{error}</div>}
+            {error && (
+              <div className="errorMessage">
+                {error}
+              </div>
+            )}
 
             <div className="formActions">
               <RegularLink
                 href={ROUTES.GETSTARTED}
-                className="heroButton nextButton"
+                className={`heroButton nextButton ${
+                  buttonsDisabled ? "disabledButton" : ""
+                }`}
+                onClick={handleDisabledLink}
+                aria-disabled={buttonsDisabled}
               >
                 Back
               </RegularLink>
 
               <RegularLink
                 href={ROUTES.INITCHAT}
-                className="heroButton nextButton"
+                className={`heroButton nextButton ${
+                  buttonsDisabled ? "disabledButton" : ""
+                }`}
+                onClick={handleDisabledLink}
+                aria-disabled={buttonsDisabled}
               >
                 Next
               </RegularLink>

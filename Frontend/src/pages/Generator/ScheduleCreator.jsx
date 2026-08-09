@@ -1,6 +1,6 @@
 import "./ScheduleCreator.css";
 import { ROUTES } from "../../routes.js";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { useUser } from "../../UserContext";
 
 import { goToNav } from "../../comp/linking";
@@ -10,11 +10,12 @@ import downloadImg from "/assets/downloadIcon.png";
 import fileImg from "/assets/file.png";
 
 function ScheduleCreator() {
-  const { userData, updateUserData, programInfo, setScheduleRequest } =
-    useUser();
+  const { userData, programInfo, setScheduleRequest } = useUser();
   const [error, setError] = useState("");
-  const goTo = goToNav();
+  const [isCheckingTranscript, setIsCheckingTranscript] = useState(false);
+  const [transcriptInvalid, setTranscriptInvalid] = useState(false);
 
+  const goTo = goToNav();
   const fileInputRef = useRef(null);
 
   const [profile, setProfile] = useState(() => ({
@@ -30,8 +31,24 @@ function ScheduleCreator() {
     chat: userData.chat || "",
   }));
 
+  const hasTranscript = Boolean(profile.transcript?.data);
+
   const handleGeneratePlan = async () => {
     setError("");
+
+    // A transcript is optional, but if one was uploaded and failed
+    // verification, don't allow the plan to be generated.
+    if (transcriptInvalid) {
+      setError(
+        "Please upload a valid transcript or remove the invalid transcript before generating a plan."
+      );
+      return;
+    }
+
+    // Don't generate while the transcript is being checked.
+    if (isCheckingTranscript) {
+      return;
+    }
 
     const isSameProfile =
       profile.degreeLevel === userData.degreeLevel &&
@@ -63,7 +80,7 @@ function ScheduleCreator() {
     goTo(ROUTES.SCHEDULELOAD);
   };
 
-  const handleFileUpload = (event) => {
+  const handleFileUpload = async (event) => {
     const file = event.target.files[0];
 
     if (!file) return;
@@ -75,7 +92,7 @@ function ScheduleCreator() {
       return;
     }
 
-    const maxSize = 5 * 1024 * 1024; // 5 MB
+    const maxSize = 5 * 1024 * 1024;
 
     if (file.size > maxSize) {
       setError("PDF file size must be less than 5 MB.");
@@ -83,20 +100,57 @@ function ScheduleCreator() {
     }
 
     setError("");
+    setTranscriptInvalid(false);
+    setIsCheckingTranscript(true);
 
-    const reader = new FileReader();
+    try {
+      const dataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
 
-    reader.onload = () => {
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
+
+        reader.readAsDataURL(file);
+      });
+
+      // Keep the uploaded file in state even while checking it
       setProfile((prev) => ({
         ...prev,
         transcript: {
-          data: reader.result,
+          data: dataUrl,
           name: file.name,
         },
       }));
-    };
 
-    reader.readAsDataURL(file);
+      const request = {
+        data: dataUrl,
+        name: file.name,
+      };
+
+      const response = await postReq("/api/transcriptCheck", request);
+
+      if (!response.is_transcript) {
+        setTranscriptInvalid(true);
+
+        setError(
+          "That file doesn't look like a transcript. Please upload a document showing your coursework, credits, and grades."
+        );
+
+        return;
+      }
+
+      // Transcript is valid
+      setTranscriptInvalid(false);
+      setError("");
+    } catch (err) {
+      console.error("Transcript verification failed:", err);
+
+      setTranscriptInvalid(true);
+
+      setError("Could not verify the transcript. Please try again.");
+    } finally {
+      setIsCheckingTranscript(false);
+    }
   };
 
   const deleteTranscript = () => {
@@ -108,13 +162,13 @@ function ScheduleCreator() {
       },
     }));
 
+    setTranscriptInvalid(false);
     setError("");
   };
 
-  const hasTranscript = profile.transcript?.data;
-
   const [activeYear, setActiveYear] = useState("2027");
   const [schedule, setSchedule] = useState([]);
+
   const hasSchedule =
     userData?.schedule && Object.keys(userData.schedule).length > 0;
 
@@ -254,7 +308,7 @@ function ScheduleCreator() {
             </div>
 
             <div className="formGroup scheduleTranscript">
-              <label className="formLabel">Upload Transcript (Optional)</label>
+              <label className="formLabel">Upload Transcript</label>
 
               <p className="transcriptLimit">5MB Limit</p>
 
@@ -264,34 +318,49 @@ function ScheduleCreator() {
                 ref={fileInputRef}
                 className="hiddenInput"
                 onChange={handleFileUpload}
+                disabled={isCheckingTranscript}
               />
 
               <div
-                className="transcriptContainer"
-                onClick={() => fileInputRef.current.click()}
+                className={`transcriptContainer ${
+                  isCheckingTranscript ? "transcriptChecking" : ""
+                }`}
+                onClick={() => {
+                  if (!isCheckingTranscript) {
+                    fileInputRef.current?.click();
+                  }
+                }}
               >
-                <img
-                  src={fileImg}
-                  alt="file upload"
-                  className="fileimg"
-                />
-
-                {hasTranscript ? (
+                {isCheckingTranscript ? (
                   <>
-                    <p className="uploadText">{profile.transcript.name}</p>
+                    <div className="transcriptLoader"></div>
 
-                    <button
-                      className="deleteText"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        deleteTranscript();
-                      }}
-                    >
-                      Delete PDF
-                    </button>
+                    <p className="uploadText">Verifying transcript...</p>
+
+                    <p className="transcriptCheckingText">Please wait</p>
                   </>
                 ) : (
-                  <p className="uploadText">Click to upload your PDF</p>
+                  <>
+                    <img src={fileImg} alt="file upload" className="fileimg" />
+
+                    {hasTranscript ? (
+                      <>
+                        <p className="uploadText">{profile.transcript.name}</p>
+
+                        <button
+                          className="deleteText"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            deleteTranscript();
+                          }}
+                        >
+                          Delete PDF
+                        </button>
+                      </>
+                    ) : (
+                      <p className="uploadText">Click to upload your PDF</p>
+                    )}
+                  </>
                 )}
               </div>
             </div>
@@ -311,17 +380,22 @@ function ScheduleCreator() {
                 placeholder="i.e. put more focus on math"
               />
             </div>
+
             {error && <div className="errorMessage">{error}</div>}
+
             <button
               className="heroButton nextButton"
               onClick={handleGeneratePlan}
+              disabled={isCheckingTranscript || transcriptInvalid}
             >
-              {"Generate Plan"}
+              {isCheckingTranscript
+                ? "Verifying Transcript..."
+                : "Generate Plan"}
             </button>
           </div>
 
           {/* Schedule Panel */}
-          <div className=" schedulePanel">
+          <div className="schedulePanel">
             <div className="scheduleTitleRow">
               <h1 className="formTitle">{userData.name}'s Schedule</h1>
 
