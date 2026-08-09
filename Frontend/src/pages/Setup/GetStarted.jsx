@@ -4,21 +4,9 @@ import { useState, useEffect } from "react";
 import { useUser } from "../../UserContext";
 import { goToNav, RegularLink } from "../../comp/linking";
 
-const semesters = [
-  "Fall 2024",
-  "Spring 2025",
-  "Fall 2025",
-  "Spring 2026",
-  "Fall 2026",
-  "Spring 2027",
-  "Fall 2027",
-  "Spring 2028",
-];
-
-const majors = ["Computer Science"];
-
 function GetStarted() {
-  const { setUserData, userData, signUpData, loggedIn } = useUser();
+  const { setUserData, userData, signUpData, loggedIn, programInfo } =
+    useUser();
 
   const [name, setName] = useState("");
   const [degreeLevel, setDegreeLevel] = useState("Undergrad");
@@ -59,8 +47,8 @@ function GetStarted() {
       return;
     }
 
-    const startIndex = semesters.indexOf(startingSemester);
-    const endIndex = semesters.indexOf(endingSemester);
+    const startIndex = programInfo.semesters.indexOf(startingSemester);
+    const endIndex = programInfo.semesters.indexOf(endingSemester);
 
     if (endIndex <= startIndex) {
       setError("Ending semester must be after starting semester.");
@@ -83,7 +71,6 @@ function GetStarted() {
   };
 
   useEffect(() => {
-
     if (!signUpData.email || !signUpData.password) {
       console.log("No Data");
       console.log(signUpData.email);
@@ -134,7 +121,9 @@ function GetStarted() {
               <div className="toggleContainer">
                 <button
                   className={`toggleOption ${
-                    degreeLevel === "Undergrad" ? "toggleActive" : "toggleInActive"
+                    degreeLevel === "Undergrad"
+                      ? "toggleActive"
+                      : "toggleInActive"
                   }`}
                   onClick={() => setDegreeLevel("Undergrad")}
                 >
@@ -143,7 +132,9 @@ function GetStarted() {
 
                 <button
                   className={`toggleOption ${
-                    degreeLevel === "Graduate" ? "toggleActive" : "toggleInActive"
+                    degreeLevel === "Graduate"
+                      ? "toggleActive"
+                      : "toggleInActive"
                   }`}
                   onClick={() => setDegreeLevel("Graduate")}
                 >
@@ -162,7 +153,7 @@ function GetStarted() {
               >
                 <option value="">Select</option>
 
-                {majors.map((m) => (
+                {programInfo.majors.map((m) => (
                   <option key={m} value={m}>
                     {m}
                   </option>
@@ -181,7 +172,7 @@ function GetStarted() {
                 >
                   <option value="">Select</option>
 
-                  {semesters.map((s) => (
+                  {programInfo.semesters.map((s) => (
                     <option key={s} value={s}>
                       {s}
                     </option>
@@ -199,7 +190,7 @@ function GetStarted() {
                 >
                   <option value="">Select</option>
 
-                  {semesters.map((s) => (
+                  {programInfo.semesters.map((s) => (
                     <option key={s} value={s}>
                       {s}
                     </option>
@@ -213,9 +204,28 @@ function GetStarted() {
 
               <input
                 className="formInput"
-                type="number"
+                type="text"
+                inputMode="numeric"
                 value={credits}
-                onChange={(e) => setCredits(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+
+                  // Allow clearing the input
+                  if (value === "") {
+                    setCredits("");
+                    return;
+                  }
+
+                  // Only allow numbers
+                  if (/^\d+$/.test(value)) {
+                    const number = Number(value);
+
+                    // Force range 1-18
+                    if (number >= 1 && number <= 18) {
+                      setCredits(value);
+                    }
+                  }
+                }}
                 placeholder="Max 18 credits"
               />
             </div>

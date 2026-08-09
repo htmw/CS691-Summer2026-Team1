@@ -6,7 +6,14 @@ import { goToNav, RegularLink } from "../../comp/linking";
 import { postReq } from "../../comp/callRequests";
 
 function InitChat() {
-  const { setUserData, userData, signUpData, loggedIn, setUserFromResponse} = useUser();
+  const {
+    setUserData,
+    userData,
+    signUpData,
+    setPendingLogin,
+    setUserFromResponse,
+    setScheduleRequest,
+  } = useUser();
 
   const [chat, setChat] = useState("");
   const [error, setError] = useState("");
@@ -30,7 +37,21 @@ function InitChat() {
 
     try {
       const response = await postReq("/signUp", updatedUserData);
-      setUserFromResponse(response);
+
+      setUserFromResponse(response, false);
+
+      setScheduleRequest({
+        degreeLevel: updatedUserData.degreeLevel,
+        major: updatedUserData.major,
+        startingSemester: updatedUserData.startingSemester,
+        endingSemester: updatedUserData.endingSemester,
+        credits: updatedUserData.credits,
+        transcript: updatedUserData.transcript,
+        chat: updatedUserData.chat,
+      });
+
+      setPendingLogin(true);
+
       goTo(ROUTES.SCHEDULELOAD);
     } catch (error) {
       console.error(error.response?.data || error);
@@ -50,8 +71,6 @@ function InitChat() {
       setChat(userData.chat || "");
     }
   }, [userData]);
-
-
 
   return (
     <div className="gradientBackground">

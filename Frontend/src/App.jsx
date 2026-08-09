@@ -26,15 +26,24 @@ import { useUser } from "./UserContext.jsx";
 import { ROUTES } from "./routes.js";
 import SignupFlowWatcher from "./comp/signUpWatch.jsx";
 
+import { useLocation } from "react-router-dom";
+
 function ProtectedRoute({ hasToBeLoggedIn, children }) {
-  const { loggedIn, loading } = useUser();
-  if(loading) return null;
-  
-  if (hasToBeLoggedIn && !loggedIn) {
-    return <Navigate to={ROUTES.HOME} replace />;
+  const { loggedIn, loading, userData, pendingLogin } = useUser();
+  const location = useLocation();
+
+  if (loading) return null;
+
+  if (
+    hasToBeLoggedIn === true &&
+    !loggedIn &&
+    !pendingLogin &&
+    location.pathname !== ROUTES.SCHEDULELOAD
+  ) {
+    return <Navigate to={ROUTES.LOGIN} replace />;
   }
 
-  if (!hasToBeLoggedIn && loggedIn) {
+  if (hasToBeLoggedIn === false && loggedIn) {
     return <Navigate to={ROUTES.HOME} replace />;
   }
 
@@ -45,8 +54,23 @@ function Routing() {
   return (
     <main>
       <Routes>
-        <Route path={ROUTES.HOME} element={<Home />} />
-        <Route path={ROUTES.CONTACT} element={<Contact />} />
+        <Route
+          path={ROUTES.HOME}
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path={ROUTES.CONTACT}
+          element={
+            <ProtectedRoute>
+              <Contact />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path={ROUTES.GETSTARTED}
@@ -121,35 +145,49 @@ function Routing() {
   );
 }
 
-function App() {
+function AppContent() {
+  const location = useLocation();
 
   const [isDark, setIsDark] = useState(() => {
-    return localStorage.getItem('theme') === 'dark';
+    return localStorage.getItem("theme") === "dark";
   });
 
   useEffect(() => {
     if (isDark) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
+      document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("theme", "dark");
     } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
+      document.documentElement.setAttribute("data-theme", "light");
+      localStorage.setItem("theme", "light");
     }
   }, [isDark]);
 
   const toggleTheme = () => setIsDark(!isDark);
 
+  const hideHeader = location.pathname === ROUTES.SCHEDULELOAD;
+
   return (
-    <Router>
+    <>
       <SignupFlowWatcher />
-      {/* Check if I can remove gradientBackground here */}
+
       <div className="container gradientBackground">
-        {/* 3. Passed the props down to your Header! */}
-        <Header toggleTheme={toggleTheme} isDark={isDark} />
+        {!hideHeader && (
+          <Header toggleTheme={toggleTheme} isDark={isDark} />
+        )}
+
         <Routing />
       </div>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }
 
 export default App;
+

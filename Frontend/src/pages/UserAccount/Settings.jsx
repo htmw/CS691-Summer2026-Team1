@@ -18,6 +18,8 @@ function Settings() {
 
   const [error, setError] = useState("");
 
+  const goTo = goToNav();
+
   const isValidEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
@@ -79,7 +81,10 @@ function Settings() {
     try {
       const response = await postReq("/updateUser", updates);
 
-      setUserData(response);
+      setUserData((prev) => ({
+        ...prev,
+        ...response,
+      }));
 
       setError("");
 
@@ -99,6 +104,7 @@ function Settings() {
     try {
       const response = await postReq("/signOut", {});
       clearSignUpData();
+      goTo(ROUTES.HOME);
     } catch (error) {
       console.error(error.response?.data || error);
     }
@@ -131,13 +137,9 @@ function Settings() {
                 <p className="settingsValue">{email || "(none)"}</p>
               </div>
 
-              <RegularLink
-                href={ROUTES.HOME}
-                className="heroButton logoutButton"
-                onClick={signOut}
-              >
+              <button className="heroButton logoutButton" onClick={signOut}>
                 Sign Out
-              </RegularLink>
+              </button>
             </div>
           ) : (
             <form className="settingsForm">
