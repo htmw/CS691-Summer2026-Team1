@@ -10,13 +10,7 @@
 
 .scheduleCreatorPage .landingOverlay {
   padding-top: 70px;
-
   overflow: hidden;
-}
-
-.scheduleCreatorPage .scheduleLayout {
-  height: 100vh;
-  overflow: visible;
 }
 
 .scheduleCreatorPage .scheduleLayout {
@@ -25,10 +19,13 @@
 
   display: grid;
   grid-template-columns: 700px minmax(0, 1fr);
+
+  overflow: visible;
 }
 
 .scheduleCreatorPage .schedulePanel {
   height: 100%;
+
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -43,13 +40,16 @@
   box-shadow: var(--shadow-card);
 }
 
-/* Left Profile */
+/* ===========================
+   Left Profile
+=========================== */
 
 .profilePanel {
   height: auto !important;
   width: 100% !important;
 
   background: var(--bg-glass-medium);
+
   border-radius: 0 !important;
   box-shadow: none;
 
@@ -84,13 +84,17 @@
   border: none;
   height: 1px;
   width: 100%;
+
   background: var(--color-divider);
+
   margin: 15px 0;
 }
 
 .profilePanel textarea {
   min-height: 100px;
+
   resize: vertical;
+
   color: var(--color-text-dark);
 }
 
@@ -106,6 +110,7 @@
   max-width: 1920px;
 
   padding: 35px 45px;
+
   box-sizing: border-box;
 }
 
@@ -113,20 +118,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   position: relative;
+
+  flex-shrink: 0;
 }
 
 .scheduleTitleRow .formTitle {
   color: var(--color-text-dark);
+
   font-size: 32px;
+
   margin: 0;
 }
 
 .downloadButton {
   position: absolute;
   right: 0;
+
   background: none;
   border: none;
+
+  padding: 6px;
+
   cursor: pointer;
 }
 
@@ -135,98 +149,538 @@
   height: 28px;
 }
 
-
 /* ===========================
-   Year Tabs
+   Schedule Content
 =========================== */
 
-.yearTabs {
+.scheduleContent {
   display: flex;
-  width: 100%;
-  margin: 25px 0 15px;
+  flex-direction: column;
+
+  gap: 22px;
+
+  margin-top: 25px;
+  padding-bottom: 30px;
 }
 
-.yearTab {
+/* ===========================
+   Schedule Tabs
+=========================== */
+
+.scheduleTabs {
+  display: flex;
+
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: thin;
+
+  border-radius: 9px;
+}
+
+.scheduleTab {
   flex: 1;
-  height: 36px;
+
+  min-width: 130px;
+  height: 42px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
+  padding: 0 18px;
+
   background: var(--bg-glass-strong);
+
   border: var(--border-primary);
 
   color: var(--color-primary);
-  font: 700 15px var(--font-family);
+
+  font: 700 14px var(--font-family);
 
   cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
-.yearTab:first-child {
-  border-radius: 8px 0 0 8px;
+.scheduleTab:first-child {
+  border-radius: 9px 0 0 9px;
 }
 
-.yearTab:last-child {
-  border-radius: 0 8px 8px 0;
+.scheduleTab:last-child {
+  border-radius: 0 9px 9px 0;
 }
 
-.yearTabActive {
+.scheduleTab:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+.scheduleTabActive {
   background: var(--color-primary);
+
   color: var(--color-white);
+
+  border-color: var(--color-primary);
 }
 
 /* ===========================
-   Semester Cards
+   Tab Content
 =========================== */
 
-.semesterList {
-  flex: 1;
-  overflow-y: auto;
-
+.scheduleTabContent {
   display: flex;
   flex-direction: column;
-  gap: 15px;
 
-  max-height: 70vh;
+  gap: 22px;
 }
 
-.semesterCard {
+.scheduleSection {
+  width: 100%;
+}
+
+.scheduleSectionTitle {
+  margin: 0 0 12px;
+
+  color: var(--color-text-dark);
+
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--font-family);
+}
+
+/* ===========================
+   Information Cards
+=========================== */
+
+.scheduleInfoCard {
+  width: 100%;
+
   background: var(--bg-glass-light);
+
   border-radius: 15px;
+
   padding: 20px;
+
+  box-sizing: border-box;
+
   box-shadow: var(--shadow-semester);
 }
 
-.semesterName {
-  margin: 0 0 10px;
+/* ===========================
+   Your Plan
+=========================== */
+
+.planCard {
+  padding: 22px;
+}
+
+.planHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 20px;
+}
+
+.planLabel {
+  margin: 0 0 5px;
+
+  color: var(--color-text-dark);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  opacity: 0.65;
+}
+
+.planName {
+  margin: 0;
+
   color: var(--color-primary);
+
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.planScore {
+  flex-shrink: 0;
+
+  padding: 6px 10px;
+
+  background: var(--bg-glass-strong);
+
+  border: var(--border-primary);
+
+  border-radius: 8px;
+
+  color: var(--color-primary);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.planRationaleContainer {
+  margin-top: 18px;
+}
+
+.planRationale {
+  margin: 0;
+
+  color: var(--color-text-dark);
+
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.planSubsection {
+  margin-top: 18px;
+  padding-top: 16px;
+
+  border-top: 1px solid var(--color-divider);
+}
+
+.planSubsection h4 {
+  margin: 0 0 8px;
+
+  color: var(--color-text-dark);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.planSubsection ul {
+  margin: 0;
+  padding-left: 20px;
+
+  color: var(--color-text-dark);
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.planSubsection li {
+  margin-bottom: 5px;
+}
+
+/* ===========================
+   Course History
+=========================== */
+
+.courseTagList {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.courseTag {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 7px 11px;
+
+  background: var(--bg-glass-strong);
+
+  border: var(--border-primary);
+
+  border-radius: 8px;
+
+  color: var(--color-primary);
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ===========================
+   Notes
+=========================== */
+
+.notesCard {
+  padding: 17px 20px;
+}
+
+.notesCard ul {
+  margin: 0;
+  padding-left: 20px;
+
+  color: var(--color-text-dark);
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.notesCard li {
+  margin-bottom: 7px;
+}
+
+.notesCard li:last-child {
+  margin-bottom: 0;
+}
+
+/* ===========================
+   Term Content
+=========================== */
+
+.termContentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+
+  margin-bottom: 15px;
+}
+
+.termEyebrow {
+  margin: 0 0 4px;
+
+  color: var(--color-text-dark);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  opacity: 0.6;
+}
+
+.termTitle {
+  margin: 0;
+
+  color: var(--color-primary);
+
   font: var(--font-title-sm);
 }
 
-.courseName {
-  margin: 5px 0;
-  color: var(--color-text-dark);
-  font: 600 15px var(--font-family);
+.semesterCredits {
+  flex-shrink: 0;
+
+  padding: 7px 11px;
+
+  background: var(--bg-glass-strong);
+
+  border: var(--border-primary);
+
+  border-radius: 8px;
+
+  color: var(--color-primary);
+
+  font-size: 12px;
+  font-weight: 700;
 }
 
-/* Smaller transcript uploader inside ScheduleCreator */
+/* ===========================
+   Course List
+=========================== */
+
+.courseList {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+/* ===========================
+   Course Cards
+=========================== */
+
+.courseCard {
+  width: 100%;
+
+  padding: 18px;
+
+  box-sizing: border-box;
+
+  background: var(--bg-glass-light);
+
+  border-radius: 15px;
+
+  box-shadow: var(--shadow-semester);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.courseCard:hover {
+  background: rgba(255, 255, 255, 0.28);
+
+  transform: translateY(-1px);
+}
+
+.courseCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 20px;
+}
+
+.courseHeading {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.courseName {
+  margin: 0;
+
+  color: var(--color-text-dark);
+
+  font: 600 16px var(--font-family);
+
+  line-height: 1.35;
+}
+
+.courseCode {
+  width: fit-content;
+
+  margin: 0;
+
+  padding: 4px 8px;
+
+  background: var(--bg-glass-strong);
+
+  border: var(--border-primary);
+
+  border-radius: 6px;
+
+  color: var(--color-primary);
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.courseCredits {
+  flex-shrink: 0;
+
+  padding: 6px 10px;
+
+  background: var(--bg-glass-strong);
+
+  border: var(--border-primary);
+
+  border-radius: 7px;
+
+  color: var(--color-primary);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ===========================
+   Course Rationale
+=========================== */
+
+.courseRationale {
+  margin-top: 15px;
+  padding-top: 13px;
+
+  border-top: 1px solid var(--color-divider);
+}
+
+.courseRationaleLabel {
+  margin: 0 0 5px;
+
+  color: var(--color-text-dark);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  opacity: 0.6;
+}
+
+.courseRationaleText {
+  margin: 0;
+
+  color: var(--color-text-dark);
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ===========================
+   Empty States
+=========================== */
+
+.emptyScheduleText {
+  margin: 0;
+
+  color: var(--color-text-dark);
+
+  font-size: 14px;
+
+  opacity: 0.6;
+}
+
+.schedulePlaceholder {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 250px;
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  color: var(--color-text-dark);
+
+  font-size: 24px;
+  font-weight: 600;
+
+  text-align: center;
+
+  background: var(--bg-glass-light);
+
+  border-radius: 15px;
+}
+
+/* ===========================
+   Smaller Transcript Uploader
+=========================== */
 
 .scheduleTranscript .transcriptLimit {
   font-size: 14px;
+
   margin-top: -6px;
   margin-bottom: 8px;
 }
 
 .scheduleTranscript .transcriptContainer {
   min-height: 120px;
+
   border-radius: 12px;
+
   border-width: 1.5px;
 }
 
 .scheduleTranscript .fileimg {
   width: 42px;
   height: 42px;
+
   margin-bottom: 10px;
 }
 
@@ -236,34 +690,45 @@
 
 .scheduleTranscript .deleteText {
   margin-top: 6px;
+
   font-size: 13px;
 }
 
 .scheduleTranscript .errorMessage {
   margin-top: 8px;
+
   font-size: 13px;
 }
 
-/* Transcript verification loader */
+/* ===========================
+   Transcript Verification
+=========================== */
 
- .scheduleTranscript .transcriptChecking {
+.scheduleTranscript .transcriptChecking {
   cursor: wait;
+
   pointer-events: none;
 }
 
 .scheduleTranscript .transcriptLoader {
   width: 28px;
   height: 28px;
+
   border: 3px solid rgba(255, 255, 255, 0.3);
   border-top: 3px solid #ffffff;
+
   border-radius: 50%;
+
   animation: transcriptSpin 0.8s linear infinite;
+
   margin-bottom: 10px;
 }
 
 .scheduleTranscript .transcriptCheckingText {
   margin: 2px 0 0;
+
   font-size: 12px;
+
   opacity: 0.65;
 }
 
@@ -277,40 +742,30 @@
   }
 }
 
-/* Disabled Generate Plan button */
+/* ===========================
+   Disabled Generate Plan
+=========================== */
 
 .nextButton:disabled {
   opacity: 0.5;
+
   cursor: not-allowed;
+
   pointer-events: none;
 }
 
-/*  */
-
-.schedulePlaceholder {
-  flex: 1;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 250px;
-
-  color: var(--color-text-dark);
-  font-size: 24px;
-  font-weight: 600;
-
-  background: var(--bg-glass-light);
-  border-radius: 15px;
-}
-
+/* ===========================
+   Schedule Loader
+=========================== */
 
 .scheduleLoader {
   position: absolute;
+
   inset: 0;
 
   display: flex;
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
 
@@ -319,11 +774,13 @@
 
 .spinner {
   width: min(30vw, 480px);
+
   aspect-ratio: 1 / 1;
 
   flex-shrink: 0;
 
   border: clamp(8px, 1.2vw, 20px) solid rgba(255, 255, 255, 0.25);
+
   border-top-color: white;
 
   border-radius: 50%;
@@ -335,18 +792,25 @@
 
 .loaderTextContainer {
   margin-top: 24px;
+
   height: 40px;
+
   position: relative;
+
   overflow: visible;
+
   display: flex;
   justify-content: center;
 }
 
 .loaderText {
   position: absolute;
+
   color: var(--color-white);
+
   font-size: 18px;
   font-weight: 500;
+
   white-space: nowrap;
 }
 
@@ -369,6 +833,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -380,6 +845,7 @@
     opacity: 1;
     transform: translateY(0);
   }
+
   to {
     opacity: 0;
     transform: translateY(-35px);
@@ -393,49 +859,162 @@
 @media (max-width: 1200px) {
   .scheduleCreatorPage {
     height: auto;
+
     min-height: calc(100vh - 78px);
+
     overflow: visible;
   }
 
   .scheduleCreatorPage .landingOverlay {
     height: auto;
+
     overflow: visible;
+
     padding-top: 30px;
   }
 
   .scheduleCreatorPage .scheduleLayout {
     height: auto;
+
     display: flex;
     flex-direction: column;
+
     gap: 24px;
+
     overflow: visible;
+
     padding: 20px;
+
     box-sizing: border-box;
   }
 
   .profilePanel {
     order: 2;
+
     width: 100%;
     max-width: 700px;
+
     height: auto;
+
     margin: 0 auto;
+
     box-sizing: border-box;
+
     overflow: visible;
+
     border-radius: 18px !important;
   }
 
   .schedulePanel {
     order: 1;
+
     width: 100%;
-    height: auto;
     max-width: 700px;
+
+    height: auto;
+
     margin: 0 auto;
+
     overflow: visible;
+
     border-radius: 18px;
   }
 
-  .semesterList {
-    max-height: none;
+  .scheduleContent {
     overflow: visible;
+  }
+}
+
+/* ===========================
+   Smaller Screens
+=========================== */
+
+@media (max-width: 600px) {
+  .schedulePanel {
+    padding: 25px 20px;
+  }
+
+  .scheduleTitleRow .formTitle {
+    font-size: 26px;
+  }
+
+  .scheduleContent {
+    margin-top: 20px;
+
+    gap: 20px;
+  }
+
+  .scheduleTabs {
+    border-radius: 8px;
+  }
+
+  .scheduleTab {
+    flex: 0 0 auto;
+
+    min-width: 110px;
+
+    height: 40px;
+
+    padding: 0 14px;
+
+    font-size: 12px;
+  }
+
+  .scheduleSectionTitle {
+    font-size: 18px;
+  }
+
+  .planCard,
+  .scheduleInfoCard,
+  .courseCard {
+    padding: 16px;
+  }
+
+  .planHeader {
+    align-items: flex-start;
+  }
+
+  .planName {
+    font-size: 20px;
+  }
+
+  .termContentHeader {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .courseCardHeader {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .courseCredits {
+    font-size: 11px;
+  }
+
+  .courseName {
+    font-size: 15px;
+  }
+
+  .courseCode {
+    font-size: 10px;
+  }
+
+  .courseRationaleText {
+    font-size: 12px;
+  }
+
+  .semesterCredits {
+    font-size: 11px;
+  }
+
+  .courseTag {
+    font-size: 12px;
   }
 }
