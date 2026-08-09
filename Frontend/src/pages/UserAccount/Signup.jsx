@@ -49,7 +49,6 @@ function Signup() {
       setError("Passwords do not match.");
       return;
     }
-    console.log({ email, password });
 
     try {
       // currently making a request to authEmail when a user tries to sign up,
