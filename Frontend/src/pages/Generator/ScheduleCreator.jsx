@@ -6,6 +6,7 @@ import { useUser } from "../../UserContext";
 import { goToNav } from "../../comp/linking";
 import { postReq } from "../../comp/callRequests";
 
+
 import downloadImg from "/assets/downloadIcon.png";
 import fileImg from "/assets/file.png";
 
@@ -331,7 +332,16 @@ function ScheduleCreator() {
                   }
                 }}
               >
+
                 {isCheckingTranscript ? (
+
+                <img
+                  src="/assets/transFilePurple.webp"
+                  alt="file upload"
+                  className="fileimg"
+                />
+
+                {hasTranscript ? (
                   <>
                     <div className="transcriptLoader"></div>
 
