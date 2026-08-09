@@ -183,7 +183,7 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/intelligent-academic-path-optimizer">
       <AppContent />
     </Router>
   );

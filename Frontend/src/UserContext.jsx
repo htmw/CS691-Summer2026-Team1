@@ -47,7 +47,6 @@ export function UserProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [pendingLogin, setPendingLogin] = useState(false);
 
-
   const sessionChecked = useRef(false);
 
   const [scheduleRequest, setScheduleRequest] = useState(null);

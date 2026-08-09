@@ -7,6 +7,7 @@ import { goToNav } from "../../comp/linking";
 import { postReq } from "../../comp/callRequests";
 
 import downloadImg from "/assets/downloadIcon.png";
+import fileImg from "/assets/file.png";
 
 function ScheduleCreator() {
   const { userData, updateUserData, programInfo, setScheduleRequest } =
@@ -270,7 +271,7 @@ function ScheduleCreator() {
                 onClick={() => fileInputRef.current.click()}
               >
                 <img
-                  src="/assets/file.png"
+                  src={fileImg}
                   alt="file upload"
                   className="fileimg"
                 />

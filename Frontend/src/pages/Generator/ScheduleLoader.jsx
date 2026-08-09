@@ -7,53 +7,46 @@ import { postReq, getReq } from "../../comp/callRequests";
 import { goToNav } from "../../comp/linking";
 
 function ScheduleLoader({ onReady }) {
-  const { scheduleRequest, pendingLogin, setPendingLogin, setLoggedIn } =
-    useUser();
-  const [messages, setMessages] = useState([
-    {
-      id: 0,
-      text: "Analyzing your availability...",
-      exiting: false,
-    },
-  ]);
+  const {
+    scheduleRequest,
+    userData,
+    setUserFromResponse,
+    pendingLogin,
+    setPendingLogin,
+    setLoggedIn,
+  } = useUser();
 
+  const [messages, setMessages] = useState([]);
   const [finished, setFinished] = useState(false);
+
   const messageId = useRef(1);
+
   const goTo = goToNav();
-  const hasGenerated = useRef(false);
+
+  // Keep the latest functions available without making the generation
+  // effect restart whenever their identity changes.
+  const goToRef = useRef(goTo);
+  const updateAllUserDataRef = useRef(setUserFromResponse);
+  const setLoggedInRef = useRef(setLoggedIn);
+  const setPendingLoginRef = useRef(setPendingLogin);
 
   useEffect(() => {
-    if (hasGenerated.current) return;
-    hasGenerated.current = true;
+    goToRef.current = goTo;
+  }, [goTo]);
 
-    console.log(scheduleRequest);
+  useEffect(() => {
+    updateAllUserDataRef.current = setUserFromResponse;
+  }, [setUserFromResponse]);
 
-    if (!scheduleRequest) {
-      goTo(ROUTES.SCHEDULECREATE);
-      return;
-    }
+  useEffect(() => {
+    setLoggedInRef.current = setLoggedIn;
+  }, [setLoggedIn]);
 
-    const generateSchedule = async () => {
-      try {
-        console.log("Best");
+  useEffect(() => {
+    setPendingLoginRef.current = setPendingLogin;
+  }, [setPendingLogin]);
 
-        const responseB = await getReq("/api/health");
-        console.log(responseB);
-
-        const responseA = await postReq("/api/extract", scheduleRequest);
-        console.log(responseA);
-
-        if (pendingLogin) {
-          setLoggedIn(true);
-          setPendingLogin(false);
-        }
-      } catch (err) {
-        console.error("Schedule generation failed:", err);
-      }
-    };
-
-    generateSchedule();
-  }, [scheduleRequest, pendingLogin, setLoggedIn, setPendingLogin, goTo]);
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const iterateText = (text, isLast = false) => {
     const id = messageId.current++;
@@ -80,6 +73,135 @@ function ScheduleLoader({ onReady }) {
       onReady(iterateText);
     }
   }, [onReady]);
+
+  useEffect(() => {
+    if (!scheduleRequest) {
+      goToRef.current(ROUTES.SCHEDULECREATE);
+      return;
+    }
+
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    let cancelled = false;
+
+    const request = scheduleRequest;
+    const email = userData.email;
+    const shouldLogin = pendingLogin;
+
+    const checkCancelled = () => {
+      if (cancelled || signal.aborted) {
+        throw new DOMException("Operation cancelled", "AbortError");
+      }
+    };
+
+    const safeDelay = async (ms) => {
+      await delay(ms);
+      checkCancelled();
+    };
+
+    const generateSchedule = async () => {
+      try {
+        // --------------------------------
+        // Step 1: Health check
+        // --------------------------------
+        iterateText("Checking our scheduling service...");
+        await safeDelay(1600);
+
+        checkCancelled();
+
+        // Message appears BEFORE the request
+        const responseB = await getReq("/api/health", {
+          signal,
+        });
+
+        console.log(responseB);
+
+        checkCancelled();
+
+        // --------------------------------
+        // Step 2: Extract schedule
+        // --------------------------------
+
+        await safeDelay(800);
+
+        checkCancelled();
+        iterateText("Building your schedule...");
+
+        // Message appears BEFORE the request
+        const responseA = await postReq("/api/extract", request, { signal });
+
+        console.log(responseA);
+
+        checkCancelled();
+
+        // --------------------------------
+        // Step 3: Update user
+        // --------------------------------
+
+        await safeDelay(1600);
+
+        const updatedScheduleRequest = {
+          ...request,
+          email,
+          schedule: responseA,
+        };
+
+        checkCancelled();
+        iterateText("Saving your schedule...", true);
+
+        // Message appears BEFORE the request
+        const responseC = await postReq(
+          "/updateUser/academic",
+          updatedScheduleRequest,
+          { signal }
+        );
+
+        console.log(responseC);
+
+        checkCancelled();
+
+        updateAllUserDataRef.current(responseC);
+
+        if (shouldLogin) {
+          setLoggedInRef.current(true);
+          setPendingLoginRef.current(false);
+        }
+
+        await safeDelay(800);
+
+        goToRef.current(ROUTES.SCHEDULECREATE);
+      } catch (err) {
+        if (cancelled || signal.aborted || err?.name === "AbortError") {
+          return;
+        }
+
+        console.error("Schedule generation failed:", err);
+
+        const errorText =
+          err.response?.data?.detail || "Unable to update your account.";
+
+        if (cancelled || signal.aborted) {
+          return;
+        }
+
+        iterateText(errorText, true);
+
+        await delay(2500);
+
+        if (!cancelled && !signal.aborted) {
+          goToRef.current(ROUTES.SCHEDULECREATE);
+        }
+      }
+    };
+
+    generateSchedule();
+
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+  }, [scheduleRequest]);
 
   return (
     <div className="gradientBackground scheduleCreatorPage">
