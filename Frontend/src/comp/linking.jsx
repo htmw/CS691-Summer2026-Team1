@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+//Simplified version of regular link that only works for internal pages
 export const goToNav = () => {
   const navigate = useNavigate();
 
@@ -14,6 +15,7 @@ export const goToNav = () => {
   };
 };
 
+//Prevents the site from reloading if loading an internal link
 export const RegularLink = ({ href, className, children, onClick }) => {
   const location = useLocation();
   const navigate = useNavigate();

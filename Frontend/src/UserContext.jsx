@@ -10,6 +10,7 @@ import { getReq } from "./comp/callRequests";
 
 const UserContext = createContext();
 
+//Local stored info
 const defaultTranscript = {
   data: "",
   name: "",
@@ -34,46 +35,25 @@ const defaultProgramInfo = {
 };
 
 export function UserProvider({ children }) {
+  //For the sign up flow
   const [signUpData, setSignUpData] = useState({
     email: "",
     password: "",
   });
 
-  const [authChecked, setAuthChecked] = useState(false);
-  const [programInfo, setProgramInfo] = useState(defaultProgramInfo);
   const [userData, setUserData] = useState(defaultUserData);
+  const [scheduleRequest, setScheduleRequest] = useState(null);
+  const [programInfo, setProgramInfo] = useState(defaultProgramInfo);
 
   const [loading, setLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [pendingLogin, setPendingLogin] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
 
   const sessionChecked = useRef(false);
+  const programChecked = useRef(false);
 
-  const [scheduleRequest, setScheduleRequest] = useState(null);
-
-  const updateSignUpData = (email, password) => {
-    setSignUpData({ email, password });
-  };
-
-  const updateUserData = (field, value) => {
-    setUserData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const clearSignUpData = useCallback(() => {
-    setSignUpData({
-      email: "",
-      password: "",
-    });
-
-    setUserData(defaultUserData);
-    setLoggedIn(false);
-
-    localStorage.removeItem("transcript");
-  }, []);
-
+  //Sets user info from backend. ShouldLogin is only for sign up flow as a work around
   const setUserFromResponse = (response, shouldLogin = true) => {
     if (response) {
       const academic = response.academic || {};
@@ -107,6 +87,33 @@ export function UserProvider({ children }) {
     return null;
   };
 
+  //Update individual fields
+  const updateUserData = (field, value) => {
+    setUserData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  //Keeps it until the user actually creates an account
+  const updateSignUpData = (email, password) => {
+    setSignUpData({ email, password });
+  };
+
+  //When the user leaves the sign up flow
+  const clearSignUpData = useCallback(() => {
+    setSignUpData({
+      email: "",
+      password: "",
+    });
+
+    setUserData(defaultUserData);
+    setLoggedIn(false);
+
+    localStorage.removeItem("transcript");
+  }, []);
+
+  //Session authentication
   useEffect(() => {
     if (sessionChecked.current) return;
     sessionChecked.current = true;
@@ -114,12 +121,8 @@ export function UserProvider({ children }) {
     const checkSession = async () => {
       try {
         const response = await getReq("/auth");
-
-        console.log("User session:", response);
-
         setUserFromResponse(response);
       } catch (error) {
-        console.error(error);
         setLoggedIn(false);
       } finally {
         setAuthChecked(true);
@@ -129,14 +132,14 @@ export function UserProvider({ children }) {
     checkSession();
   }, []);
 
+  //Once the auth check is done, load the full site
   useEffect(() => {
     if (authChecked) {
       setLoading(false);
     }
   }, [authChecked]);
 
-  const programChecked = useRef(false);
-
+  //Gets the basic program info for the schedule generator
   useEffect(() => {
     if (programChecked.current) return;
     programChecked.current = true;
@@ -144,8 +147,6 @@ export function UserProvider({ children }) {
     const loadProgramInfo = async () => {
       try {
         const response = await getReq("/api/info");
-
-        console.log("Program info:", response);
 
         setProgramInfo({
           semesters: response.semesters || [],
@@ -159,6 +160,7 @@ export function UserProvider({ children }) {
     loadProgramInfo();
   }, []);
 
+  //Expose the consts for the other files
   return (
     <UserContext.Provider
       value={{

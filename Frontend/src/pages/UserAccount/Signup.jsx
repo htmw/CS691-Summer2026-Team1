@@ -51,12 +51,6 @@ function Signup() {
     }
 
     try {
-      // currently making a request to authEmail when a user tries to sign up,
-      // .. since the signUp route in the backend already calls authEmail, 
-      // should we instead change the signup flow to just hit the 
-      // /signUp route? 
-
-      // btw, what is the SignUpData data in the backend signUp being used for?
       const response = await postReq("/auth/email", {
         email: email,
       });

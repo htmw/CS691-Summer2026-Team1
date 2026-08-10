@@ -52,7 +52,7 @@ function Home() {
             <div className="featureIcon">🎓</div>
             <h2>AI Schedule Generator</h2>
             <p>
-              Generate optimized semester schedules for Pace University based on
+              Generate optimized semester schedules based on
               degree requirements, prerequisites, and your academic goals.
             </p>
           </div>
@@ -71,7 +71,7 @@ function Home() {
             <div className="featureIcon">📄</div>
             <h2>Upload Your Transcript</h2>
             <p>
-              Upload your unofficial transcript so IAPO understands the courses
+              Upload your school transcript so IAPO understands the courses
               you've already completed and generates a more accurate academic
               plan.
             </p>

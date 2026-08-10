@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import { useUser } from "../UserContext";
 import { ROUTES } from "../routes";
 
+
+//Retains user data during signup until the user leaves or creates an account
 export default function SignupFlowWatcher() {
   const location = useLocation();
   const { clearSignUpData, loggedIn} = useUser();

@@ -1,6 +1,9 @@
 const API_KEY = "ZTvm-CXzxB|SZZp9";
 const BASE_URL = "https://iapo.pythonanywhere.com";
 
+//These automatically send cookies
+
+//Reusable Get Request
 export const getReq = async (endpoint = "/", options = {}) => {
   try {
     const response = await fetch(`${BASE_URL}${endpoint}`, {
@@ -24,6 +27,7 @@ export const getReq = async (endpoint = "/", options = {}) => {
   }
 };
 
+//Reusable Post Request
 export const postReq = async (endpoint = "/", data, options = {}) => {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     method: "POST",

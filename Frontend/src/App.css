@@ -3,33 +3,28 @@
 =========================== */
 
 .landingOverlay {
-    min-height: 100vh;
-    box-sizing: border-box;
+  min-height: 100vh;
+  box-sizing: border-box;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    background: linear-gradient(
-        var(--bg-overlay-start),
-        var(--bg-overlay-end)
-    );
-
-    padding: 60px 0;
+  padding: 60px 0;
 }
 
 .authCard {
-    width: 90%;
-    max-width: 600px;
-    padding: 40px;
-    border-radius: 18px;
+  width: 90%;
+  max-width: 600px;
+  padding: 40px;
+  border-radius: 18px;
 
-    background: var(--bg-glass);
-    box-shadow: var(--shadow-card);
+  background: var(--bg-glass);
+  box-shadow: var(--shadow-card);
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ===========================
@@ -37,105 +32,104 @@
 =========================== */
 
 .heroButton {
-    min-width: 190px;
-    padding: 16px 34px;
-    border-radius: 12px;
+  min-width: 190px;
+  padding: 16px 34px;
+  border-radius: 12px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    border: none;
-    cursor: pointer;
+  border: none;
+  cursor: pointer;
 
-    text-decoration: none;
-    font: var(--font-button);
+  text-decoration: none;
+  font: var(--font-button);
 
-    transition: 0.25s;
+  transition: 0.25s;
 }
 
 .primaryButton {
-    background: var(--color-primary);
-    color: var(--color-white);
-    box-shadow: var(--shadow-button);
+  background: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: var(--shadow-button);
 }
 
 .primaryButton:hover {
-    background: var(--color-primary-dark);
-    transform: translateY(-3px);
+  background: var(--color-primary-dark);
+  transform: translateY(-3px);
 }
 
 .nextButton {
-    background: var(--color-primary);
-    color: var(--color-white);
-    box-shadow: var(--shadow-button);
+  background: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: var(--shadow-button);
 }
 
 .nextButton:hover {
-    background: var(--color-primary-darker);
-    transform: translateY(-3px);
+  background: var(--color-primary-darker);
+  transform: translateY(-3px);
 }
-
 
 /* ===========================
    Shared Form Styles
 =========================== */
 
 .formTitle {
-    font: var(--font-title-lg);
-    color: var(--color-white);
-    margin-bottom: 20px;
+  font: var(--font-title-lg);
+  color: var(--color-white);
+  margin-bottom: 20px;
 }
 
 .formLabel {
-    margin-top: 16px;
-    margin-bottom: 4px;
+  margin-top: 16px;
+  margin-bottom: 4px;
 
-    color: var(--color-text-muted);
-    font: var(--font-label);
+  color: var(--color-text-muted);
+  font: var(--font-label);
 }
 
 .formInput {
-    width: 100%;
-    height: 40px;
+  width: 100%;
+  height: 40px;
 
-    padding-left: 12px;
+  padding-left: 12px;
 
-    border: var(--border-light);
-    border-radius: 6px;
+  border: var(--border-light);
+  border-radius: 6px;
 
-    background: var(--bg-input);
+  background: var(--bg-input);
 
-    font: var(--font-body);
+  font: var(--font-body);
 
-    color: var(--color-text-dark);
+  color: var(--color-text-dark);
 }
 
 .contactForm .formTextarea {
-    background: var(--bg-input);
+  background: var(--bg-input);
 
-    border: none;
-    border-radius: 10px;
+  border: none;
+  border-radius: 10px;
 
-    padding: 12px;
+  padding: 12px;
 
-    font: var(--font-body);
+  font: var(--font-body);
 
-    resize: none;
-    color: var(--color-text-dark);
+  resize: none;
+  color: var(--color-text-dark);
 }
 
 .errorMessage {
-    margin-top: 12px;
-    padding: 10px 14px;
+  margin-top: 12px;
+  padding: 10px 14px;
 
-    border: var(--border-error);
-    border-radius: 8px;
+  border: var(--border-error);
+  border-radius: 8px;
 
-    background: var(--bg-error-light);
-    color: var(--color-error);
+  background: var(--bg-error-light);
+  color: var(--color-error);
 
-    font: var(--font-small);
+  font: var(--font-small);
 }
 
 /* ===========================
@@ -143,28 +137,107 @@
 =========================== */
 
 .gradientBackground {
-    min-height: 100vh;
-    width: 100%;
+  min-height: 100vh;
+  width: 100%;
 
-    background:
-        radial-gradient(
-            ellipse at 20% 20%,
-            var(--gradient-bg-1),
-            transparent 45%
-        ),
-        radial-gradient(
-            ellipse at 80% 20%,
-            var(--gradient-bg-2),
-            transparent 50%
-        ),
-        radial-gradient(
-            ellipse at 50% 80%,
-            var(--gradient-bg-3),
-            transparent 55%
-        ),
-        linear-gradient(
-            135deg,
-            var(--gradient-page-start),
-            var(--gradient-page-end)
-        );
+  background:
+    /* Overlay gradient */ linear-gradient(
+      var(--bg-overlay-start),
+      var(--bg-overlay-end)
+    ),
+    /* Existing background gradients */
+      radial-gradient(ellipse at 20% 20%, var(--gradient-bg-1), transparent 45%),
+    radial-gradient(ellipse at 80% 20%, var(--gradient-bg-2), transparent 50%),
+    radial-gradient(ellipse at 50% 80%, var(--gradient-bg-3), transparent 55%),
+    linear-gradient(
+      135deg,
+      var(--gradient-page-start),
+      var(--gradient-page-end)
+    );
+}
+
+/* ===========================
+   Initial Loading Screen
+=========================== */
+
+.loadingScreen {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Overlay on top of the gradient */
+  background: rgba(10, 15, 30, 0.35);
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  z-index: 9999;
+
+  animation: loadingFadeIn 0.4s ease-out;
+}
+
+@keyframes loadingFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.loadingContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+
+  color: var(--color-white);
+}
+
+.loadingContent p {
+  margin: 0;
+
+  font: var(--font-body);
+
+  opacity: 0.8;
+}
+
+.loadingSpinner {
+  width: 42px;
+  height: 42px;
+
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--color-white);
+
+  border-radius: 50%;
+
+  animation: loadingSpin 0.8s linear infinite;
+}
+
+@keyframes loadingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===========================
+   Page Transitions
+=========================== */
+
+.pageTransition {
+  animation: pageFadeIn 0.7s ease-out;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

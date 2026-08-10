@@ -158,7 +158,6 @@ function Contact() {
                   Failed to send message. Try again.
                 </span>
               )}
-
             </form>
           </div>
         </section>
