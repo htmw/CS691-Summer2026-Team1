@@ -3,6 +3,7 @@ SQL Version of IAPO Data
 This file contains the same data used in the DynamoDB design for the IAPO system but formatted as SQL INSERT statements for the relational database version.
 The data is structured differently to fit a SQL database model rather than NoSQL DynamoDB.
 
+
 INSERT INTO Department (DepartmentID, DepartmentName) VALUES (1, 'Seidenberg School of Computer Science and Information Systems');
 
 INSERT INTO Major (MajorID, MajorName, DepartmentID) VALUES (3, 'Cybersecurity', 1);
@@ -19,12 +20,6 @@ INSERT INTO Semester (SemesterID, SemesterTerm, Year, StartDate, EndDate) VALUES
 INSERT INTO Semester (SemesterID, SemesterTerm, Year, StartDate, EndDate) VALUES ('Spring2028', 'Spring', '2028', '2028-01-27', '2028-05-18');
 INSERT INTO Semester (SemesterID, SemesterTerm, Year, StartDate, EndDate) VALUES ('Fall2027', 'Fall', '2027', '2027-08-20', '2027-12-10');
 INSERT INTO Semester (SemesterID, SemesterTerm, Year, StartDate, EndDate) VALUES ('Fall2026', 'Fall', '2026', '2026-08-29', '2026-12-17');
-
-INSERT INTO Degree_Requirements (RequirementID, MajorID, TotalCreditsRequired, CoreCreditsRequired, ElectiveCreditsRequired, CapstoneCreditsRequired, MinimumGPA) VALUES (3, 3, 15, 9, 6, 0, 3);
-INSERT INTO Degree_Requirements (RequirementID, MajorID, TotalCreditsRequired, CoreCreditsRequired, ElectiveCreditsRequired, CapstoneCreditsRequired, MinimumGPA) VALUES (2, 2, 15, 12, 3, 0, 3);
-INSERT INTO Degree_Requirements (RequirementID, MajorID, TotalCreditsRequired, CoreCreditsRequired, ElectiveCreditsRequired, CapstoneCreditsRequired, MinimumGPA) VALUES (4, 4, 15, 9, 3, 3, 3);
-INSERT INTO Degree_Requirements (RequirementID, MajorID, TotalCreditsRequired, CoreCreditsRequired, ElectiveCreditsRequired, CapstoneCreditsRequired, MinimumGPA) VALUES (1, 1, 15, 6, 6, 3, 3);
-INSERT INTO Degree_Requirements (RequirementID, MajorID, TotalCreditsRequired, CoreCreditsRequired, ElectiveCreditsRequired, CapstoneCreditsRequired, MinimumGPA) VALUES (5, 5, 15, 6, 9, 0, 3);
 
 INSERT INTO Student (StudentID, FirstName, LastName, Email, Degree, MajorID) VALUES (100001, 'William', 'Court', 'williamc@pace.edu', 'MS Computer Science', 1);
 INSERT INTO Student (StudentID, FirstName, LastName, Email, Degree, MajorID) VALUES (100002, 'Charlotte', 'Miller', 'charlottem@pace.edu', 'MS Computer Science', 1);
@@ -124,7 +119,6 @@ INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (1, 'CS641'
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (1, 'CS661', 'Elective');
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (1, 'CS672', 'Elective');
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (1, 'CS691', 'Capstone');
-INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (3, 'CS610', 'Elective');
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (3, 'CYS611', 'Core');
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (3, 'CYB613', 'Core');
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (3, 'CYB621', 'Core');
@@ -136,8 +130,6 @@ INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (2, 'CS619'
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (2, 'CS660', 'Core');
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (2, 'CS667', 'Core');
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (2, 'CS673', 'Core');
-INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (2, 'CS627', 'Elective');
-INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (2, 'MAR657', 'Elective');
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (2, 'CS672', 'Elective');
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (2, 'IS669', 'Elective');
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (2, 'ECO653', 'Elective');
@@ -158,31 +150,11 @@ INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (5, 'IS679'
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (5, 'CYB651', 'Elective');
 INSERT INTO Major_Course (MajorID, CourseID, RequirementType) VALUES (5, 'CS660', 'Elective');
 
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS624', 'CS604');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS691', 'CS604');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS691', 'CS608');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS661', 'CS604');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('IS685', 'IS614');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('IS689', 'IS614');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('IS683', 'IS614');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS655', 'CS660');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS671', 'CS655');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS641', 'CS624');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CYB613', 'CYS611');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CYB621', 'CYS611');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('IS613', 'IS612');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('IS647', 'CYS611');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS619', 'CS660');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS667', 'CS619');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS627', 'CS660');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS672', 'CS627');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('IS669', 'CS673');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('SE679', 'SE673');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('SE725', 'SE673');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('SE751', 'SE675');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('SE785', 'SE679');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('SE765', 'SE673');
-INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CYB651', 'IS614');
+INSERT INTO Degree_Requirements (RequirementID, MajorID, TotalCreditsRequired, CoreCreditsRequired, ElectiveCreditsRequired, CapstoneCreditsRequired, MinimumGPA) VALUES (3, 3, 15, 9, 6, 0, 3);
+INSERT INTO Degree_Requirements (RequirementID, MajorID, TotalCreditsRequired, CoreCreditsRequired, ElectiveCreditsRequired, CapstoneCreditsRequired, MinimumGPA) VALUES (2, 2, 15, 12, 3, 0, 3);
+INSERT INTO Degree_Requirements (RequirementID, MajorID, TotalCreditsRequired, CoreCreditsRequired, ElectiveCreditsRequired, CapstoneCreditsRequired, MinimumGPA) VALUES (4, 4, 15, 9, 3, 3, 3);
+INSERT INTO Degree_Requirements (RequirementID, MajorID, TotalCreditsRequired, CoreCreditsRequired, ElectiveCreditsRequired, CapstoneCreditsRequired, MinimumGPA) VALUES (1, 1, 15, 6, 6, 3, 3);
+INSERT INTO Degree_Requirements (RequirementID, MajorID, TotalCreditsRequired, CoreCreditsRequired, ElectiveCreditsRequired, CapstoneCreditsRequired, MinimumGPA) VALUES (5, 5, 15, 9, 9, 0, 3);
 
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5001, 'CS604', 1, 'Fall2024', 'Dr. Bai', 'Hybrid', 'Monday', '18:00', '20:30', 30, 18);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5002, 'CS604', 2, 'Fall2024', 'Dr. Yung', 'Online', 'Asynchronous', '0:00', '0:00', 30, 22);
@@ -190,7 +162,7 @@ INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instruc
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5004, 'CS672', 1, 'Fall2024', 'Dr. Fernandez', 'Hybrid', 'Wednesday', '18:00', '20:30', 30, 16);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5005, 'CS672', 2, 'Fall2024', 'Dr.Collin', 'Online', 'Asynchronous', '0:00', '0:00', 30, 27);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5006, 'CS604', 1, 'Fall2025', 'Dr. Bai', 'Hybrid', 'Monday', '18:00', '20:30', 30, 12);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5007, 'CS624', 1, 'Fall2025', 'Ms. Cruz', 'In Person', 'Wednesday', '19:30', '17:00', 30, 21);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5007, 'CS624', 1, 'Fall2025', 'Ms. Cruz', 'In Person', 'Wednesday', '17:00', '19:30', 30, 21);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5008, 'CS624', 2, 'Fall2025', 'Mr. Lee', 'Online', 'Asynchronous', '0:00', '0:00', 30, 12);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5009, 'CS641', 1, 'Fall2025', 'Mr. Wang', 'Online', '["Friday","Wednesday"]', '12:00', '14:30', 40, 21);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5010, 'CS641', 2, 'Fall2025', 'Mr.Yadav', 'Online', 'Asynchronous', '0:00', '0:00', 40, 36);
@@ -201,31 +173,31 @@ INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instruc
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5015, 'CS617', 1, 'Fall2026', 'Dr. Khan', 'Online', 'Asynchronous', '00:00', '00:00', 45, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5016, 'CS624', 1, 'Fall2026', 'Mr. Lee', 'Online', 'Asynchronous', '0:00', '0:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5017, 'CS661', 1, 'Fall2026', 'Ms. Patel', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5018, 'CS661', 2, 'Fall2026', 'Dr. Davis', 'Online', 'Monday', '19:00', '17:00', 30, 0);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5018, 'CS661', 2, 'Fall2026', 'Dr. Davis', 'Online', 'Monday', '17:00', '19:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5019, 'CS691', 1, 'Fall2026', 'Dr. Mart', 'Online', 'Asynchronous', '00:00', '00:00', 20, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5020, 'CS604', 1, 'Fall2027', 'Dr. Bai', 'Hybrid', 'Monday', '18:00', '20:30', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5021, 'CS604', 2, 'Fall2027', 'Mr. Anderson', 'Online', '["Thursday","Tuesday"]', '16:00', '18:30', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5022, 'CS617', 1, 'Fall2027', 'Dr. Smith', 'Online', 'Asynchronous', '00:00', '00:00', 45, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5023, 'CS624', 1, 'Fall2027', 'Mr. Lee', 'Online', 'Asynchronous', '0:00', '0:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5024, 'CS641', 1, 'Fall2027', 'Mr. Yadav', 'Online', 'Asynchronous', '0:00', '0:00', 40, 0);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5025, 'CS661', 1, 'Fall2027', 'Dr. Davis', 'Online', 'Monday', '19:00', '17:00', 30, 0);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5025, 'CS661', 1, 'Fall2027', 'Dr. Davis', 'Online', 'Monday', '17:00', '19:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5026, 'CS672', 1, 'Fall2027', 'Dr. Fernandez', 'Hybrid', 'Wednesday', '18:00', '20:30', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5027, 'CS672', 2, 'Fall2027', 'Dr.Collin', 'Online', 'Asynchronous', '0:00', '0:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5028, 'CS608', 1, 'Spring2025', 'Mr. Kon', 'Online', 'Asynchronous', '00:00', '00:00', 30, 18);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5029, 'CS608', 2, 'Spring2025', 'Mr. Evans', 'In Person', 'Wednesday', '12:00', '14:30', 30, 13);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5030, 'CS617', 2, 'Spring2025', 'Dr. Smith', 'Online', 'Asynchronous', '00:00', '00:00', 45, 19);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5031, 'CS624', 1, 'Spring2025', 'Ms. Cruz', 'In Person', 'Wednesday', '19:30', '17:00', 30, 15);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5031, 'CS624', 1, 'Spring2025', 'Ms. Cruz', 'In Person', 'Wednesday', '17:00', '19:30', 30, 15);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5032, 'CS624', 2, 'Spring2025', 'Mr. Lee', 'Online', 'Asynchronous', '0:00', '0:00', 30, 20);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5033, 'CS691', 1, 'Spring2025', 'Mrs. Robinson', 'Online', 'Asynchronous', '00:00', '00:00', 20, 12);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5034, 'CS608', 1, 'Spring2026', 'Dr. Wilson', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5035, 'CS617', 1, 'Spring2026', 'Dr. Khan', 'Online', 'Asynchronous', '00:00', '00:00', 45, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5036, 'CS617', 2, 'Spring2026', 'Dr. Smith', 'Online', 'Asynchronous', '00:00', '00:00', 45, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5037, 'CS641', 1, 'Spring2026', 'Mr. Yadav', 'Online', 'Asynchronous', '0:00', '0:00', 40, 0);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5038, 'CS661', 1, 'Spring2026', 'Dr. Davis', 'Online', 'Monday', '19:00', '17:00', 30, 0);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5038, 'CS661', 1, 'Spring2026', 'Dr. Davis', 'Online', 'Monday', '17:00', '19:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5039, 'CS691', 1, 'Spring2026', 'Dr. Mart', 'Online', 'Asynchronous', '00:00', '00:00', 20, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5040, 'CS691', 2, 'Spring2026', 'Mrs. Robinson', 'Online', 'Asynchronous', '00:00', '00:00', 20, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5041, 'CS604', 1, 'Spring2027', 'Dr. Yung', 'Online', 'Asynchronous', '0:00', '0:00', 30, 0);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5042, 'CS624', 1, 'Spring2027', 'Ms. Cruz', 'In Person', 'Wednesday', '19:30', '17:00', 30, 0);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5042, 'CS624', 1, 'Spring2027', 'Ms. Cruz', 'In Person', 'Wednesday', '17:00', '19:30', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5043, 'CS641', 2, 'Spring2027', 'Mr. Yadav', 'Online', 'Asynchronous', '0:00', '0:00', 40, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5044, 'CS641', 1, 'Spring2027', 'Mr. Wang', 'Online', '["Friday","Wednesday"]', '12:00', '14:30', 40, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5045, 'CS672', 1, 'Spring2027', 'Dr. Fernandez', 'Hybrid', 'Wednesday', '18:00', '20:30', 30, 0);
@@ -235,7 +207,7 @@ INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instruc
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5049, 'CS617', 1, 'Spring2028', 'Dr. Khan', 'Online', 'Asynchronous', '00:00', '00:00', 45, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5050, 'CS617', 2, 'Spring2028', 'Dr. Smith', 'Online', 'Asynchronous', '00:00', '00:00', 45, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5051, 'CS661', 1, 'Spring2028', 'Ms. Patel', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5052, 'CS661', 2, 'Spring2028', 'Dr. Davis', 'Online', 'Monday', '19:00', '17:00', 30, 0);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5052, 'CS661', 2, 'Spring2028', 'Dr. Davis', 'Online', 'Monday', '17:00', '19:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5053, 'CS691', 1, 'Spring2028', 'Dr. Mart', 'Online', 'Asynchronous', '00:00', '00:00', 20, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5054, 'CS671', 1, 'Spring2028', 'Mr. Osei', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5055, 'IS679', 1, 'Spring2025', 'Dr. Bennett', 'Online', '["Thursday","Tuesday"]', '15:00', '16:45', 30, 21);
@@ -255,16 +227,15 @@ INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instruc
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5069, 'IS614', 1, 'Spring2028', 'Mr. Prescott', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5070, 'IS614', 2, 'Spring2028', 'Dr. Cole', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5071, 'IS685', 1, 'Fall2024', 'Mr. Callahan', 'Online', 'Asynchronous', '00:00', '00:00', 30, 18);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5072, 'IS685', 2, 'Fall2024', 'Dr. Lindqvist', 'In Person', 'Wednesday', '19:30', '17:00', 30, 16);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5072, 'IS685', 2, 'Fall2024', 'Dr. Lindqvist', 'In Person', 'Wednesday', '17:00', '19:30', 30, 16);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5073, 'IS685', 1, 'Spring2025', 'Mr. Callahan', 'Online', 'Asynchronous', '00:00', '00:00', 30, 12);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5074, 'IS685', 2, 'Spring2025', 'Mrs. Novak', 'Online', 'Asynchronous', '00:00', '00:00', 30, 15);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5075, 'IS685', 1, 'Fall2025', 'Ms. Alvarado', 'Online', 'Monday', '18:00', '20:30', 30, 11);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5076, 'IS685', 1, 'Spring2026', 'Mr. Callahan', 'Online', 'Asynchronous', '00:00', '00:00', 30, 8);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5077, 'IS685', 1, 'Spring2026', 'Mr. Callahan', 'Online', 'Asynchronous', '00:00', '00:00', 30, 8);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5078, 'IS685', 1, 'Fall2027', 'Mr. Callahan', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5079, 'IS685', 2, 'Fall2027', 'Mrs. Novak', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5080, 'IS685', 1, 'Spring2028', 'Ms. Alvarado', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5081, 'IS685', 2, 'Spring2028', 'Dr. Lindqvist', 'In Person', 'Wednesday', '19:30', '17:00', 30, 0);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5081, 'IS685', 2, 'Spring2028', 'Dr. Lindqvist', 'In Person', 'Wednesday', '17:00', '19:30', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5082, 'IS689', 1, 'Fall2024', 'Dr. Mendez', 'Online', 'Monday', '18:00', '20:30', 30, 23);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5083, 'IS689', 2, 'Fall2024', 'Dr. Delgado', 'Online', 'Asynchronous', '00:00', '00:00', 30, 19);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5084, 'IS689', 1, 'Spring2025', 'Mr. Harmon', 'In Person', 'Wednesday', '12:00', '14:30', 30, 20);
@@ -291,7 +262,7 @@ INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instruc
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5105, 'CS655', 1, 'Fall2025', 'Ms. Larkin', 'Online', 'Asynchronous', '00:00', '00:00', 30, 28);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5106, 'CS655', 1, 'Spring2026', 'Dr. Bianchi', 'Online', 'Asynchronous', '00:00', '00:00', 30, 12);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5107, 'CS655', 1, 'Spring2027', 'Dr. Bianchi', 'Hybrid', 'Tuesday', '17:30', '20:00', 30, 0);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5108, 'CS655', 2, 'Spring2027', 'Dr. Okafor', 'In Person', 'Wednesday', '19:30', '17:00', 30, 0);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5108, 'CS655', 2, 'Spring2027', 'Dr. Okafor', 'In Person', 'Wednesday', '17:00', '19:30', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5109, 'CS655', 1, 'Fall2027', 'Dr. Bianchi', 'Hybrid', 'Monday', '18:00', '20:30', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5110, 'CS655', 2, 'Fall2027', 'Dr. Okafor', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5111, 'CS671', 1, 'Fall2024', 'Mr. Osei', 'Online', 'Asynchronous', '00:00', '00:00', 30, 7);
@@ -322,7 +293,7 @@ INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instruc
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5136, 'CS660', 1, 'Fall2024', 'Dr. Lindqvist', 'Online', 'Asynchronous', '00:00', '00:00', 30, 27);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5137, 'CS660', 1, 'Fall2025', 'Dr. Petrova', 'Online', '["Thursday","Tuesday"]', '15:00', '16:45', 30, 22);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5138, 'CS660', 2, 'Fall2025', 'Mr. Foster', 'Online', '["Friday","Wednesday"]', '12:00', '14:30', 30, 19);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5139, 'CS660', 1, 'Spring2026', 'Dr. Petrova', 'In Person', 'Wednesday', '19:30', '17:00', 30, 26);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5139, 'CS660', 1, 'Spring2026', 'Dr. Petrova', 'In Person', 'Wednesday', '17:00', '19:30', 30, 26);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5140, 'CS660', 1, 'Fall2026', 'Dr. Petrova', 'Hybrid', 'Monday', '18:00', '20:30', 30, 12);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5141, 'CS660', 1, 'Fall2027', 'Dr. Lindqvist', 'Hybrid', 'Monday', '18:00', '20:30', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5142, 'CS660', 2, 'Fall2027', 'Mr. Foster', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
@@ -348,7 +319,7 @@ INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instruc
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5162, 'CS619', 2, 'Fall2025', 'Ms. Ortiz', 'Online', '["Thursday","Tuesday"]', '15:00', '16:45', 30, 13);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5163, 'CS619', 1, 'Spring2026', 'Dr. Bennett', 'Online', '["Thursday","Tuesday"]', '15:00', '16:45', 30, 22);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5164, 'CS619', 1, 'Fall2026', 'Mr. Harmon', 'Online', '["Friday","Wednesday"]', '12:00', '14:30', 30, 17);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5165, 'CS619', 2, 'Fall2026', 'Ms. Larkin', 'In Person', 'Wednesday', '19:30', '17:00', 30, 19);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5165, 'CS619', 2, 'Fall2026', 'Ms. Larkin', 'In Person', 'Wednesday', '17:00', '19:30', 30, 19);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5166, 'CS619', 1, 'Spring2027', 'Dr. Bennett', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5167, 'CS619', 2, 'Spring2027', 'Ms. Larkin', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5168, 'CS619', 1, 'Fall2027', 'Dr. Bennett', 'Online', 'Monday', '18:00', '20:30', 30, 0);
@@ -362,7 +333,7 @@ INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instruc
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5176, 'CYB613', 2, 'Fall2026', 'Dr. Delgado', 'Online', 'Monday', '18:00', '20:30', 30, 18);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5177, 'CYB613', 1, 'Spring2027', 'Mr. Foster', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5178, 'CYB613', 1, 'Fall2027', 'Mr. Foster', 'Hybrid', 'Tuesday', '17:30', '20:00', 30, 0);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5179, 'CYB613', 1, 'Spring2028', 'Mr. Foster', 'In Person', 'Wednesday', '19:30', '17:00', 30, 0);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5179, 'CYB613', 1, 'Spring2028', 'Mr. Foster', 'In Person', 'Wednesday', '17:00', '19:30', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5180, 'CYB651', 1, 'Fall2024', 'Dr. Reyes', 'Online', 'Asynchronous', '00:00', '00:00', 30, 6);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5181, 'CYB651', 1, 'Fall2025', 'Dr. Reyes', 'Online', 'Asynchronous', '00:00', '00:00', 30, 13);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5182, 'CYB651', 1, 'Spring2026', 'Dr. Reyes', 'Hybrid', 'Monday', '18:00', '20:30', 30, 18);
@@ -376,7 +347,7 @@ INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instruc
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5190, 'IS612', 2, 'Fall2027', 'Ms. Rahman', 'Online', '["Thursday","Tuesday"]', '15:00', '16:45', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5191, 'CYS611', 1, 'Fall2024', 'Ms. Alvarado', 'Online', 'Asynchronous', '00:00', '00:00', 30, 19);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5192, 'CYS611', 1, 'Spring2026', 'Dr. Adeyemi', 'Online', '["Friday","Wednesday"]', '12:00', '14:30', 30, 5);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5193, 'CYS611', 1, 'Fall2027', 'Dr. Adeyemi', 'In Person', 'Wednesday', '19:30', '17:00', 30, 0);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5193, 'CYS611', 1, 'Fall2027', 'Dr. Adeyemi', 'In Person', 'Wednesday', '17:00', '19:30', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5194, 'CYS611', 1, 'Spring2028', 'Ms. Alvarado', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5195, 'CYB621', 1, 'Spring2026', 'Dr. Okafor', 'Online', 'Asynchronous', '00:00', '00:00', 30, 24);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5196, 'CYB621', 1, 'Fall2026', 'Mrs. Doyle', 'Hybrid', 'Monday', '18:00', '20:30', 30, 26);
@@ -403,7 +374,7 @@ INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instruc
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5217, 'IS613', 1, 'Spring2027', 'Ms. Ortiz', 'Hybrid', 'Monday', '18:00', '20:30', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5218, 'IS613', 1, 'Spring2028', 'Dr. Sinclair', 'Online', '["Thursday","Tuesday"]', '15:00', '16:45', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5219, 'IS632', 1, 'Spring2025', 'Dr. Adeyemi', 'Online', 'Monday', '18:00', '20:30', 30, 5);
-INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5220, 'IS632', 1, 'Spring2026', 'Ms. Alvarado', 'In Person', 'Wednesday', '19:30', '17:00', 30, 23);
+INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5220, 'IS632', 1, 'Spring2026', 'Ms. Alvarado', 'In Person', 'Wednesday', '17:00', '19:30', 30, 23);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5221, 'IS632', 1, 'Fall2026', 'Ms. Alvarado', 'Online', 'Asynchronous', '00:00', '00:00', 30, 24);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5222, 'IS632', 2, 'Fall2026', 'Mr. Prescott', 'Online', 'Asynchronous', '00:00', '00:00', 30, 18);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5223, 'IS632', 1, 'Spring2028', 'Dr. Adeyemi', 'Online', 'Monday', '18:00', '20:30', 30, 0);
@@ -468,8 +439,32 @@ INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instruc
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5282, 'SE725', 1, 'Spring2028', 'Mr. Callahan', 'Hybrid', 'Monday', '18:00', '20:30', 30, 0);
 INSERT INTO Courses_Offered (OfferedID, CourseID, SectionID, SemesterID, Instructor, InstructionalMethod, MeetingDay, StartTime, EndTime, Capacity, CurrentlyEnrolled) VALUES (5283, 'IS679', 1, 'Fall2027', 'Dr. Bennett', 'Online', 'Asynchronous', '00:00', '00:00', 30, 0);
 
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS624', 'CS604');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS691', 'CS604');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS691', 'CS608');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS661', 'CS604');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('IS685', 'IS614');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('IS689', 'IS614');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('IS683', 'IS614');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS655', 'CS660');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS671', 'CS655');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS641', 'CS624');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CYB613', 'CYS611');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CYB621', 'CYS611');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('IS613', 'IS612');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('IS647', 'CYS611');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS619', 'CS660');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CS667', 'CS619');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('IS669', 'CS673');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('SE679', 'SE673');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('SE725', 'SE673');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('SE751', 'SE675');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('SE785', 'SE679');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('SE765', 'SE673');
+INSERT INTO Prerequisites (CourseID, PrereqCourseID) VALUES ('CYB651', 'IS614');
+
 INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (1, 100001, 'RequiredDaysOff', 'Friday', 1);
-INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (2, 100005, 'GraduationDeadline', 'Spring 2028', 1);
+INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (2, 100005, 'GraduationDeadline', 'Spring2028', 1);
 INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (3, 100008, 'AvoidTime', '8AM - 5PM', 3);
 INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (4, 100014, 'AvoidDays', 'Thursday', 1);
 INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (5, 100017, 'AvoidInstructionalMethod', 'In Person', 2);
@@ -478,7 +473,7 @@ INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, Constr
 INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (8, 100030, 'GraduationDeadline', 'Spring2027', 2);
 INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (9, 100033, 'PreferredInstructionalMethod', 'Online', 1);
 INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (10, 100039, 'RequiredDaysOff', 'Wednesday, Friday', 1);
-INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (11, 100043, 'PreferredDays', 'Asynchronous ', 3);
+INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (11, 100043, 'PreferredInstructionalMethod', 'Asynchronous', 3);
 INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (12, 100048, 'PreferredTime', 'Evening', 4);
 INSERT INTO Student_Constraints (ConstraintID, StudentID, ConstraintType, ConstraintValue, Priority) VALUES (13, 100050, 'MaxCredits', '9', 1);
 
