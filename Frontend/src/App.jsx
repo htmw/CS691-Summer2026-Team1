@@ -4,7 +4,7 @@ import { useUser } from "./UserContext.jsx";
 import { ROUTES } from "./routes.js";
 
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -153,7 +153,7 @@ function LoadingScreen() {
     <div className="loadingScreen">
       <div className="loadingContent">
         <div className="loadingSpinner" />
-        <p>Loading your workspace...</p>
+        <p>Loading...</p>
       </div>
     </div>
   );
@@ -213,7 +213,7 @@ function App() {
     return <LoadingScreen />;
   }
   return (
-    <Router basename="/intelligent-academic-path-optimizer">
+    <Router>
       <AppContent />
     </Router>
   );
