@@ -1,0 +1,190 @@
+/* ===========================
+   Home Page
+=========================== */
+
+
+.heroSection {
+    max-width: 1100px;
+    width: 100%;
+    text-align: center;
+    padding: 40px;
+}
+
+/* ===========================
+   Hero
+=========================== */
+
+.heroTitle {
+    color: var(--color-white);
+    font: var(--font-title-xl);
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.heroSubtitle {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--color-text-light);
+    font: var(--font-body-lg);
+    line-height: 1.6;
+}
+
+.heroButtons {
+    margin-top: 55px;
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+/* ===========================
+   Features
+=========================== */
+
+.featuresSection {
+    max-width: 1300px;
+    width: 100%;
+    padding: 40px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.featureCard {
+    padding: 38px;
+    border-radius: 20px;
+    background: var(--bg-glass);
+    border: var(--border-glass);
+    color: var(--color-white);
+    transition: 0.3s;
+}
+
+.featureCard:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-feature);
+}
+
+.featureIcon {
+    font-size: 46px;
+    margin-bottom: 22px;
+}
+
+.featureCard h2 {
+    font: var(--font-heading);
+    margin-bottom: 18px;
+}
+
+.featureCard p {
+    color: var(--color-text-faded);
+    font: var(--font-body-light);
+    line-height: 1.7;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 900px) {
+    .heroTitle {
+        font-size: 46px;
+    }
+
+    .heroSubtitle {
+        font-size: 20px;
+    }
+
+    .featuresSection {
+        grid-template-columns: 1fr;
+    }
+
+    .heroButtons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* ===========================
+   Contact Page
+=========================== */
+
+
+
+.contactSection {
+    max-width: 900px;
+    margin: auto;
+    padding: 80px 30px;
+}
+
+.contactHeader {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.contactTitle {
+    color: var(--color-white);
+    font: var(--font-title-lg);
+    margin-bottom: 20px;
+}
+
+.contactSubtitle {
+    max-width: 650px;
+    margin: auto;
+    color: var(--color-text-light);
+    font: var(--font-body-md);
+    line-height: 1.6;
+}
+
+.contactCard {
+    background: var(--bg-glass);
+    border-radius: 24px;
+    padding: 45px;
+    box-shadow: var(--shadow-contact);
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactTextarea {
+    min-height: 180px;
+}
+
+.contactButton {
+    margin-top: 35px;
+    align-self: center;
+    min-width: 220px;
+}
+
+.sentMessage {
+    margin-top: 25px;
+    text-align: center;
+    color: var(--color-success);
+    font: 600 16px var(--font-family);
+}
+
+.sentMessageError {
+    margin-top: 25px;
+    text-align: center;
+    color: var(--color-failed);
+    font: 600 16px var(--font-family);
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width: 768px) {
+    .contactTitle {
+        font-size: 42px;
+    }
+
+    .contactSubtitle {
+        font-size: 18px;
+    }
+
+    .contactCard {
+        padding: 30px;
+    }
+}

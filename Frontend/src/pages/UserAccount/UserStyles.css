@@ -1,0 +1,96 @@
+.settingsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.settingsInfo,
+.settingsForm {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.settingsItem {
+    display: flex;
+    flex-direction: column;
+}
+
+.settingsValue {
+    color: var(--color-white);
+    font: 400 22px var(--font-family);
+    margin: 0;
+}
+
+.settingsSaveButton {
+    min-width: 140px;
+}
+
+.logoutButton {
+    width: 50%;
+    max-width: 150px;
+    margin: 0 auto;
+
+    background: var(--color-danger);
+    color: var(--color-white);
+    box-shadow: var(--shadow-button);
+}
+
+.logoutButton:hover {
+    background: var(--color-danger-dark);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+
+    .settingsCard {
+        padding: 30px;
+    }
+
+    .settingsHeader {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+
+    .settingsTitle {
+        text-align: center;
+        font-size: 44px;
+    }
+
+    .settingsSaveButton {
+        width: 100%;
+    }
+
+    .logoutButton {
+        width: 100%;
+    }
+}
+
+/* Signup specific styles */
+
+.buttonContainerCenter {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.authLink {
+    display: inline-block;
+    width: fit-content;
+
+    margin: 20px auto 0;
+
+    text-align: center;
+    font-family: var(--font-family);
+    font-weight: 600;
+
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.authLink:hover {
+    text-decoration: underline;
+}

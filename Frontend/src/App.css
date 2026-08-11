@@ -1,76 +1,243 @@
-.background {
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 90vh;
+/* ===========================
+   Shared Overlay
+=========================== */
+
+.landingOverlay {
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 60px 0;
 }
 
-.navContainer {
-    height: 10vh;
-    width: 100%;
-    background-color: #CAC8EA;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 34px;
-    padding-right: 34px;
+.authCard {
+  width: 90%;
+  max-width: 600px;
+  padding: 40px;
+  border-radius: 18px;
+
+  background: var(--bg-glass);
+  box-shadow: var(--shadow-card);
+
+  display: flex;
+  flex-direction: column;
 }
 
-.navTitle {
-    font-size: 32px;
-    cursor: pointer;
-    font-weight: 900;
-    font-family: 'Fira Sans', sans-serif;
-}
-.navOther {
-    font-size: 18px;
-    cursor: pointer;
-    font-weight: 700;
-    font-family: 'Fira Sans', sans-serif;
+/* ===========================
+   Shared Buttons
+=========================== */
+
+.heroButton {
+  min-width: 190px;
+  padding: 16px 34px;
+  border-radius: 12px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  cursor: pointer;
+
+  text-decoration: none;
+  font: var(--font-button);
+
+  transition: 0.25s;
 }
 
-.headingContainer {
-    height: 20vh;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: end;
-    //background-color: aqua;
-    
+.primaryButton {
+  background: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: var(--shadow-button);
 }
 
-.headingTitle {
-    font-size: 32px;
-    cursor: pointer;
-    color:aliceblue; 
-    font-weight: 900;
-    font-family: 'Fira Sans', sans-serif;
+.primaryButton:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-3px);
 }
 
-.buttonContainer {
-    height: 20vh;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
+.nextButton {
+  background: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: var(--shadow-button);
 }
 
-.button {
-    height: 25%;
-    width: 8%;
-    display: flex;   
-    background-color: white;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    cursor: pointer;
-    font-family: 'Fira Sans', sans-serif;
-    font-weight: 600;
-    border-radius: 6px;
-    
-} 
+.nextButton:hover {
+  background: var(--color-primary-darker);
+  transform: translateY(-3px);
+}
+
+/* ===========================
+   Shared Form Styles
+=========================== */
+
+.formTitle {
+  font: var(--font-title-lg);
+  color: var(--color-white);
+  margin-bottom: 20px;
+}
+
+.formLabel {
+  margin-top: 16px;
+  margin-bottom: 4px;
+
+  color: var(--color-text-muted);
+  font: var(--font-label);
+}
+
+.formInput {
+  width: 100%;
+  height: 40px;
+
+  padding-left: 12px;
+
+  border: var(--border-light);
+  border-radius: 6px;
+
+  background: var(--bg-input);
+
+  font: var(--font-body);
+
+  color: var(--color-text-dark);
+}
+
+.contactForm .formTextarea {
+  background: var(--bg-input);
+
+  border: none;
+  border-radius: 10px;
+
+  padding: 12px;
+
+  font: var(--font-body);
+
+  resize: none;
+  color: var(--color-text-dark);
+}
+
+.errorMessage {
+  margin-top: 12px;
+  padding: 10px 14px;
+
+  border: var(--border-error);
+  border-radius: 8px;
+
+  background: var(--bg-error-light);
+  color: var(--color-error);
+
+  font: var(--font-small);
+}
+
+/* ===========================
+   Shared Background
+=========================== */
+
+.gradientBackground {
+  min-height: 100vh;
+  width: 100%;
+
+  background:
+    /* Overlay gradient */ linear-gradient(
+      var(--bg-overlay-start),
+      var(--bg-overlay-end)
+    ),
+    /* Existing background gradients */
+      radial-gradient(ellipse at 20% 20%, var(--gradient-bg-1), transparent 45%),
+    radial-gradient(ellipse at 80% 20%, var(--gradient-bg-2), transparent 50%),
+    radial-gradient(ellipse at 50% 80%, var(--gradient-bg-3), transparent 55%),
+    linear-gradient(
+      135deg,
+      var(--gradient-page-start),
+      var(--gradient-page-end)
+    );
+}
+
+/* ===========================
+   Initial Loading Screen
+=========================== */
+
+.loadingScreen {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Overlay on top of the gradient */
+  background: rgba(10, 15, 30, 0.35);
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  z-index: 9999;
+
+  animation: loadingFadeIn 0.4s ease-out;
+}
+
+@keyframes loadingFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.loadingContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+
+  color: var(--color-white);
+}
+
+.loadingContent p {
+  margin: 0;
+
+  font: var(--font-body);
+
+  opacity: 0.8;
+}
+
+.loadingSpinner {
+  width: 42px;
+  height: 42px;
+
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--color-white);
+
+  border-radius: 50%;
+
+  animation: loadingSpin 0.8s linear infinite;
+}
+
+@keyframes loadingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===========================
+   Page Transitions
+=========================== */
+
+.pageTransition {
+  animation: pageFadeIn 0.7s ease-out;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

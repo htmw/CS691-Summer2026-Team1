@@ -1,0 +1,15 @@
+# Secrets — never commit your Gemini API key
+.env
+*.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+.vscode/
