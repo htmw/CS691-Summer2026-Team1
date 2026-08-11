@@ -1,0 +1,9 @@
+ConstraintID,ConstraintType,ConstraintValue,Priority,StudentID
+1,RequiredDaysOff,Friday,1,100001
+2,GraduationDeadline,Spring 2028,1,100005
+3,AvoidTime,8AM - 3PM,3,100008
+4,AvoidDays,Mondays,1,100014
+5,AvoidInstructionalMethod,In Person,2,100017
+6,MinCredits,3,4,100021
+7,RequiredDaysOff,Wednesday,1,100026
+8,PreferredInstructionalMethod,Asynchronous ,3,100015
