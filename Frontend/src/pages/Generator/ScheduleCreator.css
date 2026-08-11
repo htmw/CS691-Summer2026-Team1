@@ -218,9 +218,7 @@
   border-radius: 0 9px 9px 0;
 }
 
-.scheduleTab:hover {
-  background: rgba(255, 255, 255, 0.32);
-}
+
 
 .scheduleTabActive {
   background: var(--color-primary);
@@ -306,28 +304,13 @@
 .planName {
   margin: 0;
 
-  color: var(--color-primary);
+  color: var(--color-text-dark);
 
   font-size: 23px;
   font-weight: 700;
 }
 
-.planScore {
-  flex-shrink: 0;
 
-  padding: 6px 10px;
-
-  background: var(--bg-glass-strong);
-
-  border: var(--border-primary);
-
-  border-radius: 8px;
-
-  color: var(--color-primary);
-
-  font-size: 12px;
-  font-weight: 700;
-}
 
 .planRationaleContainer {
   margin-top: 18px;
@@ -461,7 +444,7 @@
 .termTitle {
   margin: 0;
 
-  color: var(--color-primary);
+  color: var(--color-text-dark);
 
   font: var(--font-title-sm);
 }
@@ -477,7 +460,7 @@
 
   border-radius: 8px;
 
-  color: var(--color-primary);
+  color: var(--color-text-dark);
 
   font-size: 12px;
   font-weight: 700;
@@ -516,11 +499,7 @@
     transform 0.2s ease;
 }
 
-.courseCard:hover {
-  background: rgba(255, 255, 255, 0.28);
 
-  transform: translateY(-1px);
-}
 
 .courseCardHeader {
   display: flex;
@@ -579,7 +558,7 @@
 
   border-radius: 7px;
 
-  color: var(--color-primary);
+  color: var(--color-text-dark);
 
   font-size: 12px;
   font-weight: 700;
