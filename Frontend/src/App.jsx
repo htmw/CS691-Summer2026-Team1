@@ -153,7 +153,7 @@ function LoadingScreen() {
     <div className="loadingScreen">
       <div className="loadingContent">
         <div className="loadingSpinner" />
-        <p>Loading your workspace...</p>
+        <p>Loading...</p>
       </div>
     </div>
   );

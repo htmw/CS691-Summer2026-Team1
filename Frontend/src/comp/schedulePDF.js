@@ -1,5 +1,8 @@
 import { jsPDF } from "jspdf";
 
+const getFirstName = (name) => { const firstName = String(name || "Student").trim().split(/\s+/)[0]; return firstName || "Student"; };
+const getPossessiveName = (name) => { const firstName = getFirstName(name); return firstName.toLowerCase().endsWith("s") ? `${firstName}'` : `${firstName}'s`; };
+
 export const downloadSchedulePDF = ({
   userData,
   profile,
@@ -188,11 +191,7 @@ export const downloadSchedulePDF = ({
     doc.setFontSize(24);
     doc.setTextColor(...darkPurple);
 
-    doc.text(
-      `${userData?.name || "Student"}'s`,
-      margin,
-      y
-    );
+    doc.text(getPossessiveName(userData?.name), margin, y);
 
     y += 28;
 
@@ -370,9 +369,9 @@ export const downloadSchedulePDF = ({
 
       const rationaleLines = selectedPlan.rationale
         ? doc.splitTextToSize(
-            selectedPlan.rationale,
-            contentWidth - 36
-          )
+          selectedPlan.rationale,
+          contentWidth - 36
+        )
         : [];
 
       const planHeight =
@@ -396,36 +395,7 @@ export const downloadSchedulePDF = ({
         y + 25
       );
 
-      if (typeof selectedPlan.score === "number") {
-        const scoreText = `${Math.round(
-          selectedPlan.score * 100
-        )}%`;
 
-        doc.setFillColor(...green);
-
-        doc.roundedRect(
-          margin + contentWidth - 70,
-          y + 12,
-          52,
-          25,
-          12,
-          12,
-          "F"
-        );
-
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(10);
-        doc.setTextColor(...white);
-
-        doc.text(
-          scoreText,
-          margin + contentWidth - 44,
-          y + 29,
-          {
-            align: "center",
-          }
-        );
-      }
 
       let planY = y + 48;
 
@@ -580,9 +550,9 @@ export const downloadSchedulePDF = ({
       courses.forEach((course) => {
         const rationaleLines = course.rationale
           ? doc.splitTextToSize(
-              course.rationale,
-              contentWidth - 36
-            )
+            course.rationale,
+            contentWidth - 36
+          )
           : [];
 
         const cardHeight =
@@ -699,11 +669,7 @@ export const downloadSchedulePDF = ({
       doc.setFontSize(8);
       doc.setTextColor(...gray);
 
-      doc.text(
-        `${userData?.name || "Student"} • Academic Schedule`,
-        margin,
-        pageHeight - 25
-      );
+      doc.text(`${getFirstName(userData?.name)} • Academic Schedule`, margin, pageHeight - 25);
 
       doc.text(
         `Page ${page} of ${totalPages}`,
@@ -719,11 +685,7 @@ export const downloadSchedulePDF = ({
     // Download
     // =========================
 
-    const safeName = (
-      userData?.name || "Student"
-    )
-      .replace(/[^a-z0-9]/gi, "_")
-      .replace(/_+/g, "_");
+    const safeName = getFirstName(userData?.name).replace(/[^a-z0-9]/gi, "_").replace(/_+/g, "_");
 
     doc.save(
       `${safeName}_Academic_Schedule.pdf`
