@@ -46,7 +46,7 @@ SELECT
 FROM Prerequisites p
 JOIN Course c
     ON p.CourseID = c.CourseID
-WHERE p.CourseID = 'CS624'
+WHERE p.CourseID = 'CS660'
 AND p.PrereqCourseID NOT IN
 (
     SELECT co.CourseID
